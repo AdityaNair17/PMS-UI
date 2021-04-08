@@ -16,6 +16,10 @@ const routes: Routes = [
         path: 'dasboard',
         loadChildren: () => import('../features/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
+      {
+        path: 'mail-inbox',
+        loadChildren: ()=>import('../features/inbox/inbox.module').then(m =>m.InboxModule)
+      }
     ]
   }
 
