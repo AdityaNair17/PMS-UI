@@ -8,6 +8,7 @@ import { NoDataComponent } from './components/no-data/no-data.component';
 import { ConfirmationAlertComponent } from './components/confirmation-alert/confirmation-alert.component';
 import { AngularPrimeNgModule } from './modules/angular-prime-ng.module';
 import { MaterialModule } from './modules/material-module';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -30,6 +31,7 @@ import { MaterialModule } from './modules/material-module';
     RouterModule,
     AngularPrimeNgModule,
     MaterialModule
-  ]
+  ],
+  providers: [MessageService]
 })
 export class SharedModule { }

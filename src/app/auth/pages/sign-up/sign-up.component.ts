@@ -9,7 +9,6 @@ import { IPatientRegistrationReq } from '../../models/patientRegistration-model'
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
-  providers: [MessageService]
 })
 export class SignUpComponent implements OnInit {
   patientSignupForm: FormGroup;
