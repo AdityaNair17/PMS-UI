@@ -1,46 +1,48 @@
+<p-toast></p-toast>
+
 <div class="auth-container">
     <h2 class="color">SIGN UP</h2>
-    <form class="auth-form">
+    <form class="auth-form" [formGroup]="patientSignupForm" (ngSubmit)="onRegister()">
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Title</mat-label>
-            <input matInput placeholder="Title">
+            <input matInput placeholder="Title" formControlName="title">
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>First name</mat-label>
-            <input matInput placeholder="First name">
+            <input matInput placeholder="First name" formControlName="firstName">
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Last name</mat-label>
-            <input matInput placeholder="Email address">
+            <input matInput placeholder="Last name" formControlName="lastName">
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Email id</mat-label>
-            <input matInput placeholder="Email id">
+            <input matInput placeholder="Email id" formControlName="emailId">
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Date of birth</mat-label>
-            <input matInput [matDatepicker]="picker" placeholder="Date of birth">
+            <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dateOfBirth">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Contact number</mat-label>
-            <input matInput placeholder="Contact number">
+            <input matInput placeholder="Contact number" formControlName="contactNumber">
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Password</mat-label>
-            <input matInput placeholder="Password" type="password">
+            <input matInput placeholder="Password" type="password" formControlName="password">
           </mat-form-field>
           <br>
           <mat-form-field appearance="outline" class="input-width">
             <mat-label>Confirm password</mat-label>
-            <input matInput placeholder="Password" type="Confirm password">
+            <input matInput placeholder="Password" type="Confirm password" formControlName="confirmPassword">
           </mat-form-field>
           <br>
         <button mat-stroked-button color="primary" class="input-width bg-color white-color">Sign up</button>
