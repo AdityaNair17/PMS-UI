@@ -1,7 +1,8 @@
 import { IUser } from './models/user-model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { IPatientRegistrationReq, IPatientRegistrationRes } from './models/patientRegistration-model';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +68,9 @@ export class AuthService {
 
   public Login(user : any) : Observable<any> {
     return this.http.post('http://localhost:300/login', user);
+  }
+
+  patientRegistration(patientDetails: IPatientRegistrationReq): Observable<IPatientRegistrationRes> {
+    return of({ status: 200, message: 'Registered Successfully' })
   }
 }

@@ -1,3 +1,4 @@
+import { IResponse } from "./masterResObj-model";
 import { IUser } from "./user-model";
 
 
@@ -7,7 +8,6 @@ export interface IPatientRegistrationReq extends IUser {
     password: string;
 }
 
-export interface IPatientRegistrationRes {
-    status: number;
-    message: number
+export interface IPatientRegistrationRes extends IResponse {
+
 }
