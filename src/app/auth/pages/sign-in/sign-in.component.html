@@ -3,15 +3,15 @@
     <form class="auth-form">
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Email address</mat-label>
-            <input matInput placeholder="Email address">
+            <input matInput placeholder="Email address" [(ngModel)] = "loginDetails.userName">
           </mat-form-field>
           <br>
         <mat-form-field appearance="outline" class="input-width">
           <mat-label>Password</mat-label>
-          <input matInput placeholder="Password" type="password">
+          <input matInput placeholder="Password" type="password" [(ngModel)] = "loginDetails.password">
         </mat-form-field>
         <br>
-        <button mat-stroked-button color="primary" class="input-width bg-color white-color">Sign in</button>
+        <button mat-stroked-button color="primary" class="input-width bg-color white-color" (click) = "login()">Sign in</button>
         <div class="btn-group">
           <a mat-flat-button class="color" routerLink="/auth/forgot-password">Forgot password?</a>
           <a mat-flat-button class="color" routerLink="/auth/sign-up">Sign up</a>
