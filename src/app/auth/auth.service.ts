@@ -13,7 +13,7 @@ export class AuthService {
   private userRole : string = "";
   private isUserAuthenticated : boolean = false;
   private personalDetailsRequired : boolean = true;
-  private changePasswordRequired : boolean = true;
+  private passwordChangeRequired : boolean = true;
   private user : IUser;
 
   constructor(private http : HttpClient) { }
@@ -50,12 +50,12 @@ export class AuthService {
     this.personalDetailsRequired = personalDetailsRequired;
   }
 
-  public get ChangePasswordRequired(){
-    return this.changePasswordRequired;
+  public get PasswordChangeRequired(){
+    return this.passwordChangeRequired;
   }
 
-  public set ChangePasswordRequired(changePasswordRequired : boolean){
-    this.changePasswordRequired = changePasswordRequired;
+  public set PasswordChangeRequired(passwordChangeRequired : boolean){
+    this.passwordChangeRequired = passwordChangeRequired;
   }
 
   public get User(){
@@ -67,7 +67,7 @@ export class AuthService {
   }
 
   public Login(user : any) : Observable<any> {
-    return this.http.post('http://localhost:300/login', user);
+    return this.http.post('http://localhost:8000/auth/login', user);
   }
 
   patientRegistration(patientDetails: IPatientRegistrationReq): Observable<IPatientRegistrationRes> {
