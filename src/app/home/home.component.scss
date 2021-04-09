@@ -1,4 +1,19 @@
+
 .router-link-active {
-    color: #00B2EE;
-    border-bottom: 2px solid #00B2EE;
+    color: white;
+    background: #00B2EE;
+  }
+
+  ::ng-deep mat-tab-nav-bar,
+  .mat-tab-header {
+    border-bottom: none;
+  }
+  
+  ::ng-deep .mat-tab-label,
+  .tab-label {
+    opacity: 5 !important;
+  }
+
+  a{
+    border: 1px solid #00B2EE;
   }
