@@ -1,7 +1,9 @@
 
+@import '../../assets/sass/variables.scss';
+
 .router-link-active {
     color: white;
-    background: #00B2EE;
+    background: $deep-sky-blue2;
   }
 
   ::ng-deep mat-tab-nav-bar,
@@ -15,5 +17,6 @@
   }
 
   a{
-    border: 1px solid #00B2EE;
+    border: 1px solid $deep-sky-blue2;
+    color: $deep-sky-blue2;
   }
