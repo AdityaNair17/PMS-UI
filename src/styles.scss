@@ -2,13 +2,13 @@
 
 // html, body { height: 100%; }
 // body { font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+@import './assets/sass/variables.scss';
 .color {
-    color: #00B2EE;
+    color:$deep-sky-blue2;
 }
 
 .bg-color{
-    background-color: #00B2EE;
+    background-color:$deep-sky-blue2;
 }
 
 .white-color{
@@ -29,3 +29,7 @@
 .auth-form{
     width: 27%;
 }
+
+.errorMessage {
+    color: $red;
+  }
