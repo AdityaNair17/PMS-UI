@@ -3,9 +3,9 @@ import { IUser } from "./user-model";
 
 
 export interface IPatientRegistrationReq extends IUser {
-    title: string;
     contactNumber: string;
     password: string;
+    confirmPassword: string;
 }
 
 export interface IPatientRegistrationRes extends IResponse {
