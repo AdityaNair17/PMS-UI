@@ -9,5 +9,5 @@ export interface IPatientRegistrationReq extends IUser {
 
 export interface IPatientRegistrationRes {
     status: number;
-    message: number
+    message: string
 }
