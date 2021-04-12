@@ -6,14 +6,19 @@ import { AuthComponent } from './auth.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthService } from './auth.service';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 
 @NgModule({
-  declarations: [AuthComponent, SignInComponent, SignUpComponent, ForgotPasswordComponent, ResetPasswordComponent, ChangePasswordComponent],
+  declarations: [
+    AuthComponent, 
+    SignInComponent, 
+    SignUpComponent, 
+    ForgotPasswordComponent,
+     ChangePasswordComponent
+    ],
   imports: [
     CommonModule,
     AuthRoutingModule,
