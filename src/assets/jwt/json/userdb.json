@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Ankit",
+      "lastName" : "Sawant",
+      "email": "ankit@email.com",
+      "dateOfBirth" : "29/08/1997",
+      "role" : "Patient",
+      "password": "ankit"
+    },
+    {
+      "id": 2,
+      "firstName": "Onkar",
+      "lastName" : "Patile",
+      "email": "onkar@email.com",
+      "dateOfBirth" : "23/08/1997",
+      "role" : "Doctor",
+      "password": "onkar"
+    }
+  ]
+}

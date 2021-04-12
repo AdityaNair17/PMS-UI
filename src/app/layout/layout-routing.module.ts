@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -9,16 +10,16 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'dasboard',
+        redirectTo: 'home',
         pathMatch: 'full'
       },
       {
-        path: 'dasboard',
-        loadChildren: () => import('../features/dashboard/dashboard.module').then(m => m.DashboardModule)
+        path: 'home',
+        loadChildren: () => import('../home/home.module').then(m => m.HomeModule)
       },
       {
-        path: 'mail-inbox',
-        loadChildren: ()=>import('../features/inbox/inbox.module').then(m =>m.InboxModule)
+        path: 'change-password',
+        component: ChangePasswordComponent
       }
     ]
   }
