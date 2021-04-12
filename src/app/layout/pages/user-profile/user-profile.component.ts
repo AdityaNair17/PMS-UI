@@ -1,3 +1,4 @@
+import { AuthService } from './../../../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
@@ -9,14 +10,19 @@ import { MenuItem } from 'primeng/api';
 export class UserProfileComponent implements OnInit {
   profileMenuItems: MenuItem[];
 
-  constructor() { }
+  constructor(private authSvc : AuthService) { }
 
   ngOnInit(): void {
     this.profileMenuItems = [
       {label: 'Manage account', icon: 'pi pi-fw pi-users', routerLink:''},
       {label: 'My profile', icon: 'pi pi-fw pi-user', routerLink: ''},
-      {label: 'Change password', icon: 'pi pi-fw pi-pencil', routerLink: '/layout/change-password'}
+      {label: 'Change password', icon: 'pi pi-fw pi-pencil', routerLink: '/layout/change-password'},
+      {label: 'Logout', command : (event) => {this.LogOut()}, routerLink : ['/auth/sign-in']}
   ];
   }
 
+  public LogOut(){
+    this.authSvc.LogOut();
+
+  }
 }
