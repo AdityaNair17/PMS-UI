@@ -9,6 +9,7 @@ import { ConfirmationAlertComponent } from './components/confirmation-alert/conf
 import { AngularPrimeNgModule } from './modules/angular-prime-ng.module';
 import { MaterialModule } from './modules/material-module';
 import { MessageService } from 'primeng/api';
+import { AvatarModule } from 'ngx-avatar';
 
 
 
@@ -21,7 +22,8 @@ import { MessageService } from 'primeng/api';
     HttpClientModule,
     RouterModule,
     AngularPrimeNgModule,
-    MaterialModule
+    MaterialModule,
+    AvatarModule
   ],
   exports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { MessageService } from 'primeng/api';
     HttpClientModule,
     RouterModule,
     AngularPrimeNgModule,
-    MaterialModule
+    MaterialModule,
+    AvatarModule
   ],
   providers: [MessageService]
 })

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 
+import {MenuModule} from 'primeng/menu';
+import {MenubarModule} from 'primeng/menubar';
 
 
 
@@ -9,11 +11,15 @@ import {ToastModule} from 'primeng/toast';
   declarations: [],
   imports: [
     ButtonModule,
-    ToastModule
+    ToastModule,
+    MenuModule,
+    MenubarModule
   ],
   exports: [
     ButtonModule,
-    ToastModule
+    ToastModule,
+    MenuModule,
+    MenubarModule
   ]
 })
 export class AngularPrimeNgModule { }
