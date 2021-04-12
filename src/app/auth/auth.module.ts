@@ -8,7 +8,6 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthService } from './auth.service';
-import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 
 @NgModule({
@@ -17,7 +16,6 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
     SignInComponent, 
     SignUpComponent, 
     ForgotPasswordComponent,
-     ChangePasswordComponent
     ],
   imports: [
     CommonModule,

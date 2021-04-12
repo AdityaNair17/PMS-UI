@@ -10,7 +10,12 @@ import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
-  declarations: [LayoutComponent, HeaderComponent, FooterComponent, UserProfileComponent],
+  declarations: [
+    LayoutComponent, 
+    HeaderComponent, 
+    FooterComponent, 
+    UserProfileComponent
+  ],
   imports: [
     CommonModule,
     LayoutRoutingModule,

@@ -13,9 +13,9 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileMenuItems = [
-      {label: 'Manage account', icon: 'pi pi-fw pi-users'},
-      {label: 'My profile', icon: 'pi pi-fw pi-user'},
-      {label: 'Change password', icon: 'pi pi-fw pi-pencil'}
+      {label: 'Manage account', icon: 'pi pi-fw pi-users', routerLink:''},
+      {label: 'My profile', icon: 'pi pi-fw pi-user', routerLink: ''},
+      {label: 'Change password', icon: 'pi pi-fw pi-pencil', routerLink: '/layout/change-password'}
   ];
   }
 
