@@ -22,6 +22,6 @@ import { AuthService } from './auth.service';
     AuthRoutingModule,
     SharedModule
   ],
-  providers : [AuthService]
+  providers : []
 })
 export class AuthModule { }

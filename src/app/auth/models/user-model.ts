@@ -5,3 +5,11 @@ export interface IUser {
     emailId: string;
     dateOfBirth: string;
 }
+
+export interface IUserSessionData {
+    jwtToken : string;
+    userRole : string;
+    userInfo : IUser;
+    personalDetailsRequired : boolean;
+    passwordChangeRequired : boolean;
+  }

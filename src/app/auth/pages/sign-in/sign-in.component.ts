@@ -28,8 +28,11 @@ export class SignInComponent implements OnInit {
           this.invalidMessageFlag = false;
           this.authSvc.AuthenticationToken = data.token;
           this.authSvc.UserRole = data.user.role;
-          this.authSvc.PasswordChangeRequired = data.user.passwordChangeRequired;
-          this.authSvc.PersonalDetailsRequired = data.user.personalDetailsRequired;
+          // this.authSvc.PasswordChangeRequired = data.user.passwordChangeRequired;
+          // this.authSvc.PersonalDetailsRequired = data.user.personalDetailsRequired;
+          this.authSvc.PasswordChangeRequired = false;
+          this.authSvc.PersonalDetailsRequired =false;
+          this.authSvc.IsUserAuthenticated = true;
           let user = {
             firstName: data.user.firstName,
             lastName: data.user.lastName,
@@ -37,13 +40,14 @@ export class SignInComponent implements OnInit {
             dateOfBirth: data.user.dateOfBirth
           }
           this.authSvc.User = user;
-          if (data.user.passwordChangeRequired) {
-            this.router.navigate(['auth/reset-password']);
-          } else if (data.user.personalDetailsRequired) {
+          this.authSvc.StoreSession();
+          if ( this.authSvc.PasswordChangeRequired) {
+            this.router.navigate(['/layout/change-password']);
+          } else if ( this.authSvc.PersonalDetailsRequired) {
             //re direct to patient details page
             // this.router.navigate(['\'])
           } else {
-            // redirect to inbox
+            this.router.navigate(['/layout/home'])
           }
         } , (error) => {
           this.invalidMessageFlag = true;
