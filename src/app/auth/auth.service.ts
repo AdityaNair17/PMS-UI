@@ -1,4 +1,4 @@
-import { IUser } from './models/user-model';
+import { IUser, IUserSessionData } from './models/user-model';
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +16,8 @@ export class AuthService {
   private passwordChangeRequired : boolean = true;
   private user : IUser;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient) {
+   }
 
   public get AuthenticationToken(){
     return this.authenticationToken;
@@ -72,5 +73,31 @@ export class AuthService {
 
   patientRegistration(patientDetails: IPatientRegistrationReq): Observable<IPatientRegistrationRes> {
     return of({ status: 200, message: 'Registered Successfully' })
+  }
+
+  public StoreSession(){
+    const userData : IUserSessionData = {
+      jwtToken : this.AuthenticationToken,
+      userRole : this.UserRole,
+      userInfo : this.User,
+      personalDetailsRequired : this.PersonalDetailsRequired,
+      passwordChangeRequired : this.passwordChangeRequired
+    }
+    localStorage.setItem('loggedInUser', JSON.stringify(userData));
+  }
+
+  public storeUserData(){
+    const user : IUserSessionData = JSON.parse(localStorage.getItem('loggedInUser'));
+    this.AuthenticationToken = user.jwtToken;
+    this.UserRole = user.userRole;
+    this.User = user.userInfo;
+    this.PersonalDetailsRequired = user.personalDetailsRequired;
+    this.PasswordChangeRequired = user.passwordChangeRequired;
+    this.IsUserAuthenticated = true;
+  }
+
+  public LogOut(){
+    localStorage.removeItem('loggedInUser');
+    this.isUserAuthenticated = false;
   }
 }

@@ -12,11 +12,11 @@
     {
       "id": 2,
       "firstName": "Onkar",
-      "lastName" : "Patile",
-      "email": "onkar@email.com",
-      "dateOfBirth" : "23/08/1997",
+      "lastName" : "Patil",
+      "email": "patil",
+      "dateOfBirth" : "23/12/1997",
       "role" : "Doctor",
-      "password": "onkar"
+      "password": "patil"
     }
   ]
 }
