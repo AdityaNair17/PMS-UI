@@ -3,26 +3,27 @@ import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IPatientRegistrationReq, IPatientRegistrationRes } from './models/patientRegistration-model';
+import { IChangePasswordReq, IChangePasswordRes } from '../layout/models/changePassword-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private authenticationToken : string = "";
-  private userRole : string = "";
-  private isUserAuthenticated : boolean = false;
-  private personalDetailsRequired : boolean = true;
-  private passwordChangeRequired : boolean = true;
-  private user : IUser;
+  private authenticationToken: string = "";
+  private userRole: string = "";
+  private isUserAuthenticated: boolean = false;
+  private personalDetailsRequired: boolean = true;
+  private passwordChangeRequired: boolean = true;
+  private user: IUser;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  public get AuthenticationToken(){
+  public get AuthenticationToken() {
     return this.authenticationToken;
   }
 
-  public set AuthenticationToken(authenticationToken : string){
+  public set AuthenticationToken(authenticationToken: string) {
     this.authenticationToken = authenticationToken;
   }
 
@@ -30,47 +31,52 @@ export class AuthService {
     return this.userRole;
   }
 
-  public set UserRole(userRole : string) {
+  public set UserRole(userRole: string) {
     this.userRole = userRole;
   }
 
-  public get IsUserAuthenticated(){
+  public get IsUserAuthenticated() {
     return this.isUserAuthenticated;
   }
 
-  public set IsUserAuthenticated(isUserAuthenticated : boolean){
+  public set IsUserAuthenticated(isUserAuthenticated: boolean) {
     this.isUserAuthenticated = isUserAuthenticated;
   }
 
-  public get PersonalDetailsRequired(){
+  public get PersonalDetailsRequired() {
     return this.personalDetailsRequired;
   }
 
-  public set PersonalDetailsRequired(personalDetailsRequired : boolean){
+  public set PersonalDetailsRequired(personalDetailsRequired: boolean) {
     this.personalDetailsRequired = personalDetailsRequired;
   }
 
-  public get PasswordChangeRequired(){
+  public get PasswordChangeRequired() {
     return this.passwordChangeRequired;
   }
 
-  public set PasswordChangeRequired(passwordChangeRequired : boolean){
+  public set PasswordChangeRequired(passwordChangeRequired: boolean) {
     this.passwordChangeRequired = passwordChangeRequired;
   }
 
-  public get User(){
+  public get User() {
     return this.user;
   }
 
-  public set User(user : IUser){
+  public set User(user: IUser) {
     this.user = user;
   }
 
-  public Login(user : any) : Observable<any> {
+  public Login(user: any): Observable<any> {
     return this.http.post('http://localhost:8000/auth/login', user);
   }
 
   patientRegistration(patientDetails: IPatientRegistrationReq): Observable<IPatientRegistrationRes> {
     return of({ status: 200, message: 'Registered Successfully' })
+  }
+
+  changePassword(changePasswordDetails: IChangePasswordReq) : Observable<IChangePasswordRes>{
+    console.log(changePasswordDetails)
+    return of({ status: 200, message: 'password changed Successfully' })
   }
 }
