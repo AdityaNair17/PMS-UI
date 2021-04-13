@@ -1,3 +1,5 @@
+import { ToastMessageService } from './shared/components/toast/service/toastMessage.service';
+import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 import { NgModule } from '@angular/core';
@@ -17,9 +19,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    ToastMessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
