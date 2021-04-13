@@ -5,6 +5,10 @@ import {ToastModule} from 'primeng/toast';
 import {MenuModule} from 'primeng/menu';
 import {MenubarModule} from 'primeng/menubar';
 
+import {ListboxModule} from 'primeng/listbox';
+import {TableModule} from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 
 @NgModule({
@@ -13,13 +17,19 @@ import {MenubarModule} from 'primeng/menubar';
     ButtonModule,
     ToastModule,
     MenuModule,
-    MenubarModule
+    MenubarModule,
+    ListboxModule,
+    TableModule,
+    InputTextModule
   ],
   exports: [
     ButtonModule,
     ToastModule,
     MenuModule,
-    MenubarModule
+    MenubarModule,
+    ListboxModule,
+    TableModule,
+    InputTextModule
   ]
 })
 export class AngularPrimeNgModule { }

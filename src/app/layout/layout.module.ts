@@ -7,6 +7,8 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { LayoutComponent } from './layout.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { SharedModule } from '../shared/shared.module';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { AuthService } from '../auth/auth.service';
 
 
 @NgModule({
@@ -14,12 +16,13 @@ import { SharedModule } from '../shared/shared.module';
     LayoutComponent, 
     HeaderComponent, 
     FooterComponent, 
-    UserProfileComponent
+    UserProfileComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
     LayoutRoutingModule,
     SharedModule
-  ]
+  ],
 })
 export class LayoutModule { }
