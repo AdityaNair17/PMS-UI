@@ -14,7 +14,7 @@ export class InboxService {
     const inboxList: IInbox[] = [
       {
         id: 'qqahshjjk55612bdbfstjbsvfaayajbx',
-        name: 'ankit',
+        name: 'Ankit sawant',
         type: 'appointment/others',
         subject: 'upcoming appointment',
         status: STATUS.Upcoming,
@@ -23,7 +23,7 @@ export class InboxService {
       },
       {
         id: 'qqahshjjk55612bdbfstjbsvfaayajbx',
-        name: 'ankit',
+        name: 'Onkar Patil',
         type: 'appointment/others',
         subject: 'upcoming appointment',
         status: STATUS.Upcoming,
@@ -32,7 +32,7 @@ export class InboxService {
       },
       {
         id: 'qqahshjjk55612bdbfstjbsvfaayajbx',
-        name: 'ankit',
+        name: 'Dr. Sanket Chaudhari',
         type: 'appointment/others',
         subject: 'upcoming appointment',
         status: STATUS.Upcoming,
@@ -41,18 +41,18 @@ export class InboxService {
       },
       {
         id: 'qqahshjjk55612bdbfstjbsvfaayajbx',
-        name: 'ankit',
+        name: 'Kamlesh Badgujar',
         type: 'appointment/others',
-        subject: 'upcoming appointment',
+        subject: 'Appointment Request For 13/03/2021 21:00',
         status: STATUS.Upcoming,
         time: '20:15',
         date: '12 Apr'
       },
       {
         id: 'qqahshjjk55612bdbfstjbsvfaayajbx',
-        name: 'ankit',
+        name: 'Pranav Ekapure',
         type: 'appointment/others',
-        subject: 'upcoming appointment',
+        subject: 'Reports of Patient XYZ',
         status: STATUS.Upcoming,
         time: '20:15',
         date: '12 Apr'

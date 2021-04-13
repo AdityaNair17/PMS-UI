@@ -24,6 +24,5 @@ import { AuthService } from '../auth/auth.service';
     LayoutRoutingModule,
     SharedModule
   ],
-  providers: [AuthService]
 })
 export class LayoutModule { }
