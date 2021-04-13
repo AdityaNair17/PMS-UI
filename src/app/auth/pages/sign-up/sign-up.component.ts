@@ -1,7 +1,7 @@
+import { ToastMessageService } from './../../../shared/components/toast/service/toastMessage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { AuthService } from '../../auth.service';
 import { IPatientRegistrationReq } from '../../models/patientRegistration-model';
 
@@ -15,7 +15,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private messageService: MessageService,
+    private toastMessageSvc: ToastMessageService,
     private authService: AuthService,
     private router: Router
   ) { }
@@ -46,11 +46,23 @@ export class SignUpComponent implements OnInit {
     this.authService.patientRegistration(patient)
       .subscribe((data) => {
         if(data.status === 200){
-          this.messageService.add({severity:'success', summary: 'Success', detail: 'Registered successfully!'});
+          const toastMessage = {
+            severity : "success",
+            summary : "Success",
+            detail : "Registered Successfully!"
+          }
+          this.toastMessageSvc.displayToastMessage(toastMessage);
           this.router.navigate(['/auth/sign-in']);
         }
-        else
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong!' });
+        else{
+          const toastMessage = {
+            severity : "error",
+            summary : "Error",
+            detail : "Something went wrong :("
+          }
+          this.toastMessageSvc.displayToastMessage(toastMessage);
+        }
+        
       });
 
   }

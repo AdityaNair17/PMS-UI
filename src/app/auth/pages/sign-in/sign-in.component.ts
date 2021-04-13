@@ -1,3 +1,4 @@
+import { ToastMessageService } from './../../../shared/components/toast/service/toastMessage.service';
 import { pmsConstants } from './../../../shared/constants/constants';
 import { AuthService } from './../../auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -7,6 +8,8 @@ import { Router } from '@angular/router';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
+
+
 export class SignInComponent implements OnInit {
 
   public loginDetails: any = {
@@ -16,7 +19,8 @@ export class SignInComponent implements OnInit {
   public invalidMessageFlag: boolean = false;
   public CONSTANT = pmsConstants;
 
-  constructor(private authSvc: AuthService, private router: Router) { }
+  constructor(private authSvc: AuthService, private router: Router,
+              private toastMessageSvc : ToastMessageService) { }
 
   ngOnInit(): void {
   }
@@ -41,6 +45,11 @@ export class SignInComponent implements OnInit {
           }
           this.authSvc.User = user;
           this.authSvc.StoreSession();
+          const toastMessage = {
+            severity : "success",
+            summary : "Logged in Successfully"
+          }
+          this.toastMessageSvc.displayToastMessage(toastMessage);
           if ( this.authSvc.PasswordChangeRequired) {
             this.router.navigate(['/layout/change-password']);
           } else if ( this.authSvc.PersonalDetailsRequired) {
@@ -51,6 +60,12 @@ export class SignInComponent implements OnInit {
           }
         } , (error) => {
           this.invalidMessageFlag = true;
+          const toastMessage = {
+            severity : "error",
+            summary : "Invalid Username or Password",
+            life : 2000
+          }
+          this.toastMessageSvc.displayToastMessage(toastMessage);
           console.log(error);
         }
     );
