@@ -1,3 +1,4 @@
+import { ToastModule } from 'primeng/toast';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,13 +9,13 @@ import { NoDataComponent } from './components/no-data/no-data.component';
 import { ConfirmationAlertComponent } from './components/confirmation-alert/confirmation-alert.component';
 import { AngularPrimeNgModule } from './modules/angular-prime-ng.module';
 import { MaterialModule } from './modules/material-module';
-import { MessageService } from 'primeng/api';
 import { AvatarModule } from 'ngx-avatar';
+import { ToastComponent } from './components/toast/toast.component';
 
 
 
 @NgModule({
-  declarations: [NoDataComponent, ConfirmationAlertComponent],
+  declarations: [NoDataComponent, ConfirmationAlertComponent, ToastComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -23,7 +24,8 @@ import { AvatarModule } from 'ngx-avatar';
     RouterModule,
     AngularPrimeNgModule,
     MaterialModule,
-    AvatarModule
+    AvatarModule,
+    ToastModule
   ],
   exports: [
     CommonModule,
@@ -33,8 +35,9 @@ import { AvatarModule } from 'ngx-avatar';
     RouterModule,
     AngularPrimeNgModule,
     MaterialModule,
-    AvatarModule
+    AvatarModule,
+    ToastComponent
   ],
-  providers: [MessageService]
+  providers: []
 })
 export class SharedModule { }
