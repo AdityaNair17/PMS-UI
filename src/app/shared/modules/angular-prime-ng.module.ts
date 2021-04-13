@@ -7,6 +7,7 @@ import {MenubarModule} from 'primeng/menubar';
 
 import {ListboxModule} from 'primeng/listbox';
 import {TableModule} from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
@@ -18,8 +19,8 @@ import {TableModule} from 'primeng/table';
     MenuModule,
     MenubarModule,
     ListboxModule,
-    TableModule
-    
+    TableModule,
+    InputTextModule
   ],
   exports: [
     ButtonModule,
@@ -27,7 +28,8 @@ import {TableModule} from 'primeng/table';
     MenuModule,
     MenubarModule,
     ListboxModule,
-    TableModule
+    TableModule,
+    InputTextModule
   ]
 })
 export class AngularPrimeNgModule { }

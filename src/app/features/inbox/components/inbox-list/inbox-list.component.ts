@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { InboxService } from '../../inbox.service';
 import { IInbox } from '../../models/inbox-models';
 
@@ -9,13 +9,7 @@ import { IInbox } from '../../models/inbox-models';
 })
 export class InboxListComponent implements OnInit {
   @Input() inboxList: IInbox[];
-  cities = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" }
-  ];
+
 
   constructor() { }
 
