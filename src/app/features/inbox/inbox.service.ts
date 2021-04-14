@@ -23,7 +23,7 @@ export class InboxService {
       name: 'Onkar Patil',
       type: 'appointment/others',
       subject: 'upcoming appointment',
-      status: STATUS.UPCOMING,
+      status: STATUS.REJECTED,
       time: '20:17',
       date: '14 Apr'
     },
@@ -32,7 +32,7 @@ export class InboxService {
       name: 'Dr. Sanket Chaudhari',
       type: 'appointment/others',
       subject: 'upcoming appointment',
-      status: STATUS.UPCOMING,
+      status: STATUS.ACCEPTED,
       time: '20:18',
       date: '15 Apr'
     },

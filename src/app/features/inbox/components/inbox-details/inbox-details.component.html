@@ -1,18 +1,14 @@
-<p-dialog 
-header="Appointment Request" 
-[(visible)]="vissible" 
-[style]="{width: '25vw'}" 
-[baseZIndex]="10000"
-(onHide)="onClose()"
->
+<p-dialog header="Appointment Request" [(visible)]="vissible" [style]="{width: '25vw'}" [baseZIndex]="10000"
+    (onHide)="onClose()">
     <p>Subject: {{mailDetails.subject}}</p>
     <p>Name: {{mailDetails.name}}</p>
     <p>Date: {{mailDetails.date}}</p>
     <p>Time: {{mailDetails.time}}</p>
-    <p>{{mailDetails.status}}</p>
+    <p
+        [ngClass]="{'acceptd': mailDetails.status ==='Accepted','rejected': mailDetails.status ==='Rejected', 'upcoming': mailDetails.status ==='Upcoming'}">
+        {{mailDetails.status}}</p>
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-check" (click)="onAccept()" label="Accept" styleClass="p-button-text"></p-button>
         <p-button icon="pi pi-times" (click)="onReject()" label="Reject"></p-button>
     </ng-template>
 </p-dialog>
-
