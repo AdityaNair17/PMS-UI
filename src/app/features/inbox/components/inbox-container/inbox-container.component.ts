@@ -11,6 +11,7 @@ import { IInbox } from '../../models/inbox-models';
 export class InboxContainerComponent implements OnInit {
   inboxList: IInbox[] = [];
   vissible: boolean = false;
+  mailDetails: IInbox = null;
   constructor(
     private inboxService: InboxService,
     private authService: AuthService
@@ -28,13 +29,15 @@ export class InboxContainerComponent implements OnInit {
   }
 
   getMailId(id: string) {
-    console.log(id);
     this.vissible = true;
-    console.log(this.vissible)
+    this.inboxService.getMailById(id)
+      .subscribe((mail) => {
+        this.mailDetails = mail;
+      })
   }
 
-  onDialogClose(event) {
-    this.vissible = event;
- }
+  onDialogClose(dialogCloseFlag: boolean) {
+    this.vissible = dialogCloseFlag;
+  }
 
 }
