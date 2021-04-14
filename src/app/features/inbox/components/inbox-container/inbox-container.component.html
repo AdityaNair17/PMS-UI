@@ -1,1 +1,8 @@
-<app-inbox-list [inboxList]="inboxList"></app-inbox-list>
+<app-inbox-list 
+[inboxList]="inboxList"
+(logMailId)="getMailId($event)"
+></app-inbox-list>
+<app-inbox-details 
+[vissible]="vissible"
+(displayChange)="onDialogClose($event)"
+></app-inbox-details>

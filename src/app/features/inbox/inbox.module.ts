@@ -7,13 +7,14 @@ import { InboxFilterComponent } from './components/inbox-filter/inbox-filter.com
 import { InboxListComponent } from './components/inbox-list/inbox-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { InboxContainerComponent } from './components/inbox-container/inbox-container.component';
+import { InboxDetailsComponent } from './components/inbox-details/inbox-details.component';
 
 
 @NgModule({
   declarations: [
     InboxComponent, 
     InboxFilterComponent, 
-    InboxListComponent, InboxContainerComponent],
+    InboxListComponent, InboxContainerComponent, InboxDetailsComponent],
   imports: [
     CommonModule,
     InboxRoutingModule,

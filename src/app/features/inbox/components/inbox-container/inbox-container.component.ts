@@ -10,6 +10,7 @@ import { IInbox } from '../../models/inbox-models';
 })
 export class InboxContainerComponent implements OnInit {
   inboxList: IInbox[] = [];
+  vissible: boolean = false;
   constructor(
     private inboxService: InboxService,
     private authService: AuthService
@@ -21,9 +22,19 @@ export class InboxContainerComponent implements OnInit {
 
   getAllInbox(user: string) {
     this.inboxService.getAllInboxByuser(user)
-    .subscribe((inboxList)=>{
-      this.inboxList = inboxList;
-    });
+      .subscribe((inboxList) => {
+        this.inboxList = inboxList;
+      });
   }
+
+  getMailId(id: string) {
+    console.log(id);
+    this.vissible = true;
+    console.log(this.vissible)
+  }
+
+  onDialogClose(event) {
+    this.vissible = event;
+ }
 
 }
