@@ -14,7 +14,7 @@ export class InboxService {
       name: 'Ankit sawant',
       type: 'appointment/others',
       subject: 'upcoming appointment',
-      status: STATUS.Upcoming,
+      status: STATUS.UPCOMING,
       time: '20:15',
       date: '13 Apr'
     },
@@ -23,7 +23,7 @@ export class InboxService {
       name: 'Onkar Patil',
       type: 'appointment/others',
       subject: 'upcoming appointment',
-      status: STATUS.Upcoming,
+      status: STATUS.UPCOMING,
       time: '20:17',
       date: '14 Apr'
     },
@@ -32,7 +32,7 @@ export class InboxService {
       name: 'Dr. Sanket Chaudhari',
       type: 'appointment/others',
       subject: 'upcoming appointment',
-      status: STATUS.Upcoming,
+      status: STATUS.UPCOMING,
       time: '20:18',
       date: '15 Apr'
     },
@@ -41,7 +41,7 @@ export class InboxService {
       name: 'Kamlesh Badgujar',
       type: 'appointment/others',
       subject: 'Appointment Request For 13/03/2021 21:00',
-      status: STATUS.Upcoming,
+      status: STATUS.UPCOMING,
       time: '20:25',
       date: '21 Apr'
     },
@@ -50,7 +50,7 @@ export class InboxService {
       name: 'Pranav Ekapure',
       type: 'appointment/others',
       subject: 'Reports of Patient XYZ',
-      status: STATUS.Upcoming,
+      status: STATUS.UPCOMING,
       time: '20:30',
       date: '20 Apr'
     }

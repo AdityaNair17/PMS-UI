@@ -24,4 +24,8 @@ export class InboxDetailsComponent implements OnInit {
     this.displayChange.emit(false)
   }
 
+  onClose() {
+    this.displayChange.emit(false)
+  }
+
 }

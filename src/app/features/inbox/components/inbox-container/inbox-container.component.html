@@ -3,6 +3,7 @@
 (logMailId)="getMailId($event)"
 ></app-inbox-list>
 <app-inbox-details 
+*ngIf="vissible"
 [vissible]="vissible"
 (displayChange)="onDialogClose($event)"
 [mailDetails]="mailDetails"

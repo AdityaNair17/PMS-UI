@@ -16,7 +16,7 @@ export interface IAppointmentContextReq{
 }
 
 export enum STATUS{
-    Upcoming = 0,
-    Accepted = 1,
-    Rejected = 2
+    UPCOMING = 'Upcoming',
+    ACCEPTED = 'Accepted',
+    REJECTED = 'Rejected'
 }
