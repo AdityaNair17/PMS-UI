@@ -8,3 +8,9 @@ export const toastErrMessage = {
   summary : "Error",
   detail : "Something went wrong :("
 }
+
+export const toastSuccMessage = {
+  severity : "success",
+  summary : "Success",
+  detail : ""
+}
