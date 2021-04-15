@@ -7,8 +7,8 @@
     <p
         [ngClass]="{'acceptd': mailDetails.status ==='Accepted','rejected': mailDetails.status ==='Rejected', 'upcoming': mailDetails.status ==='Upcoming'}">
         {{mailDetails.status}}</p>
-    <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="onAccept()" label="Accept" styleClass="p-button-text"></p-button>
-        <p-button icon="pi pi-times" (click)="onReject()" label="Reject"></p-button>
+    <ng-template pTemplate="footer" *ngIf="mailDetails.status ==='Upcoming'">
+        <button pButton icon="pi pi-check" (click)="onAccept()" label="Accept" class="p-button-success"></button>
+        <button pButton icon="pi pi-times" (click)="onReject()" label="Reject" class="p-button-danger"></button>
     </ng-template>
 </p-dialog>

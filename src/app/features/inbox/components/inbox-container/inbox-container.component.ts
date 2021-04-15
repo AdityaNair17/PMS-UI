@@ -18,7 +18,7 @@ export class InboxContainerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAllInbox('ankit@gmail.com');
+    this.getAllInbox(this.authService.User.emailId);
   }
 
   getAllInbox(user: string) {
