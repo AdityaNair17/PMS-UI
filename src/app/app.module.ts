@@ -1,6 +1,8 @@
+import { AppService } from './app.service';
+import { TokenInterceptor } from './auth/interceptor/token.interceptor';
 import { ToastMessageService } from './shared/components/toast/service/toastMessage.service';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,8 +25,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule
   ],
   providers: [
+    AppService,
     AuthService,
-    ToastMessageService
+    ToastMessageService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
