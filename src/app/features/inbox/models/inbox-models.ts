@@ -1,3 +1,4 @@
+import { IResponse } from "src/app/auth/models/masterResObj-model";
 
 
 export interface IInbox{
@@ -20,3 +21,6 @@ export enum STATUS{
     ACCEPTED = 'Accepted',
     REJECTED = 'Rejected'
 }
+
+export interface IAppointmentContextRes extends IResponse{}
+   
