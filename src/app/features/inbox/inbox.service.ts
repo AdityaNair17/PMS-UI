@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { IInbox, STATUS } from './models/inbox-models';
+import { IAppointmentContextReq, IAppointmentContextRes, IInbox, STATUS } from './models/inbox-models';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +65,10 @@ export class InboxService {
   getMailById(id: string): Observable<IInbox> {
     const mailDetails = this.inboxList.find(mail => mail.id === id);
     return of(mailDetails);
+  }
+
+  appointmentSubmission(appointment: IAppointmentContextReq): Observable<IAppointmentContextRes> {
+    return of({ status: 200, message: 'Appointment accepted' })
   }
 
 }
