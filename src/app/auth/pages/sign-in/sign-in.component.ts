@@ -1,8 +1,9 @@
 import { ToastMessageService } from './../../../shared/components/toast/service/toastMessage.service';
 import { pmsConstants } from './../../../shared/constants/constants';
 import { AuthService } from './../../auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, Form } from '@angular/forms';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -17,7 +18,11 @@ export class SignInComponent implements OnInit {
     "password": ""
   }
   public invalidMessageFlag: boolean = false;
+  public invalidEmail : boolean = false;
+  public invalidPassword : boolean = false;
   public CONSTANT = pmsConstants;
+  @ViewChild('username') emailControl : FormControl;
+  @ViewChild('password') passwordControl : FormControl;
 
   constructor(private authSvc: AuthService, private router: Router,
               private toastMessageSvc : ToastMessageService) { }
@@ -25,7 +30,27 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login() {
+
+  login(){
+    if(this.emailControl.invalid || this.passwordControl.invalid){
+      this.emailControl.markAsTouched;
+      console.log(this.emailControl)
+      this.passwordControl.markAsTouched;
+      console.log(this.isControlInvalid(this.emailControl));
+      // if(this.emailControl.invalid){
+      //   this.invalidEmail = true;
+      // }
+      // if(this.passwordControl.invalid){
+      //   this.invalidPassword = true;
+      // }
+      
+    } else {
+      this.verifyLogin();
+    }
+  }
+
+
+  verifyLogin() {
     this.authSvc.Login(this.loginDetails).subscribe(
       data => {
         console.log(data);
@@ -69,5 +94,10 @@ export class SignInComponent implements OnInit {
           console.log(error);
         }
     );
+  }
+
+  isControlInvalid(control : FormControl){
+    // console.log(control);
+    return control.invalid && (control.dirty || control.touched);
   }
 }

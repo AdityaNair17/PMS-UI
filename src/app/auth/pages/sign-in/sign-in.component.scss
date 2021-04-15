@@ -1,3 +1,5 @@
+@import '../../../../assets//sass/variables.scss';
+
 .sign-in-container{
     height: 100vh;
 }
@@ -6,4 +8,14 @@
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+}
+
+.errorMsg {
+    color: $red;
+  }
+
+::ng-deep mat-form-field{
+    .mat-form-field-wrapper {
+        padding-bottom: 0px !important;
+    }
 }
