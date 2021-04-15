@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ToastMessageService } from 'src/app/shared/components/toast/service/toastMessage.service';
-import { toastErrMessage } from 'src/app/shared/constants/constants';
+import { toastErrMessage, toastSuccMessage } from 'src/app/shared/constants/constants';
 import { InboxService } from '../../inbox.service';
-import { IInbox } from '../../models/inbox-models';
+import { IAppointmentContextReq, IInbox } from '../../models/inbox-models';
 
 @Component({
   selector: 'app-inbox-container',
@@ -38,6 +38,18 @@ export class InboxContainerComponent implements OnInit {
     this.inboxService.getMailById(id)
       .subscribe((mail) => {
         this.mailDetails = mail;
+      }, (err) => {
+        this.toastMessageSvc.displayToastMessage(toastErrMessage);
+      });
+  }
+
+  logAppointment(appointmentDetails: IAppointmentContextReq) {
+    this.inboxService.appointmentSubmission(appointmentDetails)
+      .subscribe((appointment) => {
+        if (appointment.status === 200) {
+          toastSuccMessage.summary = appointment.message;
+          this.toastMessageSvc.displayToastMessage(toastSuccMessage);
+        }
       }, (err) => {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
       });

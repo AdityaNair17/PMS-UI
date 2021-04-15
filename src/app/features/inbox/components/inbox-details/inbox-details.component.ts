@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IInbox } from '../../models/inbox-models';
+import { IAppointmentContextReq, IInbox, STATUS } from '../../models/inbox-models';
 
 @Component({
   selector: 'app-inbox-details',
@@ -9,6 +9,7 @@ import { IInbox } from '../../models/inbox-models';
 export class InboxDetailsComponent implements OnInit {
   @Input() vissible: boolean;
   @Output() displayChange: EventEmitter<boolean> = new EventEmitter();
+  @Output() logAppointment: EventEmitter<IAppointmentContextReq> = new EventEmitter();
   @Input() mailDetails: IInbox;
   constructor() { }
 
@@ -16,12 +17,14 @@ export class InboxDetailsComponent implements OnInit {
   }
 
 
-  onAccept() {
-    this.displayChange.emit(false)
+  onAccept(id: string) {
+    this.displayChange.emit(false);
+    this.logAppointment.emit({status: STATUS.ACCEPTED, id: id})
   }
 
-  onReject() {
-    this.displayChange.emit(false)
+  onReject(id: string) {
+    this.displayChange.emit(false);
+    this.logAppointment.emit({status: STATUS.REJECTED, id: id})
   }
 
   onClose() {
