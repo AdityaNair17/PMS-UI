@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { IPatientRegistrationReq } from '../../models/patientRegistration-model';
+import { toastErrMessage } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-sign-up',
@@ -55,12 +56,7 @@ export class SignUpComponent implements OnInit {
           this.router.navigate(['/auth/sign-in']);
         }
         else{
-          const toastMessage = {
-            severity : "error",
-            summary : "Error",
-            detail : "Something went wrong :("
-          }
-          this.toastMessageSvc.displayToastMessage(toastMessage);
+          this.toastMessageSvc.displayToastMessage(toastErrMessage);
         }
         
       });
