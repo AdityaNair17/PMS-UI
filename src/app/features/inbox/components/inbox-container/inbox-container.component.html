@@ -1,1 +1,10 @@
-<app-inbox-list [inboxList]="inboxList"></app-inbox-list>
+<app-inbox-list 
+[inboxList]="inboxList"
+(logMailId)="getMailId($event)"
+></app-inbox-list>
+<app-inbox-details 
+*ngIf="vissible"
+[vissible]="vissible"
+(displayChange)="onDialogClose($event)"
+[mailDetails]="mailDetails"
+></app-inbox-details>

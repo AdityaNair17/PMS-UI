@@ -18,7 +18,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     </ng-template>
 
     <ng-template pTemplate="body" let-inbox>
-        <tr>
+        <tr (click)="getMailRowDetails(inbox.id)">
             <td>{{inbox.name}}</td>
             <td>{{inbox.subject}}</td>
             <td>{{inbox.time}}</td>

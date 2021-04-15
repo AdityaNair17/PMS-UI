@@ -10,20 +10,34 @@ import { IInbox } from '../../models/inbox-models';
 })
 export class InboxContainerComponent implements OnInit {
   inboxList: IInbox[] = [];
+  vissible: boolean = false;
+  mailDetails: IInbox = null;
   constructor(
     private inboxService: InboxService,
     private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.getAllInbox('ankit@gmail.com');
+    this.getAllInbox(this.authService.User.emailId);
   }
 
   getAllInbox(user: string) {
     this.inboxService.getAllInboxByuser(user)
-    .subscribe((inboxList)=>{
-      this.inboxList = inboxList;
-    });
+      .subscribe((inboxList) => {
+        this.inboxList = inboxList;
+      });
+  }
+
+  getMailId(id: string) {
+    this.vissible = true;
+    this.inboxService.getMailById(id)
+      .subscribe((mail) => {
+        this.mailDetails = mail;
+      })
+  }
+
+  onDialogClose(dialogCloseFlag: boolean) {
+    this.vissible = dialogCloseFlag;
   }
 
 }

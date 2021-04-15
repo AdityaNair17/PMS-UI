@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { InboxService } from '../../inbox.service';
 import { IInbox } from '../../models/inbox-models';
 
@@ -9,11 +9,15 @@ import { IInbox } from '../../models/inbox-models';
 })
 export class InboxListComponent implements OnInit {
   @Input() inboxList: IInbox[];
-
+  @Output() logMailId: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getMailRowDetails(id: string){
+    this.logMailId.emit(id);
   }
 
 }
