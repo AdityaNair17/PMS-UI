@@ -1,0 +1,27 @@
+<p-table #table [value]="inboxList" 
+[paginator]="true"  
+[rows]="10" 
+[showCurrentPageReport]="true"
+currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+[rowsPerPageOptions]="[10,25,50]"
+[globalFilterFields]="['name','subject','time']"
+[filterDelay]="0"
+>
+    
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="table.filterGlobal($event.target.value, 'contains')" placeholder="Search" />
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-inbox>
+        <tr (click)="getMailRowDetails(inbox.id)">
+            <td>{{inbox.name}}</td>
+            <td>{{inbox.subject}}</td>
+            <td>{{inbox.time}}</td>
+        </tr>
+    </ng-template>
+</p-table>

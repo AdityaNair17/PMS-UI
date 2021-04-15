@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { IPatientRegistrationReq } from '../../models/patientRegistration-model';
+import { toastErrMessage, toastSuccMessage } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-sign-up',
@@ -38,31 +39,22 @@ export class SignUpComponent implements OnInit {
   }
 
   onRegister() {
-    if(!this.patientSignupForm.valid){
+    if (!this.patientSignupForm.valid) {
       return;
     }
     const patient = this.patientSignupForm.value as IPatientRegistrationReq;
     delete patient.confirmPassword;
     this.authService.patientRegistration(patient)
       .subscribe((data) => {
-        if(data.status === 200){
-          const toastMessage = {
-            severity : "success",
-            summary : "Success",
-            detail : "Registered Successfully!"
-          }
-          this.toastMessageSvc.displayToastMessage(toastMessage);
+        if (data.status === 200) {
+          toastSuccMessage.summary = "Registered Successfully!"
+          this.toastMessageSvc.displayToastMessage(toastSuccMessage);
           this.router.navigate(['/auth/sign-in']);
         }
-        else{
-          const toastMessage = {
-            severity : "error",
-            summary : "Error",
-            detail : "Something went wrong :("
-          }
-          this.toastMessageSvc.displayToastMessage(toastMessage);
+        else {
+          this.toastMessageSvc.displayToastMessage(toastErrMessage);
         }
-        
+
       });
 
   }
