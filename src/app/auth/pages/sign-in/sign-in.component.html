@@ -1,17 +1,17 @@
 <div class="sign-in-container auth-container">
     <h2 class="color">PMS</h2>
-    <form class="auth-form">
+    <form class="auth-form" #loginForm = "ngForm">
         <mat-form-field appearance="outline" class="input-width">
             <mat-label>Email address</mat-label>
             <input matInput placeholder="Email address" [(ngModel)] = "loginDetails.email" name = "username" #username = "ngModel" required >
           </mat-form-field>
-          <div *ngIf =  "(isControlInvalid(username) && username.errors?.required) || invalidEmail" class = "errorMsg">{{CONSTANT.requiredFieldMessage}}</div>
+          <div *ngIf =  "isControlInvalid(username) && username.errors?.required" class = "errorMsg">{{CONSTANT.requiredFieldMessage}}</div>
           <br>
         <mat-form-field appearance="outline" class="input-width">
           <mat-label>Password</mat-label>
           <input matInput placeholder="Password" type="password" [(ngModel)] = "loginDetails.password" name = "password" required #password = "ngModel">
         </mat-form-field>
-        <div *ngIf =  "(isControlInvalid(password) && password.errors?.required) || invalidPassword" class = "errorMsg">{{CONSTANT.requiredFieldMessage}}</div>
+        <div *ngIf =  "isControlInvalid(password) && password.errors?.required" class = "errorMsg">{{CONSTANT.requiredFieldMessage}}</div>
         <br>
         <p *ngIf = "invalidMessageFlag" class  = "errorMessage">{{CONSTANT.invalidLoginMessage}}</p>
         <br>

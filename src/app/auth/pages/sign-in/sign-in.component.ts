@@ -3,7 +3,7 @@ import { pmsConstants } from './../../../shared/constants/constants';
 import { AuthService } from './../../auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, Form } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -18,11 +18,8 @@ export class SignInComponent implements OnInit {
     "password": ""
   }
   public invalidMessageFlag: boolean = false;
-  public invalidEmail : boolean = false;
-  public invalidPassword : boolean = false;
   public CONSTANT = pmsConstants;
-  @ViewChild('username') emailControl : FormControl;
-  @ViewChild('password') passwordControl : FormControl;
+  @ViewChild('loginForm') loginForm : FormGroup;
 
   constructor(private authSvc: AuthService, private router: Router,
               private toastMessageSvc : ToastMessageService) { }
@@ -32,18 +29,13 @@ export class SignInComponent implements OnInit {
 
 
   login(){
-    if(this.emailControl.invalid || this.passwordControl.invalid){
-      this.emailControl.markAsTouched;
-      console.log(this.emailControl)
-      this.passwordControl.markAsTouched;
-      console.log(this.isControlInvalid(this.emailControl));
-      // if(this.emailControl.invalid){
-      //   this.invalidEmail = true;
-      // }
-      // if(this.passwordControl.invalid){
-      //   this.invalidPassword = true;
-      // }
-      
+    if(!this.loginForm.valid){
+      if(this.loginForm.controls['username'].invalid){
+        this.loginForm.controls['username'].markAsTouched();
+      }
+      if(this.loginForm.controls['password'].invalid){
+        this.loginForm.controls['password'].markAsTouched();
+      }     
     } else {
       this.verifyLogin();
     }
