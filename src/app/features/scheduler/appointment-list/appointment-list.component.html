@@ -1,0 +1,13 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">Appointment List</h4>
+  </div>
+  <div class="modal-body">
+    <p-calendar [(ngModel)]="value" [showIcon]="true" inputId="icon"></p-calendar>
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+    class="btn btn-outline-dark" ngbAutofocus 
+    (click)="activeModal.close('We did it!')">Close</button>
+  </div>
+</div>

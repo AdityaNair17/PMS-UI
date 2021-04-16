@@ -25,6 +25,7 @@
     "@fullcalendar/daygrid": "^4.1.0",
     "@fullcalendar/interaction": "^4.1.0",
     "@fullcalendar/timegrid": "^4.1.0",
+    "@ng-bootstrap/ng-bootstrap": "^9.1.0",
     "bootstrap": "^4.6.0",
     "json-server": "^0.16.3",
     "jsonwebtoken": "^8.5.1",

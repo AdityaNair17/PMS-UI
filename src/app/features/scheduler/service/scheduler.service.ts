@@ -1,24 +1,31 @@
+import { of } from 'rxjs';
 import { AppService } from './../../../app.service';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, SkipSelf } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as appointmentList from '../../../../assets/json/calendarAppointmentList.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchedulerService {
 
-constructor(private http: HttpClient, private appSvc : AppService) { }
+constructor(private http: HttpClient,
+            private appSvc : AppService,
+            private modal : NgbModal) { }
 
-getEvents() {
-  return this.http.get<any>('assets/json/calendarEvents.json')
-    .toPromise()
-    .then(res => <any[]>res.data)
-    .then(data => { return data; });
+getListOfAppointments() {
+  return of((appointmentList as any).default);
   }
+
 
   randomCall(){
     console.log("called");
     return this.appSvc.Get('http://localhost:3000/data');
 
+  }
+
+  openAppointmentList(component : any){
+    this.modal.open(component,{ backdrop: 'static'});
   }
 }
