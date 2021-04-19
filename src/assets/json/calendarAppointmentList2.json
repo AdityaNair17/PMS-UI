@@ -1,0 +1,35 @@
+
+[
+  {
+    "date" : "2021-02-28",
+    "noOfAppointments" : 10
+  },
+  {
+    "date" : "2021-03-02",
+    "noOfAppointments" : 5
+  },
+  {
+    "date" : "2021-03-03",
+    "noOfAppointments" : 6
+  },
+  {
+    "date" : "2021-03-04",
+    "noOfAppointments" : 14
+  },
+  {
+    "date" : "2021-03-05",
+    "noOfAppointments" : 15
+  },
+  {
+    "date" : "2021-03-06",
+    "noOfAppointments" : 6
+  },
+  {
+    "date" : "2021-03-14",
+    "noOfAppointments" : 5
+  },
+  {
+    "date" : "2021-03-15",
+    "noOfAppointments" : 6
+  }
+]

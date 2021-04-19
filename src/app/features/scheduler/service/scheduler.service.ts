@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as appointmentList from '../../../../assets/json/calendarAppointmentList.json';
+import * as appointmentList2 from '../../../../assets/json/calendarAppointmentList2.json';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ constructor(private http: HttpClient,
             private appSvc : AppService,
             private modal : NgbModal) { }
 
-getListOfAppointments() {
+getListOfAppointments(requestBody : any) {
+  console.log(requestBody);
+
   return of((appointmentList as any).default);
+
   }
 
 
