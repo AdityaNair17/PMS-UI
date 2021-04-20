@@ -1,3 +1,4 @@
+import { CreateAppointmentComponent } from './create-appointment/create-appointment.component';
 import { AppointmentListComponent } from './appointment-list/appointment-list.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SchedulerService } from './service/scheduler.service';
@@ -60,11 +61,17 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
         header: {
           left: 'prev,next',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          right: 'addAppointment,dayGridMonth,timeGridWeek,timeGridDay'
         },
         editable: true,
         dateClick: this.handleDateClick.bind(this),
         eventClick: this.handleEventClick.bind(this),
+        customButtons : {
+          addAppointment : {
+            text : "Add Appointment",
+            click : this.addAppointment.bind(this)
+          }
+        }
       };
     });
   }
@@ -119,4 +126,8 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
     nextButton[0].addEventListener('click', this.nextClick.bind(this));
   }
 
+  addAppointment(event){
+
+    this.schedulerSvc.openAppointmentList(CreateAppointmentComponent);
+  }
 }

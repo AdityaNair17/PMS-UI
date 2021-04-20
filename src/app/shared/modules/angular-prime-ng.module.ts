@@ -9,6 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import {AccordionModule} from 'primeng/accordion';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -24,7 +25,8 @@ import {AccordionModule} from 'primeng/accordion';
     InputTextModule,
     DialogModule,
     CalendarModule,
-    AccordionModule
+    AccordionModule,
+    DropdownModule
   ],
   exports: [
     ButtonModule,
@@ -36,7 +38,8 @@ import {AccordionModule} from 'primeng/accordion';
     InputTextModule,
     DialogModule,
     CalendarModule,
-    AccordionModule
+    AccordionModule,
+    DropdownModule
   ]
 })
 export class AngularPrimeNgModule { }

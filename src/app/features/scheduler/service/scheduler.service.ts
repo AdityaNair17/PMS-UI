@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as appointmentList from '../../../../assets/json/calendarAppointmentList.json';
 import * as appointmentList2 from '../../../../assets/json/calendarAppointmentList2.json';
 import * as appointmentDetails from '../../../../assets/json/listOfAppointmentDetails.json';
+import * as patientList from '../../../../assets/json/listOfPatients.json';
+import * as doctorList from '../../../../assets/json/listOfDoctors.json';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +52,14 @@ export class SchedulerService {
 
     return `${year}-${month}-${date}`;
 
+  }
+
+
+  getListOfPatients(){
+    return of((patientList as any).default);
+  }
+
+  getListOfDoctors(){
+    return of((doctorList as any).default);
   }
 }

@@ -4,6 +4,7 @@ export interface IUser {
     lastName: string;
     emailId: string;
     dateOfBirth: string;
+    id: string;
 }
 
 export interface IUserSessionData {
