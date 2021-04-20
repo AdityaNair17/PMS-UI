@@ -10,6 +10,6 @@ export class PatientService {
   constructor() { }
 
   addPatientDetils(patientDetails: any): Observable<IPatientDetailsRes> {
-    return of({ id: '456fdsdfhjjtrdsaw35789', status: 200, message: 'password changed Successfully' })
+    return of({ id: '456fdsdfhjjtrdsaw35789', status: 200, message: 'Patient details added Successfully' })
   }
 }

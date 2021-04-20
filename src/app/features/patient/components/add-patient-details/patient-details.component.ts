@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastMessageService } from 'src/app/shared/components/toast/service/toastMessage.service';
-import { accessList, genderList, languages } from 'src/app/shared/constants/constants';
+import { accessList, genderList, languages, toastErrMessage, toastSuccMessage } from 'src/app/shared/constants/constants';
+import { PatientService } from '../../patient.service';
 
 @Component({
   selector: 'app-patient-details',
@@ -18,7 +19,8 @@ export class PatientDetailsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private toastMessageSvc: ToastMessageService,
-    private router: Router
+    private router: Router,
+    private ps: PatientService
   ) { }
 
   ngOnInit(): void {
@@ -60,8 +62,21 @@ export class PatientDetailsComponent implements OnInit {
     });
   }
 
-  onAddPatientDetails(){
-    console.log(this.addPatientDetailsForm.value)
+  onAddPatientDetails() {
+    if (!this.addPatientDetailsForm.valid) {
+      return;
+    }
+    this.ps.addPatientDetils(this.addPatientDetailsForm.value)
+      .subscribe((patient) => {
+        if (patient.status === 200) {
+          toastSuccMessage.summary = patient.message;
+          this.toastMessageSvc.displayToastMessage(toastSuccMessage);
+          //re direct to view patient details page
+          // this.router.navigate(['\'])
+        }
+      }, (err) => {
+        this.toastMessageSvc.displayToastMessage(toastErrMessage);
+      });
   }
 
 }
