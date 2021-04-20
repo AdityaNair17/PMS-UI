@@ -5,31 +5,50 @@ import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as appointmentList from '../../../../assets/json/calendarAppointmentList.json';
 import * as appointmentList2 from '../../../../assets/json/calendarAppointmentList2.json';
+import * as appointmentDetails from '../../../../assets/json/listOfAppointmentDetails.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchedulerService {
 
-constructor(private http: HttpClient,
-            private appSvc : AppService,
-            private modal : NgbModal) { }
+  public selectedDate: Date;
+  constructor(private http: HttpClient,
+    private appSvc: AppService,
+    private modal: NgbModal) { }
 
-getListOfAppointments(requestBody : any) {
-  console.log(requestBody);
+  getListOfAppointments(requestBody: any) {
+    console.log(requestBody);
 
-  return of((appointmentList as any).default);
+    return of((appointmentList as any).default);
 
   }
 
 
-  randomCall(){
+  getListOfAppointmentsForSelectedDate(requestBody: any){
+    console.log(requestBody);
+    return of((appointmentDetails as any).default);
+  }
+  randomCall() {
     console.log("called");
     return this.appSvc.Get('http://localhost:3000/data');
 
   }
 
-  openAppointmentList(component : any){
-    this.modal.open(component,{ backdrop: 'static'});
+  openAppointmentList(component: any) {
+    this.modal.open(component, { backdrop: 'static' });
+  }
+
+  FormatDate(fullDate: Date) {
+    let date: any = fullDate.getDate();
+    date = date >= 10 ? date : `0${date}`;
+
+    let month: any = fullDate.getMonth() + 1;
+    month = month >= 10 ? month : `0${month}`;
+
+    const year = fullDate.getFullYear();
+
+    return `${year}-${month}-${date}`;
+
   }
 }

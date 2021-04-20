@@ -46,14 +46,14 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
 
     const requestBody = {
       emailId : this.authSvc.User.emailId,
-      startDate : this.FormatDate(this.startDate),
-      endDate : this.FormatDate(this.endDate)
+      startDate : this.schedulerSvc.FormatDate(this.startDate),
+      endDate : this.schedulerSvc.FormatDate(this.endDate)
     }
     this.schedulerSvc.getListOfAppointments(requestBody).subscribe(appoinments => {
       const appointmentsList = appoinments.filter(app => app.noOfAppointments > 0);
       this.allAppointments = this.resturctureAppointmentData(appointmentsList);
 
-      const defaultDate = this.FormatDate(this.currentDate);
+      const defaultDate = this.schedulerSvc.FormatDate(this.currentDate);
       this.options = {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         defaultDate: defaultDate,
@@ -64,7 +64,7 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
         },
         editable: true,
         dateClick: this.handleDateClick.bind(this),
-        eventClick: this.handleDateClick.bind(this),
+        eventClick: this.handleEventClick.bind(this),
       };
     });
   }
@@ -83,11 +83,17 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
     return restrucredData;
   }
   handleDateClick(event) {
-    // console.log(event.event.start);
-    // event.stopPropogation();
+    console.log(event);
+    this.schedulerSvc.selectedDate = event.date;
     this.schedulerSvc.openAppointmentList(AppointmentListComponent);
   }
 
+  handleEventClick(event) {
+    console.log(event);
+    this.schedulerSvc.selectedDate = event.event.start;
+    console.log(this.schedulerSvc.selectedDate);
+    this.schedulerSvc.openAppointmentList(AppointmentListComponent);
+  }
   previousClick(event) {
     this.currentDate.setMonth(this.currentDate.getMonth() - 1);
     console.log(this.currentDate);
@@ -113,17 +119,4 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
     nextButton[0].addEventListener('click', this.nextClick.bind(this));
   }
 
-
-  FormatDate(fullDate: Date) {
-    let date: any = fullDate.getDate();
-    date = date >= 10 ? date : `0${date}`;
-
-    let month: any = fullDate.getMonth() + 1;
-    month = month >= 10 ? month : `0${month}`;
-
-    const year = fullDate.getFullYear();
-
-    return `${year}-${month}-${date}`;
-
-  }
 }
