@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ToastMessageService } from 'src/app/shared/components/toast/service/toastMessage.service';
+import { toastErrMessage, toastSuccMessage } from 'src/app/shared/constants/constants';
 import { IChangePasswordReq } from '../../models/changePassword-model';
 
 @Component({
@@ -16,9 +18,9 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private messageService: MessageService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastMessageSvc: ToastMessageService,
   ) { }
 
   ngOnInit(): void {
@@ -43,11 +45,12 @@ export class ChangePasswordComponent implements OnInit {
     this.authService.changePassword(changePasswordDetails)
       .subscribe((data) => {
         if(data.status === 200){
-          this.messageService.add({severity:'success', summary: 'Success', detail: 'Password changed successfully!'});
+          toastSuccMessage.summary = 'Password changed successfully!'
           this.router.navigate(['/layout/home']);
+          this.toastMessageSvc.displayToastMessage(toastSuccMessage)
         }
         else
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong!' });
+        this.toastMessageSvc.displayToastMessage(toastErrMessage)
       });
   }
 
