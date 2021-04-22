@@ -18,7 +18,12 @@ const routes: Routes = [
       {
         path: 'scheduler',
         loadChildren: () => import('../features/scheduler/scheduler.module').then(m => m.SchedulerModule)
-      }
+      },
+      {
+        path: 'patient',
+        loadChildren: ()=>import('../features/patient/patient.module').then(m=>m.PatientModule)
+
+      },
     ]
   }
 ];
