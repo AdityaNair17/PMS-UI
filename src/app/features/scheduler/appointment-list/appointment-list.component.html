@@ -1,0 +1,46 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">Appointment List</h4>
+  </div>
+  <div class="modal-body">
+    <p-calendar [(ngModel)]="selectedDate" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy"></p-calendar>
+
+    <p-accordion class="accordian" *ngFor="let app of appointments" (onClose)="cancelDeleteDialog(app.appointmentId)">
+      <div >
+        <p-accordionTab >
+          <p-header>
+            <div class="row">
+              <div class="col-md-4">
+                <span>{{app.patientName}} </span>
+              </div>
+              <div class="align-right col-md-8">
+                  <i class="fa fa-edit" (click)="editAppointment(app)"></i>&nbsp;
+                  <i class="fa fa-trash" (click)="showDeleteDialog(app, $event)"></i>
+              </div>
+            </div>
+          </p-header>
+          <p-body>
+            <div>
+              <span>Physcian Name : {{app.physcianName}}</span><br>
+              <span>Appointment Time : {{app.time}}</span><br>
+              <span>Description : {{app.description}}</span>
+            </div>
+            <div *ngIf="showDeleteConfirmationDialog && appointmentToBeDeleted.appointmentId == app.appointmentId">
+              <input type="text" placeholder="Reason For Deletion"><br>
+              <div class="align-right">
+                <button class="btn-danger right-margin-5" (click)=deleteAppointment()>Delete</button>
+                <button class="btn" (click)=cancelDeleteDialog(app.appointmentId)>Cancel</button>
+              </div>
+            </div>
+          </p-body>
+        </p-accordionTab>
+        
+      </div>
+    </p-accordion>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" ngbAutofocus
+      (click)="activeModal.close('We did it!')">Close</button>
+  </div>
+</div>

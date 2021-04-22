@@ -58,7 +58,8 @@ export class SignInComponent implements OnInit {
             firstName: data.user.firstName,
             lastName: data.user.lastName,
             emailId: data.user.emailId,
-            dateOfBirth: data.user.dateOfBirth
+            dateOfBirth: data.user.dateOfBirth,
+            id: data.user.id
           }
           this.authSvc.User = user;
           this.authSvc.StoreSession();
