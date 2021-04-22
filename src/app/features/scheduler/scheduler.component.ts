@@ -58,10 +58,12 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
       this.options = {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         defaultDate: defaultDate,
+        fixedWeekCount: false,
         header: {
           left: 'prev,next',
           center: 'title',
-          right: 'addAppointment,dayGridMonth,timeGridWeek,timeGridDay'
+          // right: 'addAppointment,dayGridMonth,timeGridWeek,timeGridDay',
+          right: 'addAppointment'
         },
         editable: true,
         dateClick: this.handleDateClick.bind(this),

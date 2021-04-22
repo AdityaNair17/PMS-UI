@@ -8,6 +8,7 @@ import * as appointmentList2 from '../../../../assets/json/calendarAppointmentLi
 import * as appointmentDetails from '../../../../assets/json/listOfAppointmentDetails.json';
 import * as patientList from '../../../../assets/json/listOfPatients.json';
 import * as doctorList from '../../../../assets/json/listOfDoctors.json';
+import * as timeSlots from '../../../../assets/json/appointmentTimes.json';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +62,17 @@ export class SchedulerService {
 
   getListOfDoctors(){
     return of((doctorList as any).default);
+  }
+
+  getTimeSlots(){
+    return of((timeSlots as any).default);
+  }
+
+  createAppointment(reqObj){
+    console.log(reqObj);
+    const respStatus = {
+      status : 200
+    }
+    return of(respStatus);
   }
 }

@@ -1,3 +1,6 @@
+import { toastErrMessage } from 'src/app/shared/constants/constants';
+import { ToastMessageService } from './../../../shared/components/toast/service/toastMessage.service';
+import { pmsConstants, toastSuccMessage } from './../../../shared/constants/constants';
 import { SchedulerService } from './../service/scheduler.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -22,15 +25,23 @@ export class CreateAppointmentComponent implements OnInit {
   public disableDoctor : boolean = false;
   public listOfDoctors : any[];
   public listOfPatients : any[];
+  public availableTimeslots : any[];
+  public todaysDate : Date;
+  public CONSTANT = pmsConstants;
 
   constructor(public activeModal : NgbActiveModal,
               private authSvc : AuthService,
               private schedulerSvc : SchedulerService,
-              private fb : FormBuilder) { }
+              private fb : FormBuilder,
+              private toastMessageSvc : ToastMessageService) { }
 
   ngOnInit(): void {
     this.createControls();
     this.createFormGroup();
+
+    this.schedulerSvc.getTimeSlots().subscribe(slots => {
+      this.availableTimeslots = this.formatTimeSlot(slots);
+    })
 
     const role = this.authSvc.UserRole;
     const loggedInUser = this.authSvc.User;
@@ -56,6 +67,8 @@ export class CreateAppointmentComponent implements OnInit {
       this.schedulerSvc.getListOfDoctors().subscribe( doctors => {
         this.listOfDoctors = this.formatData(doctors);
       });
+
+
     }
 
     if(!this.disablePatient){
@@ -64,6 +77,9 @@ export class CreateAppointmentComponent implements OnInit {
         
       });
     }
+
+
+    this.todaysDate = new Date();
   }
 
   createControls(){
@@ -100,6 +116,43 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   createAppointment(){
-    console.log(this.appointmentForm)
+    const time = this.timeOfAppointment.value;
+    const endTime = time.minutes == 30 ? `${time.hours+1}:00` : `${time.hours}:30`
+    const reqObj = {
+      physcianId : this.physcianName.value.userId,
+      patientId : this.patientName.value.userId,
+      date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
+      status : "BOOKED",
+      startTime : this.timeOfAppointment.value.fullTime,
+      endTime : endTime,
+      description : this.description.value
+    }
+    this.schedulerSvc.createAppointment(reqObj).subscribe(response => {
+      if(response.status == 200){
+        this.toastMessageSvc.displayToastMessage(toastSuccMessage);
+      } else {
+        this.toastMessageSvc.displayToastMessage(toastErrMessage);
+      }
+      this.activeModal.close();
+
+    })
+  }
+
+  formatTimeSlot(slots){
+    const formattedSlots = [];
+    slots.forEach(slot => {
+      const obj = {
+        hours : slot.hours,
+        minutes : slot.minutes,
+        fullTime : slot.minutes == 30 ? `${slot.hours}:${slot.minutes}` : `${slot.hours}:00`
+      };
+      formattedSlots.push(obj);
+    });
+    return formattedSlots;
+  }
+
+  isControlInvalid(control : FormControl){
+    // console.log(control);
+    return control.invalid && (control.dirty || control.touched);
   }
 }
