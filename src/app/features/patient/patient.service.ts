@@ -27,6 +27,66 @@ export class PatientService {
     return of(allergies);
   }
 
+  getPatient():Observable<IPatient>{
+    const patient = {
+      "id": "CT62d98519-5e20-482d-817a-a6330aca531a",
+      "basicDetails": {
+        "id": "206",
+        "firstName": "Ravikumar",
+        "lastName": "Jadhav",
+        "emailId": "m10@gmail.com",
+        "dateOfBirth": "1985-01-30",
+        "contactNo": "9090909090",
+        "age": 36.0,
+        "gender": "male",
+        "race": "Ashian",
+        "ethnicity": "Test"
+      },
+      "emergencyDetails": {
+        "id": "207",
+        "emergency_first_name": "Amar",
+        "emergency_last_name": "Shinde",
+        "emergency_relation_ship": "Friend",
+        "emergency_contact_number": "9898989898",
+        "mailId": "test10@gmail.com",
+        "_access_approved": true,
+        "_same_address": true
+      },
+      "address": {
+        "id": "211",
+        "landmarkArea": "Sadarbazar Peth",
+        "city": "Satara",
+        "state": "Maharashtra",
+        "country": "India",
+        "pin": 415001,
+        "addressType": "HOME_ADDRESS",
+      },
+      "languageKnown": [
+        {
+          "id": 2,
+          "name": "Hindi"
+        },
+        {
+          "id": 1,
+          "name": "Marathi"
+        }
+      ],
+      "allergies": [
+        {
+          "id": 1,
+          "type": "DUST",
+          "fatal": false
+        },
+        {
+          "id": 2,
+          "type": "FOOD",
+          "fatal": false
+        }
+      ]
+    }
+    return of(JSON.parse(JSON.stringify(patient)));
+  }
+
   getAllPatients(user?: string): Observable<IPatient[]> {
     const data = [
       {

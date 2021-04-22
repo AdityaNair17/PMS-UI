@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastMessageService } from 'src/app/shared/components/toast/service/toastMessage.service';
 import { accessList, genderList, toastErrMessage, toastSuccMessage } from 'src/app/shared/constants/constants';
-import { IAllergies, ILanguageKnown } from '../../models/patientDetails-model';
+import { IAllergies, ILanguageKnown, IPatient } from '../../models/patientDetails-model';
 import { PatientService } from '../../patient.service';
 
 @Component({
@@ -12,6 +12,8 @@ import { PatientService } from '../../patient.service';
   styleUrls: ['./patient-details.component.scss']
 })
 export class PatientDetailsComponent implements OnInit {
+  @Input() readonlyMode: boolean;
+  @Input() patient: IPatient;
   genderList: string[] = genderList;
   accessList: any[] = accessList;
   languages: ILanguageKnown[] = [];
