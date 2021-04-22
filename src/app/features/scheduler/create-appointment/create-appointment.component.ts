@@ -20,6 +20,7 @@ export class CreateAppointmentComponent implements OnInit {
   public physcianName : FormControl;
   public dateOfAppointment : FormControl;
   public timeOfAppointment : FormControl;
+  public reason : FormControl;
   public description : FormControl;
   public disablePatient : boolean = false;
   public disableDoctor : boolean = false;
@@ -28,6 +29,7 @@ export class CreateAppointmentComponent implements OnInit {
   public availableTimeslots : any[];
   public todaysDate : Date;
   public CONSTANT = pmsConstants;
+  public appointmentMode : string = "add";
 
   constructor(public activeModal : NgbActiveModal,
               private authSvc : AuthService,
@@ -36,6 +38,8 @@ export class CreateAppointmentComponent implements OnInit {
               private toastMessageSvc : ToastMessageService) { }
 
   ngOnInit(): void {
+    this.appointmentMode = this.schedulerSvc.appointmentMode;
+
     this.createControls();
     this.createFormGroup();
 
@@ -43,6 +47,10 @@ export class CreateAppointmentComponent implements OnInit {
       this.availableTimeslots = this.formatTimeSlot(slots);
     })
 
+    
+    this.todaysDate = new Date();
+
+    if(this.appointmentMode == 'add'){
     const role = this.authSvc.UserRole;
     const loggedInUser = this.authSvc.User;
     if(role == 'Patient'){
@@ -77,9 +85,41 @@ export class CreateAppointmentComponent implements OnInit {
         
       });
     }
+  } else {
+
+    this.listOfDoctors = [];
+    this.listOfDoctors.push({
+      userId : this.schedulerSvc.selectedAppointment.physcianId,
+      name : this.schedulerSvc.selectedAppointment.physcianName
+    });
+    this.appointmentForm.get("physcianName").patchValue(this.listOfDoctors[0]);
+    this.disableDoctor = true;
 
 
-    this.todaysDate = new Date();
+    this.listOfPatients = [];
+    this.listOfPatients.push({
+      userId : this.schedulerSvc.selectedAppointment.patientId,
+      name : this.schedulerSvc.selectedAppointment.patientName
+    })
+    this.appointmentForm.get("patientName").patchValue(this.listOfPatients[0]);
+    this.disablePatient = true;
+
+    const dateArray = this.schedulerSvc.selectedAppointment.date.split("-");
+    const year = dateArray[0];
+    const month = dateArray[1];
+    const date = dateArray[2];
+    this.appointmentForm.get("dateOfAppointment").patchValue(new Date(year, month - 1, date));
+    console.log(year + " " + month + " " + date);
+
+
+    this.appointmentForm.get("timeOfAppointment").patchValue(this.availableTimeslots.find(t => t.fullTime == this.schedulerSvc.selectedAppointment.startTime));
+
+    this.appointmentForm.get("description").patchValue(this.schedulerSvc.selectedAppointment.description);
+
+    this.appointmentForm.get("title").patchValue(this.schedulerSvc.selectedAppointment.title);
+
+  }
+
   }
 
   createControls(){
@@ -89,9 +129,12 @@ export class CreateAppointmentComponent implements OnInit {
     this.dateOfAppointment = new FormControl('', Validators.required);
     this.timeOfAppointment = new FormControl('', Validators.required);
     this.description = new FormControl('', Validators.required);
+    this.reason = new FormControl('', Validators.required);
   }
 
   createFormGroup(){
+
+    if(this.appointmentMode == 'add'){
     this.appointmentForm = this.fb.group({
       title : this.title,
       patientName : this.patientName,
@@ -100,6 +143,17 @@ export class CreateAppointmentComponent implements OnInit {
       timeOfAppointment : this.timeOfAppointment,
       description : this.description
     })
+  } else {
+    this.appointmentForm = this.fb.group({
+      title : this.title,
+      patientName : this.patientName,
+      physcianName : this.physcianName,
+      dateOfAppointment : this.dateOfAppointment,
+      timeOfAppointment : this.timeOfAppointment,
+      description : this.description,
+      reason : this.reason
+    })
+  }
   }
 
   formatData(details){
@@ -121,6 +175,8 @@ export class CreateAppointmentComponent implements OnInit {
     const reqObj = {
       physcianId : this.physcianName.value.userId,
       patientId : this.patientName.value.userId,
+      patientName : this.patientName.value.name,
+      physcianName : this.physcianName.value.name,
       date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
       status : "BOOKED",
       startTime : this.timeOfAppointment.value.fullTime,
@@ -128,6 +184,33 @@ export class CreateAppointmentComponent implements OnInit {
       description : this.description.value
     }
     this.schedulerSvc.createAppointment(reqObj).subscribe(response => {
+      if(response.status == 200){
+        this.toastMessageSvc.displayToastMessage(toastSuccMessage);
+      } else {
+        this.toastMessageSvc.displayToastMessage(toastErrMessage);
+      }
+      this.activeModal.close();
+
+    })
+  }
+
+
+  editAppointment(){
+    const time = this.timeOfAppointment.value;
+    const endTime = time.minutes == 30 ? `${time.hours+1}:00` : `${time.hours}:30`
+    const reqObj = {
+      physcianId : this.physcianName.value.userId,
+      patientId : this.patientName.value.userId,
+      patientName : this.patientName.value.name,
+      physcianName : this.physcianName.value.name,
+      date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
+      status : "BOOKED",
+      startTime : this.timeOfAppointment.value.fullTime,
+      endTime : endTime,
+      description : this.description.value,
+      reasonForChange : this.reason.value
+    }
+    this.schedulerSvc.editAppointment(reqObj).subscribe(response => {
       if(response.status == 200){
         this.toastMessageSvc.displayToastMessage(toastSuccMessage);
       } else {
@@ -152,7 +235,6 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   isControlInvalid(control : FormControl){
-    // console.log(control);
     return control.invalid && (control.dirty || control.touched);
   }
 }

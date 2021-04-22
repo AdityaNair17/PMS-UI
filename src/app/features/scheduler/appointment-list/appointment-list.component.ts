@@ -1,3 +1,4 @@
+import { CreateAppointmentComponent } from './../create-appointment/create-appointment.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SchedulerService } from './../service/scheduler.service';
 import { Component, OnInit } from '@angular/core';
@@ -41,7 +42,7 @@ export class AppointmentListComponent implements OnInit {
   }
 
   deleteAppointment(){
-    console.log(this.appointmentToBeDeleted);
+    console.log(this.appointmentToBeDeleted);   
   }
 
   showDeleteDialog(appointment, event){
@@ -54,5 +55,9 @@ export class AppointmentListComponent implements OnInit {
     this.showDeleteConfirmationDialog = false;
     this.appointmentToBeDeleted = null;
     }
+  }
+
+  editAppointment(appointment){
+    this.schedulerSvc.createEditAppointment(CreateAppointmentComponent,"edit",appointment);
   }
 }

@@ -130,6 +130,6 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
 
   addAppointment(event){
 
-    this.schedulerSvc.openAppointmentList(CreateAppointmentComponent);
+    this.schedulerSvc.createEditAppointment(CreateAppointmentComponent, "add");
   }
 }

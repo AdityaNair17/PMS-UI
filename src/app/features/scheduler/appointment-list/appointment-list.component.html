@@ -14,6 +14,7 @@
                 <span>{{app.patientName}} </span>
               </div>
               <div class="align-right col-md-8">
+                  <i class="fa fa-edit" (click)="editAppointment(app)"></i>&nbsp;
                   <i class="fa fa-trash" (click)="showDeleteDialog(app, $event)"></i>
               </div>
             </div>

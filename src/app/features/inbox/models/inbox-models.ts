@@ -19,7 +19,8 @@ export interface IAppointmentContextReq{
 export enum STATUS{
     UPCOMING = 'Upcoming',
     ACCEPTED = 'Accepted',
-    REJECTED = 'Rejected'
+    REJECTED = 'Rejected',
+    PENDING = 'Approval Pending'
 }
 
 export interface IAppointmentContextRes extends IResponse{}

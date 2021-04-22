@@ -16,6 +16,9 @@ import * as timeSlots from '../../../../assets/json/appointmentTimes.json';
 export class SchedulerService {
 
   public selectedDate: Date;
+  public appointmentMode : string;
+  public selectedAppointment : any;
+
   constructor(private http: HttpClient,
     private appSvc: AppService,
     private modal: NgbModal) { }
@@ -42,6 +45,14 @@ export class SchedulerService {
     this.modal.open(component, { backdrop: 'static' });
   }
 
+  createEditAppointment(component : any, mode : string = "add", appointment? : any){
+    this.appointmentMode = mode;
+    if(appointment){
+      this.selectedAppointment = appointment;
+    }
+    this.modal.open(component, {backdrop : 'static'});
+  }
+  
   FormatDate(fullDate: Date) {
     let date: any = fullDate.getDate();
     date = date >= 10 ? date : `0${date}`;
@@ -69,6 +80,14 @@ export class SchedulerService {
   }
 
   createAppointment(reqObj){
+    console.log(reqObj);
+    const respStatus = {
+      status : 200
+    }
+    return of(respStatus);
+  }
+
+  editAppointment(reqObj){
     console.log(reqObj);
     const respStatus = {
       status : 200

@@ -4,49 +4,65 @@
     "patientName" : "Ankit",
     "physcianName" : "Sanket Chaudhari",
     "date" : "2021-04-16",
-    "time" : "9:30",
+    "startTime" : "9:30",
     "reasonForChange" : null,
     "visitId" : 123,
-    "description" : "Some descioption"
+    "description" : "Some description",
+    "title" : "Title",
+    "patientId" : "2123123",
+    "physcianId" : "123"
+
   },
   {
     "appointmentId" : "ABgC",
     "patientName" : "Ankit",
     "physcianName" : "Sanket Chaudhari",
     "date" : "2021-04-16",
-    "time" : "9:30",
+    "startTime" : "9:30",
     "reasonForChange" : null,
     "visitId" : 123,
-    "description" : "Some descioption"
+    "description" : "Some description",
+    "title" : "Title",
+    "patientId" : "2123345123",
+    "physcianId" : "2345"
   },
   {
     "appointmentId" : "fsfABC",
     "patientName" : "Ankit",
     "physcianName" : "Sanket Chaudhari",
     "date" : "2021-04-16",
-    "time" : "9:30",
+    "startTime" : "9:30",
     "reasonForChange" : null,
     "visitId" : 123,
-    "description" : "Some descioption"
+    "description" : "Some description",
+    "title" : "Title",
+    "patientId" : "1234",
+    "physcianId" : "14523423"
   },
   {
     "appointmentId" : "AdfBC",
     "patientName" : "Ankit",
     "physcianName" : "Sanket Chaudhari",
     "date" : "2021-04-16",
-    "time" : "9:30",
+    "startTime" : "9:30",
     "reasonForChange" : null,
     "visitId" : 123,
-    "description" : "Some descioption"
+    "description" : "Some description",
+    "title" : "Title",
+    "patientId" : "345",
+    "physcianId" : "122353"
   },
   {
     "appointmentId" : "AfsdfBC",
     "patientName" : "Ankit",
     "physcianName" : "Sanket Chaudhari",
     "date" : "2021-04-16",
-    "time" : "9:30",
+    "startTime" : "9:30",
     "reasonForChange" : null,
     "visitId" : 123,
-    "description" : "Some descioption"
+    "description" : "Some description",
+    "title" : "Title",
+    "patientId" : "2123245123",
+    "physcianId" : "12123"
   }
 ]

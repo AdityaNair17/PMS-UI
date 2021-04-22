@@ -1,6 +1,7 @@
 <div>
   <div class="modal-header">
-    <h4 class="modal-title">Create Appointment</h4>
+    <h4 class="modal-title" *ngIf = "appointmentMode == 'add'">Create Appointment</h4>
+    <h4 class="modal-title" *ngIf = "appointmentMode == 'edit'">Edit Appointment</h4>
   </div>
 
   <div class="modal-body">
@@ -40,11 +41,18 @@
         <input class="form-control" formControlName="description" required>
         <div *ngIf =  "isControlInvalid(description) && description.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
       </div>
+
+      <div *ngIf = "appointmentMode == 'edit'">
+          <label>Reason For Updation : </label>&nbsp;
+          <input class="form-control" formControlName="reason" required>
+          <div *ngIf =  "isControlInvalid(reason) && reason.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
+        </div>
     </form>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="createAppointment()" [disabled] = "appointmentForm.invalid">Create</button>
+    <button type="button" class="btn btn-primary" (click)="createAppointment()" [disabled] = "appointmentForm.invalid" *ngIf = "appointmentMode == 'add'">Create</button>
+    <button type="button" class="btn btn-primary" (click)="editAppointment()" [disabled] = "appointmentForm.invalid" *ngIf = "appointmentMode == 'edit'">Edit</button>
     <button type="button" class="btn" ngbAutofocus
       (click)="activeModal.close('We did it!')">Close</button>
   </div>
