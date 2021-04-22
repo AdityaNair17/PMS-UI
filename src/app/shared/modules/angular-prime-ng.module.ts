@@ -9,6 +9,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
 import {TooltipModule} from 'primeng/tooltip';
 
+import { CalendarModule } from 'primeng/calendar';
+import {AccordionModule} from 'primeng/accordion';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -23,7 +26,10 @@ import {TooltipModule} from 'primeng/tooltip';
     TableModule,
     InputTextModule,
     DialogModule,
-    TooltipModule
+    TooltipModule,
+    CalendarModule,
+    AccordionModule,
+    DropdownModule
   ],
   exports: [
     ButtonModule,
@@ -34,7 +40,10 @@ import {TooltipModule} from 'primeng/tooltip';
     TableModule,
     InputTextModule,
     DialogModule,
-    TooltipModule
+    TooltipModule,
+    CalendarModule,
+    AccordionModule,
+    DropdownModule
   ]
 })
 export class AngularPrimeNgModule { }

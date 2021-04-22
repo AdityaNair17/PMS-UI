@@ -39,6 +39,7 @@ function userDetails({email, password}){
     "emailId" : userdb.users[index].email,
     "dateOfBirth" : userdb.users[index].dateOfBirth,
     "role" : userdb.users[index].role,
+    "id" : userdb.users[index].id,
     "personalDetailsRequired": true,
     "passwordChangeRequired" : true,
   }
