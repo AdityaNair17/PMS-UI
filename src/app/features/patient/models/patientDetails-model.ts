@@ -20,8 +20,8 @@ export interface IPatient {
     basicDetails?: IBasicDetails;
     address?: IAddress;
     emergencyDetails?: IEmergencyDetails;
-    languageKnown?: ILanguageKnown;
-    allergies?: IAllergies;
+    languageKnown?: ILanguageKnown[];
+    allergies?: IAllergies[];
 }
 
 export interface IBasicDetails {
@@ -31,7 +31,7 @@ export interface IBasicDetails {
     emailId?: string;
     dateOfBirth?: string;
     contactNo?: string;
-    age?: string;
+    age?: number;
     gender?: string;
     race?: string;
     ethnicity?: string;
