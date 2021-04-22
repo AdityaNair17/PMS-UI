@@ -124,8 +124,8 @@
         <div class="formControl-group">
             <mat-form-field appearance="outline">
                 <mat-label>Address</mat-label>
-                <mat-select formControlName="addressType">
-                    <mat-option value="HOME_ADDRESS">Same as home address</mat-option>
+                <mat-select formControlName="_same_address">
+                    <mat-option [value]=true>Same as home address</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -133,14 +133,14 @@
     <div class="formControl-group">
         <mat-form-field appearance="outline">
             <mat-label>Languages Known</mat-label>
-            <mat-select formControlName="languageKnown" multiple >
-                <mat-option *ngFor="let language of languages" [value]="language">{{language}}</mat-option>
+            <mat-select formControlName="languageKnown" multiple>
+                <mat-option *ngFor="let language of languages" [value]="language">{{language.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Allergies</mat-label>
             <mat-select formControlName="allergies" multiple>
-                <mat-option *ngFor="let access of accessList" [value]="access.value">{{access.name}}</mat-option>
+                <mat-option *ngFor="let allergie of allergies" [value]="allergie">{{allergie.type}}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>

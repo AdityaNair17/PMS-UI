@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastMessageService } from 'src/app/shared/components/toast/service/toastMessage.service';
-import { accessList, genderList, languages, toastErrMessage, toastSuccMessage } from 'src/app/shared/constants/constants';
+import { accessList, genderList, toastErrMessage, toastSuccMessage } from 'src/app/shared/constants/constants';
+import { IAllergies, ILanguageKnown } from '../../models/patientDetails-model';
 import { PatientService } from '../../patient.service';
 
 @Component({
@@ -13,7 +14,8 @@ import { PatientService } from '../../patient.service';
 export class PatientDetailsComponent implements OnInit {
   genderList: string[] = genderList;
   accessList: any[] = accessList;
-  languages: string[] = languages;
+  languages: ILanguageKnown[] = [];
+  allergies: IAllergies[] = [];
   addPatientDetailsForm: FormGroup;
 
   constructor(
@@ -25,6 +27,8 @@ export class PatientDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.getLanguageKnownList();
+    this.getAllergies();
   }
 
   buildForm() {
@@ -55,7 +59,7 @@ export class PatientDetailsComponent implements OnInit {
         emergency_contact_number: [null, [Validators.required,]],
         _access_approved: [null, [Validators.required,]],
         emergencyContactEmailId: [null, [Validators.required]],
-        addressType: [null, [Validators.required]]
+        _same_address: [true, [Validators.required]]
       }),
       languageKnown: [[], [Validators.required]],
       allergies: [[], [Validators.required]]
@@ -76,6 +80,24 @@ export class PatientDetailsComponent implements OnInit {
         }
       }, (err) => {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
+      });
+  }
+
+  getLanguageKnownList() {
+    this.ps.getLanguageKnownList()
+      .subscribe((languages) => {
+        this.languages = languages;
+      }, (err) => {
+        this.toastMessageSvc.displayToastMessage(toastErrMessage)
+      });
+  }
+
+  getAllergies() {
+    this.ps.getAllergies()
+      .subscribe((allergies) => {
+        this.allergies = allergies;
+      }, (err) => {
+        this.toastMessageSvc.displayToastMessage(toastErrMessage)
       });
   }
 
