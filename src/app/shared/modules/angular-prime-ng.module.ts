@@ -7,6 +7,8 @@ import {ListboxModule} from 'primeng/listbox';
 import {TableModule} from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
+import {TooltipModule} from 'primeng/tooltip';
+
 
 
 
@@ -20,7 +22,8 @@ import { DialogModule } from 'primeng/dialog';
     ListboxModule,
     TableModule,
     InputTextModule,
-    DialogModule
+    DialogModule,
+    TooltipModule
   ],
   exports: [
     ButtonModule,
@@ -30,7 +33,8 @@ import { DialogModule } from 'primeng/dialog';
     ListboxModule,
     TableModule,
     InputTextModule,
-    DialogModule
+    DialogModule,
+    TooltipModule
   ]
 })
 export class AngularPrimeNgModule { }

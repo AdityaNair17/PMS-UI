@@ -5,6 +5,7 @@ import { PatientDetailsComponent } from './components/add-patient-details/patien
 import { PatientEditDetailsComponent } from './components/patient-edit-details/patient-edit-details.component';
 import { PatientComponent } from './patient.component';
 import { PatientListComponent } from './components/patient-list/patient-list.component';
+import { PatientContainerComponent } from './components/patient-container/patient-container.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'list',
-        component: PatientListComponent
+        component: PatientContainerComponent
       },
       {
         path: 'add-patient-details',

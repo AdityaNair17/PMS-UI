@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IPatient } from '../../models/patientDetails-model';
 
 @Component({
   selector: 'app-patient-list',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-list.component.scss']
 })
 export class PatientListComponent implements OnInit {
-
+@Input() patients: IPatient[];
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.patients)
   }
 
 }
