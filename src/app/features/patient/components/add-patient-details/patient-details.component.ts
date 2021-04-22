@@ -58,7 +58,7 @@ export class PatientDetailsComponent implements OnInit {
         emergency_relation_ship: [null, [Validators.required,]],
         emergency_contact_number: [null, [Validators.required,]],
         _access_approved: [null, [Validators.required,]],
-        emergencyContactEmailId: [null, [Validators.required]],
+        mailId: [null, [Validators.required]],
         _same_address: [true, [Validators.required]]
       }),
       languageKnown: [[], [Validators.required]],
