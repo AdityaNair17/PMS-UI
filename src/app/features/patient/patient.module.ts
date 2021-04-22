@@ -7,10 +7,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PatientDetailsComponent } from './components/add-patient-details/patient-details.component';
 import { PatientEditDetailsComponent } from './components/patient-edit-details/patient-edit-details.component';
 import { ViewPatientDetailsComponent } from './components/view-patient-details/view-patient-details.component';
+import { PatientContainerComponent } from './components/patient-container/patient-container.component';
+import { PatientListComponent } from './components/patient-list/patient-list.component';
 
 
 @NgModule({
-  declarations: [PatientComponent, PatientDetailsComponent, PatientEditDetailsComponent, ViewPatientDetailsComponent],
+  declarations: [PatientComponent, PatientDetailsComponent, PatientEditDetailsComponent, ViewPatientDetailsComponent, PatientContainerComponent, PatientListComponent],
   imports: [
     CommonModule,
     PatientRoutingModule,

@@ -20,11 +20,6 @@ const routes: Routes = [
         canActivate : [AuthGuardGuard]
       },
       {
-        path: 'patient',
-        loadChildren: ()=>import('../features/patient/patient.module').then(m=>m.PatientModule)
-
-      },
-      {
         path: 'change-password',
         component: ChangePasswordComponent
       }

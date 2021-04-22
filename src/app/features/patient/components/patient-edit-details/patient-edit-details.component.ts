@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-edit-details.component.scss']
 })
 export class PatientEditDetailsComponent implements OnInit {
-
+  editMode: boolean = true;
   constructor() { }
 
   ngOnInit(): void {

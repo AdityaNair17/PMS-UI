@@ -4,6 +4,8 @@ import { ViewPatientDetailsComponent } from './components/view-patient-details/v
 import { PatientDetailsComponent } from './components/add-patient-details/patient-details.component';
 import { PatientEditDetailsComponent } from './components/patient-edit-details/patient-edit-details.component';
 import { PatientComponent } from './patient.component';
+import { PatientListComponent } from './components/patient-list/patient-list.component';
+import { PatientContainerComponent } from './components/patient-container/patient-container.component';
 
 const routes: Routes = [
   {
@@ -12,8 +14,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'add-patient-details',
+        redirectTo: 'list',
         pathMatch: 'full'
+      },
+      {
+        path: 'list',
+        component: PatientContainerComponent
       },
       {
         path: 'add-patient-details',

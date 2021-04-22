@@ -1,0 +1,43 @@
+<p-table #table [value]="patients" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+    [globalFilterFields]="['basicDetails.firstName','basicDetails.emailId','basicDetails.dateOfBirth', 'basicDetails.contactNo']"
+    [filterDelay]="0">
+
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="table.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search" />
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>Email id</th>
+            <th>Contact number</th>
+            <th>Action</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-patient>
+        <tr>
+            <td>{{patient.basicDetails.firstName}} {{patient.basicDetails.lastName}}</td>
+            <td>{{patient.basicDetails.dateOfBirth}}</td>
+            <td>{{patient.basicDetails.emailId}}</td>
+            <td>{{patient.basicDetails.contactNo}}</td>
+            <td>
+                <button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"
+                    pTooltip="View full patient details"
+                    [routerLink]="['/layout/home/patient/view-patient-details/',patient.id]"></button>
+                <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+                    pTooltip="Edit patient details"
+                    [routerLink]="['/layout/home/patient/edit-patient-details/',patient.id]"></button>
+            </td>
+
+        </tr>
+    </ng-template>
+</p-table>
