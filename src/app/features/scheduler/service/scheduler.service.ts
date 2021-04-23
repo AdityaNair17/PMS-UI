@@ -50,7 +50,7 @@ export class SchedulerService {
     if(appointment){
       this.selectedAppointment = appointment;
     }
-    this.modal.open(component, {backdrop : 'static'});
+    return this.modal.open(component, {backdrop : 'static'});
   }
   
   FormatDate(fullDate: Date) {
@@ -80,7 +80,7 @@ export class SchedulerService {
   }
 
   createAppointment(reqObj){
-    console.log(reqObj);
+    console.log(JSON.stringify(reqObj));
     const respStatus = {
       status : 200
     }
@@ -88,7 +88,7 @@ export class SchedulerService {
   }
 
   editAppointment(reqObj){
-    console.log(reqObj);
+    console.log(JSON.stringify(reqObj));
     const respStatus = {
       status : 200
     }

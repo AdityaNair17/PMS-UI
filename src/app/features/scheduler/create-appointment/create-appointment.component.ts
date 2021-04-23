@@ -204,19 +204,14 @@ export class CreateAppointmentComponent implements OnInit {
       patientName : this.patientName.value.name,
       physcianName : this.physcianName.value.name,
       date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
-      status : "BOOKED",
+      status : this.schedulerSvc.selectedAppointment.status,
       startTime : this.timeOfAppointment.value.fullTime,
       endTime : endTime,
       description : this.description.value,
       reasonForChange : this.reason.value
     }
     this.schedulerSvc.editAppointment(reqObj).subscribe(response => {
-      if(response.status == 200){
-        this.toastMessageSvc.displayToastMessage(toastSuccMessage);
-      } else {
-        this.toastMessageSvc.displayToastMessage(toastErrMessage);
-      }
-      this.activeModal.close();
+      this.activeModal.close(response);
 
     })
   }

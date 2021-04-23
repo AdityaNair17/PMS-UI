@@ -17,6 +17,15 @@
       "dateOfBirth" : "23/12/1997",
       "role" : "Doctor",
       "password": "patil"
+    },
+    {
+      "id": "3",
+      "firstName": "Shriya",
+      "lastName" : "Khatri",
+      "email": "shriya",
+      "dateOfBirth" : "23/12/1997",
+      "role" : "Nurse",
+      "password": "shriya"
     }
   ]
 }
