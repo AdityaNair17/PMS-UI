@@ -1,6 +1,7 @@
 <div>
   <div class="modal-header">
     <h4 class="modal-title">Appointment List</h4>
+    <i class="fa fa-times" (click)="activeModal.close()"></i>
   </div>
   <div class="modal-body">
     <p-calendar [(ngModel)]="selectedDate" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy"></p-calendar>
@@ -14,8 +15,10 @@
                 <span>{{app.patientName}} </span>
               </div>
               <div class="align-right col-md-8">
-                  <i class="fa fa-edit" (click)="editAppointment(app)"></i>&nbsp;
-                  <i class="fa fa-trash" (click)="showDeleteDialog(app, $event)"></i>
+                  <i class="fa fa-eye" *ngIf="app.patientVisitDetailId != null" title="View Visit" (click) = "viewVisit(app,$event)"></i>
+                  <i class="fa fa-plus-circle"  *ngIf="app.patientVisitDetailId == null" title="Create Visit" (click)="createVisit(app, $event)"></i>&nbsp;
+                  <i class="fa fa-edit"  *ngIf="app.patientVisitDetailId == null" (click)="editAppointment(app, $event)" title="Reschedule Appointment"></i>&nbsp;
+                  <i class="fa fa-trash"  *ngIf="app.patientVisitDetailId == null" (click)="showDeleteDialog(app, $event)" title="Delete Appointment"></i>
               </div>
             </div>
           </p-header>
@@ -41,6 +44,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" ngbAutofocus
-      (click)="activeModal.close('We did it!')">Close</button>
+      (click)="activeModal.close()">Close</button>
   </div>
 </div>

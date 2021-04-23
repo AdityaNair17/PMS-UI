@@ -6,11 +6,12 @@
     "date" : "2021-04-16",
     "startTime" : "9:30",
     "reasonForChange" : null,
-    "visitId" : 123,
+    "patientVisitDetailId" : 123,
     "description" : "Some description",
     "title" : "Title",
     "patientId" : "2123123",
-    "physcianId" : "123"
+    "physcianId" : "123",
+    "status" : "Accepted"
 
   },
   {
@@ -20,11 +21,12 @@
     "date" : "2021-04-16",
     "startTime" : "9:30",
     "reasonForChange" : null,
-    "visitId" : 123,
+    "patientVisitDetailId" : null,
     "description" : "Some description",
     "title" : "Title",
     "patientId" : "2123345123",
-    "physcianId" : "2345"
+    "physcianId" : "2345",
+    "status" : "Approval Pending"
   },
   {
     "appointmentId" : "fsfABC",
@@ -33,11 +35,12 @@
     "date" : "2021-04-16",
     "startTime" : "9:30",
     "reasonForChange" : null,
-    "visitId" : 123,
+    "patientVisitDetailId" : 123,
     "description" : "Some description",
     "title" : "Title",
     "patientId" : "1234",
-    "physcianId" : "14523423"
+    "physcianId" : "14523423",
+    "status" : "Accepted"
   },
   {
     "appointmentId" : "AdfBC",
@@ -46,11 +49,12 @@
     "date" : "2021-04-16",
     "startTime" : "9:30",
     "reasonForChange" : null,
-    "visitId" : 123,
+    "patientVisitDetailId" : null,
     "description" : "Some description",
     "title" : "Title",
     "patientId" : "345",
-    "physcianId" : "122353"
+    "physcianId" : "122353",
+    "status" : "Accepted"
   },
   {
     "appointmentId" : "AfsdfBC",
@@ -59,10 +63,11 @@
     "date" : "2021-04-16",
     "startTime" : "9:30",
     "reasonForChange" : null,
-    "visitId" : 123,
+    "patientVisitDetailId" : 123,
     "description" : "Some description",
     "title" : "Title",
     "patientId" : "2123245123",
-    "physcianId" : "12123"
+    "physcianId" : "12123",
+    "status" : "Approval Pending"
   }
 ]

@@ -1,3 +1,5 @@
+import { toastSuccMessage, toastErrMessage } from 'src/app/shared/constants/constants';
+import { ToastMessageService } from 'src/app/shared/components/toast/service/toastMessage.service';
 import { CreateAppointmentComponent } from './../create-appointment/create-appointment.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SchedulerService } from './../service/scheduler.service';
@@ -18,7 +20,8 @@ export class AppointmentListComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal,
               private schedulerSvc : SchedulerService,
-              private authSvc : AuthService) { }
+              private authSvc : AuthService,
+              private toastMessageSvc : ToastMessageService) { }
 
 
   ngOnInit(): void {
@@ -57,7 +60,29 @@ export class AppointmentListComponent implements OnInit {
     }
   }
 
-  editAppointment(appointment){
-    this.schedulerSvc.createEditAppointment(CreateAppointmentComponent,"edit",appointment);
+  editAppointment(appointment, event){
+    event.stopPropagation()
+    const modal = this.schedulerSvc.createEditAppointment(CreateAppointmentComponent,"edit",appointment);
+    modal.result.then((response) => {
+      if(response){
+        if(response.status == 200){
+          this.toastMessageSvc.displayToastMessage(toastSuccMessage);
+        } else {
+          this.toastMessageSvc.displayToastMessage(toastErrMessage);
+        }
+        this.GetListOfAppointments();
+      }
+    })
+  }
+
+
+  viewVisit(appointment, event){
+    event.stopPropagation();
+    console.log(appointment);
+  }
+
+  createVisit(appointment, event){
+    event.stopPropagation();
+    console.log(appointment);
   }
 }
