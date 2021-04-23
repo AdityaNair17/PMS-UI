@@ -27,7 +27,7 @@ export class PatientService {
     return of(allergies);
   }
 
-  getPatient():Observable<IPatient>{
+  getPatient(): Observable<IPatient> {
     const patient = {
       "id": "CT62d98519-5e20-482d-817a-a6330aca531a",
       "basicDetails": {
@@ -38,7 +38,7 @@ export class PatientService {
         "dateOfBirth": "1985-01-30",
         "contactNo": "9090909090",
         "age": 36.0,
-        "gender": "male",
+        "gender": "Male",
         "race": "Ashian",
         "ethnicity": "Test"
       },
@@ -62,14 +62,9 @@ export class PatientService {
         "addressType": "HOME_ADDRESS",
       },
       "languageKnown": [
-        {
-          "id": 2,
-          "name": "Hindi"
-        },
-        {
-          "id": 1,
-          "name": "Marathi"
-        }
+        { id: 1, name: 'Hindi' },
+        { id: 2, name: 'English' },
+        { id: 3, name: 'Mandarin' }
       ],
       "allergies": [
         {

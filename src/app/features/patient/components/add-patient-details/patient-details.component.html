@@ -41,7 +41,7 @@
         <div class="formControl-group">
             <mat-form-field appearance="outline">
                 <mat-label>Gender</mat-label>
-                <mat-select formControlName="age" [disabled]="readonlyMode">
+                <mat-select formControlName="gender" [disabled]="readonlyMode">
                     <mat-option *ngFor="let gender of genderList" [value]="gender">{{gender}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -142,13 +142,13 @@
         <mat-form-field appearance="outline">
             <mat-label>Languages Known</mat-label>
             <mat-select formControlName="languageKnown" multiple [disabled]="readonlyMode">
-                <mat-option *ngFor="let language of languages" [value]="language">{{language.name}}</mat-option>
+                <mat-option *ngFor="let language of languages" [value]="language.id">{{language.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Allergies</mat-label>
             <mat-select formControlName="allergies" multiple [disabled]="readonlyMode">
-                <mat-option *ngFor="let allergie of allergies" [value]="allergie">{{allergie.type}}</mat-option>
+                <mat-option *ngFor="let allergie of allergies" [value]="allergie.id">{{allergie.type}}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
