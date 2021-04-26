@@ -1,10 +1,12 @@
 <div class="p-my-4 p-mx-6">
-    <div *ngIf="!patient.id ; else readEditMode">
+    <div class="p-mb-4">
+    <div *ngIf="!patient ; else readEditMode">
         <h2 class="color">Add patient details</h2>
     </div>
     <ng-template #readEditMode>
         <h2 class="color">{{readonlyMode ? 'View patient details': 'Edit patient details'}}</h2>
     </ng-template>
+    </div>
     <form [formGroup]="addPatientDetailsForm" (ngSubmit)="onAddPatientDetails()">
         <div formGroupName="basicDetails">
             <div class="formControl-group">
@@ -155,7 +157,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <button mat-stroked-button class="bg-color white-color mb-30" *ngIf="!readonlyMode">{{!!patient.id ? 'Update
+        <button mat-stroked-button class="bg-color white-color mb-30" *ngIf="!readonlyMode">{{!!patient ? 'Update
             patient
             details': 'Add patient details'}}</button>
     </form>
