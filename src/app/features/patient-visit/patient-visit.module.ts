@@ -1,3 +1,5 @@
+import { AngularPrimeNgModule } from './../../shared/modules/angular-prime-ng.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -20,7 +22,10 @@ import { VisitDetailsComponent } from './visit-details/visit-details.component';
   imports: [
     CommonModule,
     PatientVisitRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularPrimeNgModule
   ]
 })
 export class PatientVisitModule { }

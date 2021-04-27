@@ -1,0 +1,17 @@
+{
+  "medicationList": [
+      {
+          "medicineName": "cipla",
+          "status": "active",
+          "dosage": "500mg",
+          "description": "once"
+      },
+      {
+          "medicineName": "paracitamol",
+          "status": "active",
+          "dosage": "500mg",
+          "description": "twice"
+      }
+  ],
+  "successFlag": true
+}

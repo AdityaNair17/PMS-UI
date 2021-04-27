@@ -1,3 +1,4 @@
+import { VisitMedicationComponent } from './visit-medication/visit-medication.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientVisitComponent } from './patient-visit.component';
@@ -11,6 +12,10 @@ const routes: Routes = [
       {
         path: ':id/:readOnly',
         component: VisitDetailsComponent
+      },
+      {
+        path : '\medication',
+        component : VisitMedicationComponent
       }
     ]
   }

@@ -1,0 +1,25 @@
+{
+    "successFlag": true,
+    "medicationOnVisit": {
+        "patientId": "1",
+        "visitId": "1",
+        "medication": [
+            {
+                "medicineName": "Cipla",
+                "status": "active",
+                "dosage": "100mg",
+                "description": "once"
+            },
+            {
+                "medicineName": "Paracitamol",
+                "status": "active",
+                "dosage": "500mg",
+                "description": "once"
+            }
+        ],
+        "auditInfo": {
+            "createdDate": "2021-04-26T22:56:38.254",
+            "createdBy": "101"
+        }
+    }
+}

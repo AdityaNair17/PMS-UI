@@ -1,1 +1,19 @@
 <p>visit-procedure works!</p>
+<form [formGroup]="procedureForm">
+  <div formArrayName = "procedureArray">
+    <div *ngFor = "let procedure of procedureArray.controls; let i = index">
+      <div>
+        <label>Procedure : </label>&nbsp;
+        <p-dropdown formControlName = "procedure"></p-dropdown>
+      </div>
+      <br>
+      <div>
+        <label>Description : </label>&nbsp;
+        <input type="text" formControlName = "description">
+      </div>
+
+    </div>
+
+  </div>
+
+</form>
