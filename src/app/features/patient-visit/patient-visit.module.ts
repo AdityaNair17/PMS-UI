@@ -7,6 +7,7 @@ import { VisitDiagnosisComponent } from './visit-diagnosis/visit-diagnosis.compo
 import { VisitProcedureComponent } from './visit-procedure/visit-procedure.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PatientVisitComponent } from './patient-visit.component';
+import { VisitDetailsComponent } from './visit-details/visit-details.component';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { PatientVisitComponent } from './patient-visit.component';
     VisitMedicationComponent, 
     VisitDiagnosisComponent, 
     VisitProcedureComponent, 
-    PatientVisitComponent
+    PatientVisitComponent, VisitDetailsComponent
   ],
   imports: [
     CommonModule,
