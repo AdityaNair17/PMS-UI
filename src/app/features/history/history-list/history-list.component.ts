@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IHistoryList } from '../models/history-model';
 
 @Component({
   selector: 'app-history-list',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./history-list.component.scss']
 })
 export class HistoryListComponent implements OnInit {
-
+@Input() historyList: IHistoryList[];
   constructor() { }
 
   ngOnInit(): void {
