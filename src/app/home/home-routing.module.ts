@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../features/scheduler/scheduler.module').then(m => m.SchedulerModule)
       },
       {
+        path: 'history',
+        loadChildren: ()=>import('../features/history/history.module').then(m=>m.HistoryModule)
+      },
+      {
         path: 'patient',
         loadChildren: ()=>import('../features/patient/patient.module').then(m=>m.PatientModule)
 
