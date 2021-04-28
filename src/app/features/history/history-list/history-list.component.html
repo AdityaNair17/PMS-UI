@@ -1,0 +1,34 @@
+<p-table #table [value]="historyList" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+    [globalFilterFields]="['name','appointmentDate','nextAppointmentDate']" [filterDelay]="0">
+
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="table.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search" />
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th>Appointment Date</th>
+            <th>Diagnosis</th>
+            <th>Procedure</th>
+            <th>Next Appointment Date</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-history>
+        <tr>
+            <td [routerLink]="['/layout/visit', history.id , true ]">{{history.name}}</td>
+            <td>{{history.appointmentDate}}</td>
+            <td>{{history.diagnosis[0]}}</td>
+            <td>{{history.procedure[0]}}</td>
+            <td>{{history.nextAppointmentDate}}</td>
+        </tr>
+    </ng-template>
+</p-table>
