@@ -24,7 +24,7 @@
 
     <ng-template pTemplate="body" let-history>
         <tr>
-            <td>{{history.name}}</td>
+            <td [routerLink]="['/layout/visit', history.id , true ]">{{history.name}}</td>
             <td>{{history.appointmentDate}}</td>
             <td>{{history.diagnosis[0]}}</td>
             <td>{{history.procedure[0]}}</td>

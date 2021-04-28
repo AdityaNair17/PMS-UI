@@ -4,4 +4,5 @@ export interface IHistoryList{
     diagnosis?: string[];
     procedure?: string[];
     nextAppointmentDate?: string;
+    id?:string;
 }
