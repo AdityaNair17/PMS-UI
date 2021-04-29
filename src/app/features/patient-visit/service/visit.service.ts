@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 
 import * as medicationList from '../../../../assets/json/medicationList.json';
 import * as medicationById from '../../../../assets/json/medicationById.json';
+import * as procedureList from '../../../../assets/json/procedureList.json';
+import * as procedureById from '../../../../assets/json/procedureById.json';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +31,13 @@ export class VisitService {
 
   getMedicationDetailsById(){
     return of((medicationById as any).default);
+  }
+
+  getProcedureList(){
+    return of((procedureList as any).default);
+  }
+
+  getProcedureDetailsById(){
+    return of((procedureById as any).default);
   }
 }

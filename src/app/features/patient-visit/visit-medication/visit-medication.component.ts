@@ -1,4 +1,4 @@
-import { Imedication } from './../model/medicationModel';
+import { Imedication } from './../model/model';
 import { VisitService } from './../service/visit.service';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';

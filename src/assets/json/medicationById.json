@@ -15,6 +15,24 @@
                 "status": "active",
                 "dosage": "500mg",
                 "description": "once"
+            },
+            {
+                "medicineName": "Paracitamol2",
+                "status": "active",
+                "dosage": "500mg",
+                "description": "once"
+            },
+            {
+                "medicineName": "Paracitamol3",
+                "status": "active",
+                "dosage": "500mg",
+                "description": "once"
+            },
+            {
+                "medicineName": "Paracitamol4",
+                "status": "active",
+                "dosage": "500mg",
+                "description": "once"
             }
         ],
         "auditInfo": {

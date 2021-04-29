@@ -2,5 +2,9 @@ export interface Imedication {
   medicineName : string;
   dosage : string;
   description : string;
-  status : string;
+}
+
+export interface IProcedure {
+  procedureId : string,
+  procedureName : string
 }

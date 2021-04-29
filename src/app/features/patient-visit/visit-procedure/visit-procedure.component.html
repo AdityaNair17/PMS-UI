@@ -2,18 +2,24 @@
 <form [formGroup]="procedureForm">
   <div formArrayName = "procedureArray">
     <div *ngFor = "let procedure of procedureArray.controls; let i = index">
+      <div [formGroupName] = "i">
       <div>
         <label>Procedure : </label>&nbsp;
-        <p-dropdown formControlName = "procedure"></p-dropdown>
+        <p-dropdown formControlName = "procedure" [options] = "procedures" optionLabel = "procedureName" placeholder = "Select"
+                    [disabled] = "disableFields"></p-dropdown>
       </div>
       <br>
       <div>
         <label>Description : </label>&nbsp;
-        <input type="text" formControlName = "description">
+        <input type="text" formControlName = "description" [readonly] = "disableFields">
       </div>
-
+      <br>
+    </div>
     </div>
 
   </div>
-
+  <button *ngIf = "displayButtons" class="btn btn-primary" [disabled] = "!procedureForm.valid" (click)= "addFormGroup()"> <i class="fa fa-plus-square"></i></button> &nbsp;
+  <button *ngIf = "displayButtons && procedureForm.controls.procedureArray.value.length > 1" class="btn btn-primary" (click)= "removeLastProcedure()"> <i class="fa fa-trash"></i></button> &nbsp;
 </form>
+
+<button class="btn btn-primary" (click) = "storeProcedure()" [disabled] = "!procedureForm.valid" >Submit</button>

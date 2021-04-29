@@ -1,7 +1,7 @@
 import { IUser, IUserSessionData } from './models/user-model';
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { IPatientRegistrationReq, IPatientRegistrationRes } from './models/patientRegistration-model';
 import { IChangePasswordReq, IChangePasswordRes } from '../layout/models/changePassword-model';
 
@@ -69,6 +69,21 @@ export class AuthService {
   }
 
   public Login(user: any): Observable<any> {
+    const params = new HttpParams({
+      fromObject: {
+        grant_type : 'password',
+        username : user.email,
+        password : user.password,
+        client_id : 'kidclient',
+        client_secret : 'kidsecret'
+      }
+    });
+
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    };
     return this.http.post('http://localhost:8000/auth/login', user);
   }
 

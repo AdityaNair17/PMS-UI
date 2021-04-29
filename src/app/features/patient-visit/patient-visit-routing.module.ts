@@ -1,3 +1,4 @@
+import { VisitProcedureComponent } from './visit-procedure/visit-procedure.component';
 import { VisitMedicationComponent } from './visit-medication/visit-medication.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,8 +15,12 @@ const routes: Routes = [
         component: VisitDetailsComponent
       },
       {
-        path : '\medication',
+        path : 'medication',
         component : VisitMedicationComponent
+      },
+      {
+        path: 'procedure',
+        component : VisitProcedureComponent
       }
     ]
   }
