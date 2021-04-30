@@ -5,13 +5,15 @@ import * as medicationList from '../../../../assets/json/medicationList.json';
 import * as medicationById from '../../../../assets/json/medicationById.json';
 import * as procedureList from '../../../../assets/json/procedureList.json';
 import * as procedureById from '../../../../assets/json/procedureById.json';
+import * as diagnosisList from '../../../../assets/json/diagnosisList.json';
+import * as diagnosisById from '../../../../assets/json/diagnosisById.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VisitService {
 
-  private visitId : string = null;
+  private visitId : string = "123";
   private medicationObj : any
 
   constructor() { }
@@ -39,5 +41,13 @@ export class VisitService {
 
   getProcedureDetailsById(){
     return of((procedureById as any).default);
+  }
+
+  getDiagnosisList(){
+    return of((diagnosisList as any).default);
+  }
+
+  getDiagnosisById(){
+    return of((diagnosisById as any).default);
   }
 }

@@ -1,3 +1,4 @@
+import { VisitDiagnosisComponent } from './visit-diagnosis/visit-diagnosis.component';
 import { VisitProcedureComponent } from './visit-procedure/visit-procedure.component';
 import { VisitMedicationComponent } from './visit-medication/visit-medication.component';
 import { NgModule } from '@angular/core';
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'procedure',
         component : VisitProcedureComponent
+      }, 
+      {
+        path: 'diagnosis',
+        component : VisitDiagnosisComponent 
       }
     ]
   }

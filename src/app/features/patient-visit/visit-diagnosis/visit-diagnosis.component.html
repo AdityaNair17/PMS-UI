@@ -1,1 +1,25 @@
-<p>visit-diagnosis works!</p>
+
+<form [formGroup]="diagnosisForm">
+  <div formArrayName = "diagnosisArray">
+    <div *ngFor = "let procedure of diagnosisArray.controls; let i = index">
+      <div [formGroupName] = "i">
+      <div>
+        <label>Diagnosis : </label>&nbsp;
+        <p-dropdown formControlName = "diagnosis" [options] = "diagnosisList" optionLabel = "diagnosisName" placeholder = "Select"
+                    [disabled] = "disableFields"></p-dropdown>
+      </div>
+      <br>
+      <div>
+        <label>Description : </label>&nbsp;
+        <input type="text" formControlName = "description" [readonly] = "disableFields">
+      </div>
+      <br>
+    </div>
+    </div>
+
+  </div>
+  <button *ngIf = "displayButtons" class="btn btn-primary" [disabled] = "!diagnosisForm.valid" (click)= "addFormGroup()"> <i class="fa fa-plus-square"></i></button> &nbsp;
+  <button *ngIf = "displayButtons && diagnosisForm.controls.diagnosisArray.value.length > 1" class="btn btn-primary" (click)= "removeLastDiagnosis()"> <i class="fa fa-trash"></i></button> &nbsp;
+</form>
+
+<button class="btn btn-primary" (click) = "storeDiagnosis()" [disabled] = "!diagnosisForm.valid" >Submit</button>

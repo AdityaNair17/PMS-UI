@@ -1,0 +1,82 @@
+{
+  "successFlag": true,
+  "diagnosis": [
+      {
+          "seq_id": 1460,
+          "diagonosisId": "0016070",
+          "name": "Bypass Cerebral Ventricle to Nasopharynx with Autologous Tissue Substitute",
+          "description": "Bypass Cerebral Ventricle to Nasopharynx with Autologous Tissue Substitute",
+          "patient_visit_id": "P101",
+          "created_by": "sweeta",
+          "creation_on": "2021-13-24 12:13:30",
+          "last_modified_by": "sweeta",
+          "last_modified_on": "2021-13-24 12:13:30"
+      },
+      {
+          "seq_id": 1461,
+          "diagonosisId": "0016071",
+          "name": "Bypass Cerebral Ventricle to Mastoid Sinus with Autologous Tissue Substitute",
+          "description": "Bypass Cerebral Ventricle to Mastoid Sinus with Autologous Tissue Substitute",
+          "patient_visit_id": "P101",
+          "created_by": "sweeta",
+          "creation_on": "2021-13-24 12:13:31",
+          "last_modified_by": "sweeta",
+          "last_modified_on": "2021-13-24 12:13:31"
+      },
+      {
+          "seq_id": 1462,
+          "diagonosisId": "0016072",
+          "name": "Bypass Cerebral Ventricle to Atrium with Autologous Tissue Substitute",
+          "description": "Bypass Cerebral Ventricle to Atrium with Autologous Tissue Substitute",
+          "patient_visit_id": "P101",
+          "created_by": "sweeta",
+          "creation_on": "2021-13-24 12:13:31",
+          "last_modified_by": "sweeta",
+          "last_modified_on": "2021-13-24 12:13:31"
+      },
+      {
+          "seq_id": 1463,
+          "diagonosisId": "0016073",
+          "name": "Bypass Cerebral Ventricle to Blood Vessel with Autologous Tissue Substitute",
+          "description": "Bypass Cerebral Ventricle to Blood Vessel with Autologous Tissue Substitute",
+          "patient_visit_id": "P101",
+          "created_by": "sweeta",
+          "creation_on": "2021-13-24 12:13:31",
+          "last_modified_by": "sweeta",
+          "last_modified_on": "2021-13-24 12:13:31"
+      },
+      {
+          "seq_id": 1464,
+          "diagonosisId": "0016074",
+          "name": "Bypass Cerebral Ventricle to Pleural Cavity with Autologous Tissue Substitute",
+          "description": "Bypass Cerebral Ventricle to Pleural Cavity with Autologous Tissue Substitute",
+          "patient_visit_id": "P101",
+          "created_by": "sweeta",
+          "creation_on": "2021-13-24 12:13:31",
+          "last_modified_by": "sweeta",
+          "last_modified_on": "2021-13-24 12:13:31"
+      },
+      {
+          "seq_id": 1548,
+          "diagonosisId": "01",
+          "name": "Tesr",
+          "description": "ABC",
+          "patient_visit_id": "P101",
+          "created_by": "sweeta",
+          "creation_on": "2021-50-27 06:50:45",
+          "last_modified_by": "sweeta",
+          "last_modified_on": "2021-50-27 06:50:45"
+      },
+      {
+          "seq_id": 1549,
+          "diagonosisId": "02",
+          "name": "testing",
+          "description": "ABC",
+          "patient_visit_id": "P101",
+          "created_by": "sweeta",
+          "creation_on": "2021-50-27 06:50:45",
+          "last_modified_by": "sweeta",
+          "last_modified_on": "2021-50-27 06:50:45"
+      }
+  ]
+}
