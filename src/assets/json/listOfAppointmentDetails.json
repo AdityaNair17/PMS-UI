@@ -1,7 +1,7 @@
 [
   {
     "appointmentId" : "ABasC",
-    "patientName" : "Ankit",
+    "patientName" : "Ankit Sawant",
     "physcianName" : "Sanket Chaudhari",
     "date" : "2021-04-16",
     "startTime" : "9:30",
@@ -16,7 +16,7 @@
   },
   {
     "appointmentId" : "ABgC",
-    "patientName" : "Ankit",
+    "patientName" : "Kamlesh Badgujar",
     "physcianName" : "Sanket Chaudhari",
     "date" : "2021-04-16",
     "startTime" : "9:30",
@@ -30,8 +30,8 @@
   },
   {
     "appointmentId" : "fsfABC",
-    "patientName" : "Ankit",
-    "physcianName" : "Sanket Chaudhari",
+    "patientName" : "Roshankumar Sah",
+    "physcianName" : "Pranav Ekapure",
     "date" : "2021-04-16",
     "startTime" : "9:30",
     "reasonForChange" : null,

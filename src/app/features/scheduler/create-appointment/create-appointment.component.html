@@ -2,8 +2,9 @@
   <div class="modal-header">
     <h4 class="modal-title" *ngIf = "appointmentMode == 'add'">Create Appointment</h4>
     <h4 class="modal-title" *ngIf = "appointmentMode == 'edit'">Edit Appointment</h4>
-    <i class="fa fa-times" (click)="activeModal.close()"></i>
-
+    <div>
+    <i class="fa fa-times closeIcon" (click)="activeModal.close()"></i>
+    </div>
   </div>
 
   <div class="modal-body">

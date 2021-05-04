@@ -1,20 +1,20 @@
 <div>
   <div class="modal-header">
     <h4 class="modal-title">Appointment List</h4>
-    <i class="fa fa-times" (click)="activeModal.close()"></i>
+    <i class="fa fa-times closeIcon" (click)="activeModal.close()" ></i>
   </div>
   <div class="modal-body">
-    <p-calendar [(ngModel)]="selectedDate" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy"></p-calendar>
-
+    <p-calendar [(ngModel)]="selectedDate" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy" (onSelect) = "dateChange($event)"></p-calendar>
+    <br><br>
     <p-accordion class="accordian" *ngFor="let app of appointments" (onClose)="cancelDeleteDialog(app.appointmentId)">
       <div >
         <p-accordionTab >
           <p-header>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-8">
                 <span>{{app.patientName}} </span>
               </div>
-              <div class="align-right col-md-8">
+              <div class="align-right col-md-4">
                   <i class="fa fa-eye" *ngIf="app.patientVisitDetailId != null" title="View Visit" (click) = "viewVisit(app,$event)"></i>
                   <i class="fa fa-plus-circle"  *ngIf="app.patientVisitDetailId == null" title="Create Visit" (click)="createVisit(app, $event)"></i>&nbsp;
                   <i class="fa fa-edit"  *ngIf="app.patientVisitDetailId == null" (click)="editAppointment(app, $event)" title="Reschedule Appointment"></i>&nbsp;
@@ -28,10 +28,11 @@
               <span>Appointment Time : {{app.time}}</span><br>
               <span>Description : {{app.description}}</span>
             </div>
+            <br>
             <div *ngIf="showDeleteConfirmationDialog && appointmentToBeDeleted.appointmentId == app.appointmentId">
-              <input type="text" placeholder="Reason For Deletion"><br>
+              <input type="text" placeholder="Reason For Deletion" [(ngModel)] = "deletionReason"><br>
               <div class="align-right">
-                <button class="btn-danger right-margin-5" (click)=deleteAppointment()>Delete</button>
+                <button class="btn-danger right-margin-5" [disabled] = "deletionReason.length == 0" (click)=deleteAppointment()>Delete</button>
                 <button class="btn" (click)=cancelDeleteDialog(app.appointmentId)>Cancel</button>
               </div>
             </div>
@@ -43,7 +44,7 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" ngbAutofocus
+    <button type="button" class="btn btn-outline-dark" ngbAutoFocus
       (click)="activeModal.close()">Close</button>
   </div>
 </div>

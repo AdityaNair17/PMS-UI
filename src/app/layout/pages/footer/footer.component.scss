@@ -1,14 +1,18 @@
+@import '../../../../assets/sass/variables.scss';
+@import '../../../../assets/sass/mixin.scss';
+
 footer{
+    @include height($footer-height);
     width: 100%;
-    margin: -8px;
     display: flex;
     align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
+    background-color: $white;
+    color: $footer-txt;
+    font-weight: $lbold;
     justify-content: space-between;
     padding: 0 20px;
     position:fixed;
     bottom:0px;
     z-index: 1;
+    border-top: 1px solid $theme-color;
 }

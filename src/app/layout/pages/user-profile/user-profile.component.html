@@ -1,5 +1,5 @@
-<div class="profile-container">
-<ngx-avatar name="User name"></ngx-avatar>
-<button type="button" pRipple pButton class="p-button-rounded p-button-text" icon="pi pi-fw pi-angle-down"   (click)="menu.toggle($event)"></button>
+<div class="profile-container"  (click)="menu.toggle($event)">
+<ngx-avatar [name]="user" [size]="35" [style]="customStyle" ></ngx-avatar>
+<i class="fa fa-angle-down alignment"></i>
 </div>
 <p-menu #menu [popup]="true" [model]="profileMenuItems"></p-menu>

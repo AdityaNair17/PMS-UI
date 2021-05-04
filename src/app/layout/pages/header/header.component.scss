@@ -1,11 +1,20 @@
+@import '../../../../assets/sass/variables.scss';
+@import '../../../../assets/sass/mixin.scss';
+
+
 .header {
-    height: 70px;
-    margin: -8px;
+    @include height($header-height);
     display: flex;
     align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
+    background-color: $white;
+    color: $header-txt;
+    font-weight: $bold;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 5px 20px;
+    border-bottom: 1px solid $header-border;
+    font-size: 25px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999999;
   }
