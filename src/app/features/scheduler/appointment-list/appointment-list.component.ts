@@ -1,3 +1,4 @@
+import { FormControl, Validators } from '@angular/forms';
 import { toastSuccMessage, toastErrMessage } from 'src/app/shared/constants/constants';
 import { ToastMessageService } from 'src/app/shared/components/toast/service/toastMessage.service';
 import { CreateAppointmentComponent } from './../create-appointment/create-appointment.component';
@@ -17,6 +18,7 @@ export class AppointmentListComponent implements OnInit {
   appointments : any[];
   showDeleteConfirmationDialog : boolean = false;
   appointmentToBeDeleted : any;
+  deletionReason : string = "";
 
   constructor(public activeModal: NgbActiveModal,
               private schedulerSvc : SchedulerService,
@@ -54,7 +56,7 @@ export class AppointmentListComponent implements OnInit {
   }
 
   cancelDeleteDialog(appointmentId) {
-    if(this.appointmentToBeDeleted.appointmentId == appointmentId){
+    if(this.appointmentToBeDeleted &&  this.appointmentToBeDeleted.appointmentId == appointmentId){
     this.showDeleteConfirmationDialog = false;
     this.appointmentToBeDeleted = null;
     }
@@ -84,5 +86,11 @@ export class AppointmentListComponent implements OnInit {
   createVisit(appointment, event){
     event.stopPropagation();
     console.log(appointment);
+  }
+
+  dateChange(date){
+    this.selectedDate = date;
+    this.GetListOfAppointments();
+
   }
 }
