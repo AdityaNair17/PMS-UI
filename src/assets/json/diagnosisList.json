@@ -1,0 +1,97 @@
+{
+    "successFlag": true,
+    "diagnosisMaster": [
+        {
+            "diagnosisId": "A1814",
+            "diagnosisName": "Tuberculosis of prostate"
+        },
+        {
+            "diagnosisId": "C9150",
+            "diagnosisName": "Adult T-cell lymph/leuk (HTLV-1-assoc) not achieve remission"
+        },
+        {
+            "diagnosisId": "C9151",
+            "diagnosisName": "Adult T-cell lymphoma/leukemia (HTLV-1-assoc)"
+        },
+        {
+            "diagnosisId": "C9152",
+            "diagnosisName": "Adult T-cell lymphoma/leukemia (HTLV-1-assoc)"
+        },
+        {
+            "diagnosisId": "F0150",
+            "diagnosisName": "Vascular dementia without behavioral disturbance"
+        },
+        {
+            "diagnosisId": "F0151",
+            "diagnosisName": "Vascular dementia with behavioral disturbance"
+        },
+        {
+            "diagnosisId": "F0390",
+            "diagnosisName": "Unspecified dementia without behavioral disturbance"
+        },
+        {
+            "diagnosisId": "F0391",
+            "diagnosisName": "Unspecified dementia with behavioral disturbance"
+        },
+        {
+            "diagnosisId": "F69",
+            "diagnosisName": "Unspecified disorder of adult personality and behavior"
+        },
+        {
+            "diagnosisId": "G112",
+            "diagnosisName": "Late-onset cerebellar ataxia"
+        },
+        {
+            "diagnosisId": "G1221",
+            "diagnosisName": "Amyotrophic lateral sclerosis"
+        },
+        {
+            "diagnosisId": "G301",
+            "diagnosisName": "Alzheimer disease with late onset"
+        },
+        {
+            "diagnosisId": "G451",
+            "diagnosisName": "Carotid artery syndrome (hemispheric)"
+        },
+        {
+            "diagnosisId": "G452",
+            "diagnosisName": "Multiple and bilateral precerebral artery syndromes"
+        },
+        {
+            "diagnosisId": "G458",
+            "diagnosisName": "Oth transient cerebral ischemic attacks and related synd"
+        },
+        {
+            "diagnosisId": "G459",
+            "diagnosisName": "Transient cerebral ischemic attack, unspecified"
+        },
+        {
+            "diagnosisId": "G460",
+            "diagnosisName": "Middle cerebral artery syndrome"
+        },
+        {
+            "diagnosisId": "G461",
+            "diagnosisName": "Anterior cerebral artery syndrome"
+        },
+        {
+            "diagnosisId": "G462",
+            "diagnosisName": "Posterior cerebral artery syndrome"
+        },
+        {
+            "diagnosisId": "H02031",
+            "diagnosisName": "Senile entropion of right upper eyelid"
+        },
+        {
+            "diagnosisId": "H02032",
+            "diagnosisName": "Senile entropion of right lower eyelid"
+        },
+        {
+            "diagnosisId": "H02033",
+            "diagnosisName": "Senile entropion of right eye, unspecified eyelid"
+        },
+        {
+            "diagnosisId": "H02034",
+            "diagnosisName": "Senile entropion of left upper eyelid"
+        }
+    ]
+}

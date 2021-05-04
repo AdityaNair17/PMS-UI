@@ -1,0 +1,15 @@
+{
+  "medicationList": [
+      {
+          "medicineName": "cipla",
+          "dosage": "500mg",
+          "description": "once"
+      },
+      {
+          "medicineName": "paracitamol",
+          "dosage": "500mg",
+          "description": "twice"
+      }
+  ],
+  "successFlag": true
+}

@@ -1,1 +1,31 @@
-<p>visit-medication works!</p>
+<form [formGroup] = "medicationForm">
+
+  <div formArrayName = "medicationArray" >
+    <div *ngFor = "let medication of medicationArray.controls; let i = index">
+      <div [formGroupName] = "i">
+        <div>
+          <label>Medication : </label>&nbsp;
+            <p-dropdown formControlName = "medication" [options]="medications" optionLabel = "medicineName" placeholder = "Select" (onChange) = "medicationSelected($event, medication)"
+                         [disabled] = "disableFields"></p-dropdown> 
+        </div>
+        <br>
+        <div>
+            <label>Dosage : </label>&nbsp;
+              <input type="text" formControlName = "dosage" [readonly] = "disableFields">
+        </div>
+        <br>
+        <div>
+            <label>Description : </label>&nbsp;
+            <input type="text" formControlName = "description" [readonly] = "disableFields">
+          </div>
+        <br>
+      </div>
+    </div>
+
+
+  </div>
+  <button *ngIf = "displayButtons" class="btn btn-primary" [disabled] = "!medicationForm.valid" (click)= "addFormGroup()"> <i class="fa fa-plus-square"></i></button> &nbsp;
+  <button *ngIf = "displayButtons && medicationForm.controls.medicationArray.value.length > 1" class="btn btn-primary" (click)= "removeLastMedication()"> <i class="fa fa-trash"></i></button> &nbsp;
+</form>
+
+<button class="btn btn-primary" (click) = "submitVisit()" [disabled] = "!medicationForm.valid" >Submit</button>

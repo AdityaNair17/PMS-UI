@@ -1,3 +1,6 @@
+import { VisitDiagnosisComponent } from './visit-diagnosis/visit-diagnosis.component';
+import { VisitProcedureComponent } from './visit-procedure/visit-procedure.component';
+import { VisitMedicationComponent } from './visit-medication/visit-medication.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientVisitComponent } from './patient-visit.component';
@@ -11,6 +14,18 @@ const routes: Routes = [
       {
         path: ':id/:readOnly',
         component: VisitDetailsComponent
+      },
+      {
+        path : 'medication',
+        component : VisitMedicationComponent
+      },
+      {
+        path: 'procedure',
+        component : VisitProcedureComponent
+      }, 
+      {
+        path: 'diagnosis',
+        component : VisitDiagnosisComponent 
       }
     ]
   }
