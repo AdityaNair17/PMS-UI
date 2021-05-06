@@ -28,6 +28,10 @@ const routes: Routes = [
         loadChildren: ()=>import('../features/patient/patient.module').then(m=>m.PatientModule)
 
       },
+      {
+        path: 'visit',
+        loadChildren: ()=>import('../features/patient-visit/patient-visit.module').then(m => m.PatientVisitModule) 
+      }
     ]
   }
 ];

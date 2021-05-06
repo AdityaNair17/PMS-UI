@@ -1,3 +1,4 @@
+import { VisitVitalsComponent } from './visit-vitals/visit-vitals.component';
 import { VisitDiagnosisComponent } from './visit-diagnosis/visit-diagnosis.component';
 import { VisitProcedureComponent } from './visit-procedure/visit-procedure.component';
 import { VisitMedicationComponent } from './visit-medication/visit-medication.component';
@@ -14,19 +15,23 @@ const routes: Routes = [
       {
         path: ':id/:readOnly',
         component: VisitDetailsComponent
-      },
-      {
-        path : 'medication',
-        component : VisitMedicationComponent
-      },
-      {
-        path: 'procedure',
-        component : VisitProcedureComponent
-      }, 
-      {
-        path: 'diagnosis',
-        component : VisitDiagnosisComponent 
       }
+      // {
+      //   path : 'medication',
+      //   component : VisitMedicationComponent
+      // },
+      // {
+      //   path: 'procedure',
+      //   component : VisitProcedureComponent
+      // }, 
+      // {
+      //   path: 'diagnosis',
+      //   component : VisitDiagnosisComponent 
+      // },
+      // {
+      //   path : 'vitals',
+      //   component : VisitVitalsComponent
+      // }
     ]
   }
 ];

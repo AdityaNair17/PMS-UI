@@ -13,7 +13,7 @@ import * as diagnosisById from '../../../../assets/json/diagnosisById.json';
 })
 export class VisitService {
 
-  private visitId : string = "123";
+  private visitId : string = null;
   private medicationObj : any
 
   constructor() { }

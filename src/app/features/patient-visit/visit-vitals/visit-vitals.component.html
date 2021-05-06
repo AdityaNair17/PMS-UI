@@ -1,0 +1,40 @@
+<p>visit-vitals works!</p>
+
+<form [formGroup] = "vitalsForm">
+
+  <div class="form-horizontal">
+    <label>Height : </label>&nbsp;
+    <input type="text" formControlName = "height">&nbsp;cm
+  </div>
+
+  <div>
+    <label>Weight : </label>&nbsp;
+    <input type="text" formControlName = "weight">&nbsp;Kg
+  </div>
+
+  <div>
+    <label>Blood Pressure:</label>
+    <br>
+    <div>
+      <label>Systolic : </label>&nbsp;
+      <input type="text" formControlName = "systolic">&nbsp;mm Hg
+    </div>
+
+    <div>
+      <label>Diastolic : </label>&nbsp;
+      <input type="text" formControlName = "diastolic">&nbsp;mm Hg
+    </div>
+
+  </div>
+  <div>
+    <label>Temperature : </label>&nbsp;
+    <input type="text" formControlName = "temperature">&nbsp;F
+  </div>
+
+  <div>
+    <label>Respiration Rate : </label>&nbsp;
+    <input type="text" formControlName = "respirationRate">&nbsp;/minute
+  </div>
+</form>
+
+<button class="btn btn-primary" (click) = "submitVitals()" [disabled] = "!vitalsForm.valid" >Submit</button>

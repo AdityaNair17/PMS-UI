@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private authSvc : AuthService) { }
 
   ngOnInit(): void {
-
+    console.log(this.authSvc.User)
     this.user = `${this.authSvc.User.firstName} ${this.authSvc.User.lastName}`;
     this.profileMenuItems = [
       {label : this.user, styleClass : 'name'},
