@@ -7,14 +7,15 @@
         <label>Diagnosis : </label>&nbsp;
         <p-dropdown formControlName = "diagnosis" [options] = "diagnosisList" optionLabel = "diagnosisName" placeholder = "Select"
                     [disabled] = "disableFields"></p-dropdown>
-      </div>
-      <br>
-      <div>
+
+      &nbsp;&nbsp;
+
         <label>Description : </label>&nbsp;
         <input type="text" formControlName = "description" [readonly] = "disableFields">
       </div>
       <br>
     </div>
+
     </div>
 
   </div>
@@ -22,4 +23,4 @@
   <button *ngIf = "displayButtons && diagnosisForm.controls.diagnosisArray.value.length > 1" class="btn btn-primary" (click)= "removeLastDiagnosis()"> <i class="fa fa-trash"></i></button> &nbsp;
 </form>
 
-<button class="btn btn-primary" (click) = "storeDiagnosis()" [disabled] = "!diagnosisForm.valid" >Submit</button>
+<!-- <button class="btn btn-primary" (click) = "storeDiagnosis()" [disabled] = "!diagnosisForm.valid" >Submit</button> -->

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { toastSuccMessage, toastErrMessage } from 'src/app/shared/constants/constants';
 import { ToastMessageService } from 'src/app/shared/components/toast/service/toastMessage.service';
@@ -23,7 +24,8 @@ export class AppointmentListComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal,
               private schedulerSvc : SchedulerService,
               private authSvc : AuthService,
-              private toastMessageSvc : ToastMessageService) { }
+              private toastMessageSvc : ToastMessageService,
+              private router : Router) { }
 
 
   ngOnInit(): void {
@@ -80,12 +82,17 @@ export class AppointmentListComponent implements OnInit {
 
   viewVisit(appointment, event){
     event.stopPropagation();
-    console.log(appointment);
+    console.log(appointment)
+    this.activeModal.close();
+    this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(appointment), isEdit : JSON.stringify(true) }]);
   }
 
   createVisit(appointment, event){
     event.stopPropagation();
     console.log(appointment);
+    this.activeModal.close();
+    this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(appointment), isEdit : JSON.stringify(false) }]);
+
   }
 
   dateChange(date){

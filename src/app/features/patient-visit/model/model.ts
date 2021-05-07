@@ -13,3 +13,19 @@ export interface IDiagnosis {
   diagnosisId : string,
   diagnosisName : string
 }
+
+export interface MedicationById {
+  successFlag : boolean;
+  medicationOnVisit : MedicationOnVisit;
+  auditInfo : any;
+  timestamp? : string;
+  message? : string;
+  error? : string;
+  stacktrace? : string;
+}
+
+export interface MedicationOnVisit {
+  patientId : string;
+  visitId : string;
+  medication : Array<Imedication>;
+}

@@ -12,10 +12,10 @@ const routes: Routes = [
     path: '',
     component: PatientVisitComponent,
     children: [
-      {
-        path: ':id/:readOnly',
-        component: VisitDetailsComponent
-      }
+      // {
+      //   path: ':id/:readOnly',
+      //   component: VisitDetailsComponent
+      // }
       // {
       //   path : 'medication',
       //   component : VisitMedicationComponent

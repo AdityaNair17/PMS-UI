@@ -1,9 +1,11 @@
+import { VisitService } from './service/visit.service';
 import { VisitVitalsComponent } from './visit-vitals/visit-vitals.component';
 import { VisitDiagnosisComponent } from './visit-diagnosis/visit-diagnosis.component';
 import { VisitProcedureComponent } from './visit-procedure/visit-procedure.component';
 import { VisitMedicationComponent } from './visit-medication/visit-medication.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-patient-visit',
@@ -33,9 +35,24 @@ export class PatientVisitComponent implements OnInit {
       ],
     }
   };
-  constructor() { }
+  constructor(private route : ActivatedRoute,
+              private visitSvc : VisitService,
+              private cdr : ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.visitSvc.AppointmentDetails = JSON.parse(this.route.snapshot.paramMap.get('appointmentDetails')); 
+    this.visitSvc.VisitId = this.visitSvc.AppointmentDetails.patientVisitDetailId;
+    this.visitSvc.PatientId = this.visitSvc.AppointmentDetails.patientId;
+    this.visitSvc.isEdit = JSON.parse(this.route.snapshot.paramMap.get('isEdit'));
+    console.log(this.visitSvc.VisitId);
+    console.log(this.visitSvc.AppointmentDetails);
+    console.log(this.visitSvc.PatientId);
+    this.cdr.detectChanges();
+  }
+
+  showNextStep(event?: Event) {
+    // this.ngWizardService.next();
+    console.log(event)
   }
 
   isProcedureValid(){

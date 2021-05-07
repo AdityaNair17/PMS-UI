@@ -20,7 +20,7 @@ export class VisitDiagnosisComponent implements OnInit {
   ngOnInit(): void {
     this.createFormGroup();
 
-    if(this.visitSvc.VisitId != null){
+    if(this.visitSvc.isEdit){
 
       this.visitSvc.getDiagnosisById().subscribe(response => {
         if(response.successFlag){

@@ -35,7 +35,7 @@
     "date" : "2021-04-16",
     "startTime" : "9:30",
     "reasonForChange" : null,
-    "patientVisitDetailId" : 123,
+    "patientVisitDetailId" : "123",
     "description" : "Some description",
     "title" : "Title",
     "patientId" : "1234",

@@ -20,7 +20,7 @@ export class VisitProcedureComponent implements OnInit {
   ngOnInit(): void {
     this.createFormGroup();
 
-    if(this.visitSvc.VisitId != null) {
+    if(this.visitSvc.isEdit) {
       this.visitSvc.getProcedureDetailsById().subscribe(response => {
         if(response.successFlag){
           this.procedures = [];

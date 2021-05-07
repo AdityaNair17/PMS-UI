@@ -1,3 +1,4 @@
+import { VisitService } from './../service/visit.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,11 +11,29 @@ export class VisitVitalsComponent implements OnInit {
 
   public vitalsForm : FormGroup;
   private numberRegex : string = '^\\d*\\.?\\d*$';
-  constructor(private fb : FormBuilder) { }
+  public disableFields : boolean = false;
+
+  constructor(private fb : FormBuilder,
+              private visitSvc : VisitService) { }
 
   ngOnInit(): void {
   
     this.createFormGroup();
+    if(this.visitSvc.isEdit){
+      this.visitSvc.getVitalsById().subscribe((vitals) => {
+        this.vitalsForm.setValue({
+          height : vitals.height,
+          weight : vitals.weight,
+          systolic : vitals.systolic,
+          diastolic : vitals.diastolic,
+          temperature : vitals.temperature,
+          respirationRate : vitals.respirationRate
+        })
+        this.disableFields = true;
+      })
+      
+    }
+
   }
 
   createFormGroup(){

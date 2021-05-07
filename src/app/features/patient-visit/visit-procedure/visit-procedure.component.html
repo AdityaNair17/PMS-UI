@@ -8,9 +8,9 @@
         <label>Procedure : </label>&nbsp;
         <p-dropdown formControlName = "procedure" [options] = "procedures" optionLabel = "procedureName" placeholder = "Select"
                     [disabled] = "disableFields"></p-dropdown>
-      </div>
-      <br>
-      <div>
+
+      &nbsp;&nbsp;
+
         <label>Description : </label>&nbsp;
         <input type="text" formControlName = "description" [readonly] = "disableFields">
       </div>
@@ -23,4 +23,4 @@
   <button *ngIf = "displayButtons && procedureForm.controls.procedureArray.value.length > 1" class="btn btn-primary" (click)= "removeLastProcedure()"> <i class="fa fa-trash"></i></button> &nbsp;
 </form>
 
-<button class="btn btn-primary" (click) = "storeProcedure()" [disabled] = "!procedureForm.valid" >Submit</button>
+<!-- <button class="btn btn-primary" (click) = "storeProcedure()" [disabled] = "!procedureForm.valid" >Submit</button> -->
