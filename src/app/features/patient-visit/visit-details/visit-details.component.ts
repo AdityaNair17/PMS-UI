@@ -1,3 +1,4 @@
+import { VisitService } from './../service/visit.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisitDetailsComponent implements OnInit {
 
-  constructor() { }
+  public patientName : string;
+  public physcianName : string;
+  public appointmentDate : string;
+  constructor(private visitSvc : VisitService) { }
 
   ngOnInit(): void {
+    this.patientName = this.visitSvc.AppointmentDetails.patientName;
+    this.physcianName = this.visitSvc.AppointmentDetails.physcianName;
+    this.appointmentDate = this.visitSvc.AppointmentDetails.date;
   }
 
 }

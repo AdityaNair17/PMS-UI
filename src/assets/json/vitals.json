@@ -1,0 +1,9 @@
+{
+  "patientVisitId" : "123",
+  "height" : 180,
+  "weight" : 75,
+  "systolic" : 70,
+  "diastolic" : 100,
+  "temperature" : 98,
+  "respirationRate"  : 60
+}

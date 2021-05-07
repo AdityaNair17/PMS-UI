@@ -4,12 +4,12 @@
 
   <div class="form-horizontal">
     <label>Height : </label>&nbsp;
-    <input type="text" formControlName = "height">&nbsp;cm
+    <input type="text" formControlName = "height" [readonly]="disableFields">&nbsp;cm
   </div>
 
   <div>
     <label>Weight : </label>&nbsp;
-    <input type="text" formControlName = "weight">&nbsp;Kg
+    <input type="text" formControlName = "weight" [readonly]="disableFields">&nbsp;Kg
   </div>
 
   <div>
@@ -17,23 +17,23 @@
     <br>
     <div>
       <label>Systolic : </label>&nbsp;
-      <input type="text" formControlName = "systolic">&nbsp;mm Hg
+      <input type="text" formControlName = "systolic" [readonly]="disableFields">&nbsp;mm Hg
     </div>
 
     <div>
       <label>Diastolic : </label>&nbsp;
-      <input type="text" formControlName = "diastolic">&nbsp;mm Hg
+      <input type="text" formControlName = "diastolic" [readonly]="disableFields">&nbsp;mm Hg
     </div>
 
   </div>
   <div>
     <label>Temperature : </label>&nbsp;
-    <input type="text" formControlName = "temperature">&nbsp;F
+    <input type="text" formControlName = "temperature" [readonly]="disableFields">&nbsp;F
   </div>
 
   <div>
     <label>Respiration Rate : </label>&nbsp;
-    <input type="text" formControlName = "respirationRate">&nbsp;/minute
+    <input type="text" formControlName = "respirationRate" [readonly]="disableFields">&nbsp;/minute
   </div>
 </form>
 

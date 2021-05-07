@@ -1,20 +1,22 @@
-<ng-wizard [config] = "config">
 
-  <ng-wizard-step [title]="'Vitals'" [description]="'Step 1 description'" >
+<app-visit-details></app-visit-details>
+<ng-wizard [config] = "config" class="wizardBlock">
+
+  <ng-wizard-step [title]="'Vitals'" [description]="'Fill Vital Information'" >
     <app-visit-vitals></app-visit-vitals>
   </ng-wizard-step>
 
-<ng-wizard-step [title]="'Diagnosis'" [description]="'Step 2 description'" >
+<ng-wizard-step [title]="'Diagnosis'" [description]="'Fill Diagnosis Information'" [canEnter]="isVitalsValid()">
   <app-visit-diagnosis></app-visit-diagnosis>
 </ng-wizard-step>
 
 
-<ng-wizard-step [title]="'Procedure'" [description]="'Step 3 description'" [canExit]="isProcedureValid()">
+<ng-wizard-step [title]="'Procedure'" [description]="'Fill Procedure Information'" [canEnter]="isDiagnosisValid()">
   <app-visit-procedure></app-visit-procedure>
 </ng-wizard-step>
 
 
-<ng-wizard-step [title]="'Medication'" [description]="'Step 4 description'"  >
+<ng-wizard-step [title]="'Medication'" [description]="'Fill Medication Information'"  [canEnter]="isProcedureValid()">
   <app-visit-medication></app-visit-medication>
 </ng-wizard-step>
 

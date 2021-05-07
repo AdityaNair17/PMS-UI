@@ -7,19 +7,20 @@
           <label>Medication : </label>&nbsp;
             <p-dropdown formControlName = "medication" [options]="medications" optionLabel = "medicineName" placeholder = "Select" (onChange) = "medicationSelected($event, medication)"
                          [disabled] = "disableFields"></p-dropdown> 
-        </div>
-        <br>
-        <div>
+
+        &nbsp;&nbsp;
+    
             <label>Dosage : </label>&nbsp;
               <input type="text" formControlName = "dosage" [readonly] = "disableFields">
-        </div>
-        <br>
-        <div>
+
+        &nbsp;&nbsp;
+
             <label>Description : </label>&nbsp;
             <input type="text" formControlName = "description" [readonly] = "disableFields">
           </div>
-        <br>
+          
       </div>
+      <br>
     </div>
 
 

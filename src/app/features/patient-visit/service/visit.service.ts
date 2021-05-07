@@ -1,3 +1,5 @@
+import { AppointmentDetails } from './../../scheduler/model/model';
+import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { Injectable } from '@angular/core';
 
@@ -7,6 +9,7 @@ import * as procedureList from '../../../../assets/json/procedureList.json';
 import * as procedureById from '../../../../assets/json/procedureById.json';
 import * as diagnosisList from '../../../../assets/json/diagnosisList.json';
 import * as diagnosisById from '../../../../assets/json/diagnosisById.json';
+import * as vitalsById from '../../../../assets/json/vitals.json';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +17,11 @@ import * as diagnosisById from '../../../../assets/json/diagnosisById.json';
 export class VisitService {
 
   private visitId : string = null;
-  private medicationObj : any
+  private patientId : string = null;
+  private appointmentDetails : AppointmentDetails;
+  public isEdit : boolean = true;
 
-  constructor() { }
+  constructor(private http : HttpClient) { }
 
 
   public get VisitId(){
@@ -26,13 +31,35 @@ export class VisitService {
   public set VisitId(id : string){
     this.visitId = id;
   }
+
+  public get PatientId(){
+    return this.patientId;
+  }
+
+  public set PatientId(id : string){
+    this.patientId = id;
+  }
+
+
+  public get AppointmentDetails(){
+    return this.appointmentDetails;
+  }
+
+  public set AppointmentDetails(appointment : AppointmentDetails){
+    this.appointmentDetails = appointment;
+  }
+
   getMedicationList(){
-    return of((medicationList as any).default);
+    // return of((medicationList as any).default);
+    const url  = 'http://23.96.121.152:8080/medication/getList';
+    return this.http.get(url);
   }
 
 
   getMedicationDetailsById(){
-    return of((medicationById as any).default);
+    const url  = 'http://23.96.121.152:8080/medication/getList/' + this.visitId + '/' + this.patientId;
+    // return of((medicationById as any).default);
+    return this.http.get(url);
   }
 
   getProcedureList(){
@@ -49,5 +76,14 @@ export class VisitService {
 
   getDiagnosisById(){
     return of((diagnosisById as any).default);
+  }
+
+  getVitalsById(){
+    return of((vitalsById as any).default);
+  }
+
+  postMedication(reqBody : any){
+    const url = 'http://23.96.121.152:8080/medication/saveList';
+    return this.http.post(url, reqBody);
   }
 }

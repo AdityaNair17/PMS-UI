@@ -20,11 +20,12 @@ const routes: Routes = [
         canActivate: [AuthGuardGuard]
       },
       {
+        path: 'visit',
+        loadChildren: ()=>import('../features/patient-visit/patient-visit.module').then(m => m.PatientVisitModule) 
+      },
+      {
         path: 'change-password',
         component: ChangePasswordComponent
-      }, {
-        path: 'visit',
-        loadChildren: () => import('../features/patient-visit/patient-visit.module').then(m => m.PatientVisitModule)
       }
     ]
   }

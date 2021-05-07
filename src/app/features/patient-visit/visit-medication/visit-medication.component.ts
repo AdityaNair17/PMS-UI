@@ -1,4 +1,4 @@
-import { Imedication } from './../model/model';
+import { Imedication, MedicationById } from './../model/model';
 import { VisitService } from './../service/visit.service';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -22,8 +22,8 @@ export class VisitMedicationComponent implements OnInit {
 
   ngOnInit(): void {
     this.createFormGroup();
-    if(this.visitSvc.VisitId != null){
-      this.visitSvc.getMedicationDetailsById().subscribe((response) => {
+    if(this.visitSvc.isEdit){
+      this.visitSvc.getMedicationDetailsById().subscribe((response : MedicationById) => {
         if(response.successFlag){
           this.medications = [];
           response.medicationOnVisit.medication.forEach(md => {
@@ -42,7 +42,7 @@ export class VisitMedicationComponent implements OnInit {
       })
 
     } else {
-    this.visitSvc.getMedicationList().subscribe(medications => {
+    this.visitSvc.getMedicationList().subscribe((medications : any) => {
       this.medications = medications.medicationList;
     })
   }
@@ -89,16 +89,18 @@ export class VisitMedicationComponent implements OnInit {
       const obj = {
         description : md.get("description").value,
         dosage : md.get("dosage").value,
-        medication : md.get("medication").value.medicineName,
+        medicineName : md.get("medication").value.medicineName,
         status : md.get("medication").value.status
       };
       medication.push(obj);
     });
     const reqObj = {
       medication : medication,
-      patientId : "123",
+      patientId : "1234",
       visitId : "123"
     }
-    console.log(reqObj);
+    this.visitSvc.postMedication(reqObj).subscribe(data => {
+      console.log(data);
+    })
   }
 }
