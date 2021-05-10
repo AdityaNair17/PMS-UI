@@ -1,11 +1,12 @@
+import { AppService } from './../../app.service';
 import { VisitService } from './service/visit.service';
 import { VisitVitalsComponent } from './visit-vitals/visit-vitals.component';
 import { VisitDiagnosisComponent } from './visit-diagnosis/visit-diagnosis.component';
 import { VisitProcedureComponent } from './visit-procedure/visit-procedure.component';
 import { VisitMedicationComponent } from './visit-medication/visit-medication.component';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
-import { ActivatedRoute } from '@angular/router';
+import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME, TOOLBAR_BUTTON_POSITION } from 'ng-wizard';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-visit',
@@ -30,18 +31,21 @@ export class PatientVisitComponent implements OnInit {
     selected: 0,
     theme: THEME.arrows,
     toolbarSettings: {
+      toolbarButtonPosition : TOOLBAR_BUTTON_POSITION.start,
       toolbarExtraButtons: [
-        { text: 'Finish', class: 'btn btn-info', event: () => { alert("Finished!!!"); } }
+        { text: 'Cancel', class: 'btn btn-info align-right', event: this.cancel.bind(this) }
       ],
     }
   };
   constructor(private route : ActivatedRoute,
               private visitSvc : VisitService,
-              private cdr : ChangeDetectorRef) { }
+              private cdr : ChangeDetectorRef,
+              private appSvc : AppService,
+              private router : Router) { }
 
   ngOnInit(): void {
     this.visitSvc.AppointmentDetails = JSON.parse(this.route.snapshot.paramMap.get('appointmentDetails')); 
-    this.visitSvc.VisitId = this.visitSvc.AppointmentDetails.patientVisitDetailId;
+    this.visitSvc.VisitId = this.visitSvc.AppointmentDetails.visitId;
     this.visitSvc.PatientId = this.visitSvc.AppointmentDetails.patientId;
     this.visitSvc.isEdit = JSON.parse(this.route.snapshot.paramMap.get('isEdit'));
     console.log(this.visitSvc.VisitId);
@@ -84,6 +88,23 @@ export class PatientVisitComponent implements OnInit {
       return true;
     } else {
       return false;
+    }
+  }
+
+  submitVisit(){
+    this.vitals.submitVitals();
+    this.diagnosis.storeDiagnosis();
+    this.procedure.storeProcedure();
+    const prevUrl = this.appSvc.previousUrl;
+    if(prevUrl != undefined || prevUrl != ''){
+      this.router.navigate([prevUrl]);
+    }
+  }
+
+  cancel(){
+    const prevUrl = this.appSvc.previousUrl;
+    if(prevUrl != undefined || prevUrl != ''){
+      this.router.navigate([prevUrl]);
     }
   }
 }

@@ -1,4 +1,4 @@
-import { AppointmentDetails } from './../../scheduler/model/model';
+import { VisitDetails } from './../model/model';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -18,7 +18,7 @@ export class VisitService {
 
   private visitId : string = null;
   private patientId : string = null;
-  private appointmentDetails : AppointmentDetails;
+  private appointmentDetails : VisitDetails;
   public isEdit : boolean = true;
 
   constructor(private http : HttpClient) { }
@@ -45,21 +45,23 @@ export class VisitService {
     return this.appointmentDetails;
   }
 
-  public set AppointmentDetails(appointment : AppointmentDetails){
+  public set AppointmentDetails(appointment : VisitDetails){
     this.appointmentDetails = appointment;
   }
 
   getMedicationList(){
-    // return of((medicationList as any).default);
-    const url  = 'http://23.96.121.152:8080/medication/getList';
-    return this.http.get(url);
+    return of((medicationList as any).default);
+    // const url  = 'http://23.96.121.152:8080/medication/getList';
+    // return this.http.get(url);
   }
 
 
   getMedicationDetailsById(){
-    const url  = 'http://23.96.121.152:8080/medication/getList/' + this.visitId + '/' + this.patientId;
-    // return of((medicationById as any).default);
-    return this.http.get(url);
+    // const url  = 'http://23.96.121.152:8080/medication/getList/' + this.visitId + '/' + this.patientId;
+    // return this.http.get(url);
+
+    return of((medicationById as any).default);
+
   }
 
   getProcedureList(){

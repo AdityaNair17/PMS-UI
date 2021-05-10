@@ -1,0 +1,15 @@
+@import '../../../../assets/sass/variables.scss';
+@import '../../../../assets/sass/mixin.scss';
+
+.heading {
+  text-align: center;
+  color: $deep-sky-blue2;
+  font-weight: $lbold;
+  padding: 5px;
+}
+
+.visitInfoheight{
+
+  @include height($visit-info-height);
+  margin: 5px;
+}

@@ -17,9 +17,8 @@
 
 
 <ng-wizard-step [title]="'Medication'" [description]="'Fill Medication Information'"  [canEnter]="isProcedureValid()">
-  <app-visit-medication></app-visit-medication>
+  <app-visit-medication (submitClick) = "submitVisit()"></app-visit-medication>
 </ng-wizard-step>
-
 
 </ng-wizard>
 
