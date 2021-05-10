@@ -29,3 +29,11 @@ export interface MedicationOnVisit {
   visitId : string;
   medication : Array<Imedication>;
 }
+
+export interface VisitDetails {
+  patientId : string;
+  patientName : string;
+  visitId : string;
+  physcianName : string;
+  appointmentDate : string;
+}

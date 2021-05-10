@@ -12,8 +12,8 @@ $bold: 700;
 
 $header-height : 45px;
 $footer-height : 30px;
-
-
+$visit-info-height : 150px;
+$visit-wizard-unusable-height : $header-height + $footer-height + $visit-info-height;
 
 // Background
 $inbox-read-bg: #D0D0D0;
@@ -38,6 +38,7 @@ $pie-chart-pending: #00B2EE;
 $deep-sky-blue2: #00B2EE;
 $red : #FF0000;
 $green: #7CFC00;
+$surf-blue: #63D1F4;
 
 
 // Others

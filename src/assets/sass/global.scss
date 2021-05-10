@@ -3,6 +3,8 @@
 // html, body { height: 100%; }
 // body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import './variables.scss';
+@import './mixin.scss';
+
 .color {
     color:$deep-sky-blue2;
 }
@@ -62,6 +64,50 @@ margin-bottom: 3rem !important;
 .wizardBlock {
     .ng-wizard-main{
         overflow-y: scroll;
-        height: 500px;
+        height: calc(100vh - #{$visit-wizard-unusable-height} - 20px);
+        max-height: calc(100vh - #{$visit-wizard-unusable-height} - 20px);
     }
+
+    .ng-wizard-theme-arrows {
+        ul.step-anchor {
+            margin-bottom: 10px;
+
+
+            li.active{
+                a {
+                    background-color: $deep-sky-blue2 !important;
+
+                    &::after{
+                        border-left: 30px solid $deep-sky-blue2 !important;
+                    }
+                }
+            }
+
+            li.done{
+            
+                a{
+                    background-color: $surf-blue!important;
+                }
+                a:after{
+                    border-left: 30px solid $surf-blue !important;
+                }   
+            }
+        }
+    }
+
+
+    .ng-wizard-btn-prev, .ng-wizard-btn-next{
+        background-color: $deep-sky-blue2 !important;
+        border-color: $deep-sky-blue2 !important;
+    }
+    
+    .ng-wizard-btn-group-extra{
+        position: absolute;
+        right: 0;
+    }
+
+    .align-right{
+        float: right;
+      
+      }
   }

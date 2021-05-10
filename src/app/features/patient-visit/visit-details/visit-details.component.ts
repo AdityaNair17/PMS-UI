@@ -16,7 +16,7 @@ export class VisitDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.patientName = this.visitSvc.AppointmentDetails.patientName;
     this.physcianName = this.visitSvc.AppointmentDetails.physcianName;
-    this.appointmentDate = this.visitSvc.AppointmentDetails.date;
+    this.appointmentDate = this.visitSvc.AppointmentDetails.appointmentDate;
   }
 
 }

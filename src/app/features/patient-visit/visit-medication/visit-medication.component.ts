@@ -1,7 +1,7 @@
 import { Imedication, MedicationById } from './../model/model';
 import { VisitService } from './../service/visit.service';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-visit-medication',
@@ -15,6 +15,7 @@ export class VisitMedicationComponent implements OnInit {
   public medications : Array<Imedication>;
   public disableFields : boolean = false;
   public displayButtons : boolean = true;
+  @Output() submitClick : EventEmitter<any> = new EventEmitter<any>();
   constructor(private fb : FormBuilder,
               private visitSvc : VisitService) {
 
@@ -99,8 +100,10 @@ export class VisitMedicationComponent implements OnInit {
       patientId : "1234",
       visitId : "123"
     }
-    this.visitSvc.postMedication(reqObj).subscribe(data => {
-      console.log(data);
-    })
+    // this.visitSvc.postMedication(reqObj).subscribe(data => {
+    //   console.log(data);
+    // })
+    console.log(reqObj);
+    this.submitClick.emit();
   }
 }

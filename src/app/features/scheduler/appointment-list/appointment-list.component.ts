@@ -1,3 +1,5 @@
+import { VisitDetails } from './../../patient-visit/model/model';
+import { AppService } from './../../../app.service';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { toastSuccMessage, toastErrMessage } from 'src/app/shared/constants/constants';
@@ -25,7 +27,8 @@ export class AppointmentListComponent implements OnInit {
               private schedulerSvc : SchedulerService,
               private authSvc : AuthService,
               private toastMessageSvc : ToastMessageService,
-              private router : Router) { }
+              private router : Router,
+              private appSvc : AppService) { }
 
 
   ngOnInit(): void {
@@ -84,14 +87,32 @@ export class AppointmentListComponent implements OnInit {
     event.stopPropagation();
     console.log(appointment)
     this.activeModal.close();
-    this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(appointment), isEdit : JSON.stringify(true) }]);
+    this.appSvc.previousUrl = 'layout/home/scheduler';
+    
+    const visitObj : VisitDetails = {
+      patientId : appointment.patientId,
+      patientName : appointment.patientName,
+      visitId : appointment.patientVisitDetailId,
+      physcianName : appointment.physcianName,
+      appointmentDate : appointment.date
+    }
+    this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(visitObj), isEdit : JSON.stringify(true) }]);
   }
 
   createVisit(appointment, event){
     event.stopPropagation();
     console.log(appointment);
     this.activeModal.close();
-    this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(appointment), isEdit : JSON.stringify(false) }]);
+    this.appSvc.previousUrl = 'layout/home/scheduler';
+    // An API call will be made here to generate visitID
+    const visitObj : VisitDetails = {
+      patientId : appointment.patientId,
+      patientName : appointment.patientName,
+      visitId : appointment.patientVisitDetailId,
+      physcianName : appointment.physcianName,
+      appointmentDate : appointment.date
+    }
+    this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(visitObj), isEdit : JSON.stringify(false) }]);
 
   }
 
