@@ -1,6 +1,6 @@
 import { toastErrMessage } from 'src/app/shared/constants/constants';
 import { ToastMessageService } from './../../../shared/components/toast/service/toastMessage.service';
-import { pmsConstants, toastSuccMessage } from './../../../shared/constants/constants';
+import { pmsConstants, toastSuccMessage, appointmentCreationSuccess } from './../../../shared/constants/constants';
 import { SchedulerService } from './../service/scheduler.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -185,7 +185,7 @@ export class CreateAppointmentComponent implements OnInit {
     }
     this.schedulerSvc.createAppointment(reqObj).subscribe(response => {
       if(response.status == 200){
-        this.toastMessageSvc.displayToastMessage(toastSuccMessage);
+        this.toastMessageSvc.displayToastMessage(appointmentCreationSuccess);
       } else {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
       }

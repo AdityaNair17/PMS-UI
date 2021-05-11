@@ -14,21 +14,17 @@
 
     <ng-template pTemplate="header">
         <tr>
-            <th>Name</th>
+            <th>Patient</th>
+            <th>Physician</th>
             <th>Appointment Date</th>
-            <th>Diagnosis</th>
-            <th>Procedure</th>
-            <th>Next Appointment Date</th>
         </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-history>
         <tr>
-            <td [routerLink]="['/layout/visit', history.id , true ]">{{history.name}}</td>
+            <td>{{history.patientName}}</td>
+            <td>{{history.physicianName}}</td>
             <td>{{history.appointmentDate}}</td>
-            <td>{{history.diagnosis[0]}}</td>
-            <td>{{history.procedure[0]}}</td>
-            <td>{{history.nextAppointmentDate}}</td>
         </tr>
     </ng-template>
 </p-table>

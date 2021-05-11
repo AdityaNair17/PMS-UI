@@ -57,7 +57,7 @@ export class VisitService {
 
 
   getMedicationDetailsById(){
-    // const url  = 'http://23.96.121.152:8080/medication/getList/' + this.visitId + '/' + this.patientId;
+    // const url  = `http://23.96.121.152:8080/medication/getList/${this.visitId}/${this.patientId}`;
     // return this.http.get(url);
 
     return of((medicationById as any).default);

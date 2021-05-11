@@ -1,8 +1,7 @@
 export interface IHistoryList{
-    name?:string;
-    appointmentDate?: string;
-    diagnosis?: string[];
-    procedure?: string[];
-    nextAppointmentDate?: string;
-    id?:string;
+    patientName : string;
+    patientId : string;
+    visitId : string;
+    appointmentDate : string;
+    physicianName : string;
 }

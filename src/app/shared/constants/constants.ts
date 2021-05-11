@@ -16,6 +16,18 @@ export const toastSuccMessage = {
   detail: ""
 }
 
+export const appointmentCreationSuccess = {
+  severity: "success",
+  summary: "Appointment Created Successfully",
+  detail: ""
+}
+
+export const appointmentEditionSuccess = {
+  severity: "success",
+  summary: "Appointment Edited Successfully",
+  detail: ""
+}
+
 export const genderList: string[] = ['Male', 'Female'];
 
 export const accessList = [
