@@ -25,14 +25,14 @@
           <p-body>
             <div>
               <span>Physcian Name : {{app.physcianName}}</span><br>
-              <span>Appointment Time : {{app.time}}</span><br>
+              <span>Appointment Time : {{app.startTime}}</span><br>
               <span>Description : {{app.description}}</span>
             </div>
             <br>
             <div *ngIf="showDeleteConfirmationDialog && appointmentToBeDeleted.appointmentId == app.appointmentId">
               <input type="text" placeholder="Reason For Deletion" [(ngModel)] = "deletionReason"><br>
               <div class="align-right">
-                <button class="btn-danger right-margin-5" [disabled] = "deletionReason.length == 0" (click)=deleteAppointment()>Delete</button>
+                <button type="button" class="btn btn-danger right-margin-5"  [disabled] = "deletionReason.length == 0" (click)=deleteAppointment()>Delete</button>
                 <button class="btn" (click)=cancelDeleteDialog(app.appointmentId)>Cancel</button>
               </div>
             </div>
@@ -44,7 +44,7 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" ngbAutoFocus
+    <button type="button" class="btn btn-secondary" ngbAutoFocus
       (click)="activeModal.close()">Close</button>
   </div>
 </div>

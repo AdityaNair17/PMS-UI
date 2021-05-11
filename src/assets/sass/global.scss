@@ -111,3 +111,20 @@ margin-bottom: 3rem !important;
       
       }
   }
+
+
+.fullCalendar {
+    .fc .fc-view-container .fc-event{
+        border-radius: 10px;
+        text-align: center;
+    }
+}
+
+.pd-tp-5{
+    padding-top: 5px;
+}
+
+.modal{
+    z-index: 999999 !important;
+    top: 5% !important;
+}

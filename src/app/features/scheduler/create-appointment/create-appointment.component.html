@@ -9,46 +9,60 @@
 
   <div class="modal-body">
     <form [formGroup]="appointmentForm">
-        <div>
-            <label>Title : </label>&nbsp;
-            <input class="form-control" formControlName="title" required>
+        <div class="flex-block">
+            <label for="title">Title :</label>&nbsp;&nbsp;
+            <div>
+            <input formControlName="title" id="title" required>
             <div *ngIf =  "isControlInvalid(title) && title.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
           </div>
-          <br>
-      <div>
-        <label>Patient : </label>&nbsp;
-        <p-dropdown [options]="listOfPatients" optionLabel = "name" formControlName = "patientName" [filter]="true" [disabled]="disablePatient" placeholder = "Select"></p-dropdown>
-        <div *ngIf =  "isControlInvalid(patientName) && patientName.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
+          </div>
+          <br><br>
+      <div class="flex-block">
+        <label class="pd-tp-5">Patient : </label>&nbsp;&nbsp;
+        <div>
+          <p-dropdown [options]="listOfPatients" optionLabel = "name" formControlName = "patientName" [filter]="true" [disabled]="disablePatient" placeholder = "Select"></p-dropdown>
+          <div *ngIf =  "isControlInvalid(patientName) && patientName.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
+        </div>
       </div>
-      <br>
-      <div>
-        <label>Physican : </label>&nbsp;
+      <br><br>
+      <div class="flex-block">
+        <label class="pd-tp-5">Physican : </label>&nbsp;&nbsp;
+        <div>
         <p-dropdown [options]="listOfDoctors" optionLabel = "name" formControlName = "physcianName"  [filter]="true" [disabled]="disableDoctor" placeholder = "Select" ></p-dropdown>
         <div *ngIf =  "isControlInvalid(physcianName) && physcianName.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
       </div>
-      <br>
-      <div>
-        <label>Date : </label>&nbsp;
+      </div>
+      <br><br>
+      <div class="flex-block">
+        <label class="pd-tp-5">Date : </label>&nbsp;&nbsp;
+        <div>
         <p-calendar formControlName = "dateOfAppointment" [minDate] = "todaysDate" dateFormat="dd/mm/yy"></p-calendar>
         <div *ngIf =  "isControlInvalid(dateOfAppointment) && dateOfAppointment.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
       </div>
-      <br>
-      <div>
-        <label>Time : </label>&nbsp;
+      </div>
+      <br><br>
+      <div class="flex-block">
+        <label class="pd-tp-5">Time : </label>&nbsp;&nbsp;
+        <div>
         <p-dropdown [options]="availableTimeslots" optionLabel = "fullTime" formControlName = "timeOfAppointment"  [filter]="true" placeholder = "Select"></p-dropdown>
         <div *ngIf =  "isControlInvalid(timeOfAppointment) && timeOfAppointment.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
       </div>
-      <br>
-      <div>
-        <label>Description : </label>&nbsp;
-        <input class="form-control" formControlName="description" required>
+      </div>
+      <br><br>
+      <div class="flex-block">
+        <label >Description : </label>&nbsp;&nbsp;
+        <div>
+        <textarea class="form-control textarea-width" formControlName="description" required></textarea>
         <div *ngIf =  "isControlInvalid(description) && description.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
       </div>
-
-      <div *ngIf = "appointmentMode == 'edit'">
-          <label>Reason For Updation : </label>&nbsp;
-          <input class="form-control" formControlName="reason" required>
+      </div>
+      <br><br>
+      <div class="flex-block" *ngIf = "appointmentMode == 'edit'">
+          <label >Reason : </label>&nbsp;&nbsp;
+          <div>
+          <textarea class="form-control textarea-width" formControlName="reason" required></textarea>
           <div *ngIf =  "isControlInvalid(reason) && reason.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
+        </div>
         </div>
     </form>
   </div>
@@ -56,7 +70,7 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="createAppointment()" [disabled] = "appointmentForm.invalid" *ngIf = "appointmentMode == 'add'">Create</button>
     <button type="button" class="btn btn-primary" (click)="editAppointment()" [disabled] = "appointmentForm.invalid" *ngIf = "appointmentMode == 'edit'">Edit</button>
-    <button type="button" class="btn" ngbAutofocus
+    <button type="button" class="btn btn-secondary" ngbAutofocus
       (click)="activeModal.close()">Close</button>
   </div>
 </div>

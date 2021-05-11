@@ -1,3 +1,4 @@
+import { appointmentEditionSuccess } from './../../../shared/constants/constants';
 import { VisitDetails } from './../../patient-visit/model/model';
 import { AppService } from './../../../app.service';
 import { Router } from '@angular/router';
@@ -73,7 +74,7 @@ export class AppointmentListComponent implements OnInit {
     modal.result.then((response) => {
       if(response){
         if(response.status == 200){
-          this.toastMessageSvc.displayToastMessage(toastSuccMessage);
+          this.toastMessageSvc.displayToastMessage(appointmentEditionSuccess);
         } else {
           this.toastMessageSvc.displayToastMessage(toastErrMessage);
         }

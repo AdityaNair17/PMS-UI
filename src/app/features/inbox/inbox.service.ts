@@ -13,7 +13,7 @@ export class InboxService {
       id: 'qqahshjjk55612bdbfstjbsvfaayajbx0',
       name: 'Ankit sawant',
       type: 'appointment/others',
-      subject: 'upcoming appointment',
+      subject: 'Appointment Request',
       status: STATUS.UPCOMING,
       time: '20:15',
       date: '13 Apr'
@@ -22,7 +22,7 @@ export class InboxService {
       id: 'qqahshjjk55612bdbfstjbsvfaayajbx1',
       name: 'Onkar Patil',
       type: 'appointment/others',
-      subject: 'upcoming appointment',
+      subject: 'Appointment Request',
       status: STATUS.REJECTED,
       time: '20:17',
       date: '14 Apr'
@@ -31,7 +31,7 @@ export class InboxService {
       id: 'qqahshjjk55612bdbfstjbsvfaayajbx2',
       name: 'Dr. Sanket Chaudhari',
       type: 'appointment/others',
-      subject: 'upcoming appointment',
+      subject: 'Appointment Request',
       status: STATUS.ACCEPTED,
       time: '20:18',
       date: '15 Apr'
@@ -50,7 +50,7 @@ export class InboxService {
       name: 'Pranav Ekapure',
       type: 'appointment/others',
       subject: 'Reports of Patient XYZ',
-      status: STATUS.UPCOMING,
+      status: STATUS.ACCEPTED,
       time: '20:30',
       date: '20 Apr'
     }

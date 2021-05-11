@@ -28,5 +28,5 @@
   <button *ngIf = "displayButtons" class="btn btn-primary" [disabled] = "!medicationForm.valid" (click)= "addFormGroup()"> <i class="fa fa-plus-square"></i></button> &nbsp;
   <button *ngIf = "displayButtons && medicationForm.controls.medicationArray.value.length > 1" class="btn btn-primary" (click)= "removeLastMedication()"> <i class="fa fa-trash"></i></button> &nbsp;
 </form>
-
+<br><br>
 <button class="btn btn-primary" *ngIf="displayButtons" (click) = "submitVisit()" [disabled] = "!medicationForm.valid" >Submit</button>

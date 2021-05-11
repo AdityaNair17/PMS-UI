@@ -1,0 +1,44 @@
+[
+  {
+    "patientId" : "1234",
+    "patientName" : "Ankit Sawant",
+    "visitId" : "1234",
+    "physicianName" : "Dr. Sanket Chaudhari",
+    "appointmentDate" : "2021-02-07"
+  },
+  {
+    "patientId" : "1234",
+    "patientName" : "Kamlesh Badgujar",
+    "visitId" : "1234",
+    "physicianName" : "Dr. Onkar Patil",
+    "appointmentDate" : "2021-02-07"
+  },
+  {
+    "patientId" : "1234",
+    "patientName" : "Roshankumar Sah",
+    "visitId" : "1234",
+    "physicianName" : "Dr. Pranav Ekapure",
+    "appointmentDate" : "2021-02-07"
+  },
+  {
+    "patientId" : "1234",
+    "patientName" : "Ankit Sawant",
+    "visitId" : "1234",
+    "physicianName" : "Dr. Sanket Chaudhari",
+    "appointmentDate" : "2021-02-07"
+  },
+  {
+    "patientId" : "1234",
+    "patientName" : "Ankit Sawant",
+    "visitId" : "1234",
+    "physicianName" : "Dr. Sanket Chaudhari",
+    "appointmentDate" : "2021-02-07"
+  },
+  {
+    "patientId" : "1234",
+    "patientName" : "Ankit Sawant",
+    "visitId" : "1234",
+    "physicianName" : "Dr. Sanket Chaudhari",
+    "appointmentDate" : "2021-02-07"
+  }
+]
