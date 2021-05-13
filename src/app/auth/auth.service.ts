@@ -1,3 +1,4 @@
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IUser, IUserSessionData } from './models/user-model';
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -17,7 +18,8 @@ export class AuthService {
   private passwordChangeRequired: boolean = true;
   private user: IUser;
 
-  constructor(private http : HttpClient) {
+  constructor(private http : HttpClient,
+              private modal : NgbModal) {
    }
 
   public get AuthenticationToken() {
@@ -120,5 +122,9 @@ export class AuthService {
   public LogOut() {
     localStorage.removeItem('loggedInUser');
     this.isUserAuthenticated = false;
+  }
+
+  public openModal(component : any){
+    this.modal.open(component, {backdrop: 'static'});
   }
 }
