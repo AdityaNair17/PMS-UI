@@ -17,8 +17,8 @@
         <br>
         <button mat-stroked-button color="primary" class="input-width bg-color white-color" (click) = "login()">Sign in</button>
         <div class="btn-group">
-          <a mat-flat-button class="color" routerLink="/auth/forgot-password">Forgot password?</a>
-          <a mat-flat-button class="color" routerLink="/auth/sign-up">Sign up</a>
+          <a mat-flat-button class="color" (click)="openForgotPasswordModal()" >Forgot password?</a>
+          <a mat-flat-button class="color" (click)="openSignUpModal()">Sign up</a>
         </div>
     </form>
 </div>

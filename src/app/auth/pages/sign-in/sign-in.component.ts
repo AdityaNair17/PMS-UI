@@ -1,3 +1,5 @@
+import { ForgotPasswordComponent } from './../forgot-password/forgot-password.component';
+import { SignUpComponent } from './../sign-up/sign-up.component';
 import { ToastMessageService } from './../../../shared/components/toast/service/toastMessage.service';
 import { pmsConstants } from './../../../shared/constants/constants';
 import { AuthService } from './../../auth.service';
@@ -92,5 +94,13 @@ export class SignInComponent implements OnInit {
   isControlInvalid(control : FormControl){
     // console.log(control);
     return control.invalid && (control.dirty || control.touched);
+  }
+
+  openSignUpModal(){
+    this.authSvc.openModal(SignUpComponent);
+  }
+
+  openForgotPasswordModal(){
+    this.authSvc.openModal(ForgotPasswordComponent);
   }
 }

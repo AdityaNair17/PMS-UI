@@ -1,3 +1,4 @@
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastMessageService } from './../../../shared/components/toast/service/toastMessage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -18,7 +19,8 @@ export class SignUpComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastMessageSvc: ToastMessageService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    public activeModal : NgbActiveModal
   ) { }
 
   ngOnInit(): void {
@@ -50,9 +52,11 @@ export class SignUpComponent implements OnInit {
           toastSuccMessage.summary = "Registered Successfully!"
           this.toastMessageSvc.displayToastMessage(toastSuccMessage);
           this.router.navigate(['/auth/sign-in']);
+          this.activeModal.close();
         }
         else {
           this.toastMessageSvc.displayToastMessage(toastErrMessage);
+          this.activeModal.close();
         }
 
       });
