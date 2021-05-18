@@ -84,10 +84,11 @@ export class VisitProcedureComponent implements OnInit {
     });
 
     const reqBody = {
-      patient_visit_id : "123",
+      patient_visit_id : this.visitSvc.VisitId,
       procedure_details : procedureDetails,
     }
 
     console.log(reqBody);
+    this.visitSvc.postProcedure(reqBody);
   }
 }

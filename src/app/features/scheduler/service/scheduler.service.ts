@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
 import { AppService } from './../../../app.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as appointmentList from '../../../../assets/json/calendarAppointmentList.json';
@@ -18,6 +18,7 @@ export class SchedulerService {
   public selectedDate: Date;
   public appointmentMode : string;
   public selectedAppointment : any;
+  baseUrl : string = "http://40.87.25.157:8082/appointment"
 
   constructor(private http: HttpClient,
     private appSvc: AppService,
@@ -25,16 +26,31 @@ export class SchedulerService {
 
   getListOfAppointments(requestBody: any) {
     console.log(requestBody);
-
+    const url = `${this.baseUrl}/byuseridandwithindate`;
+    const param = {
+      userId : requestBody.emailId,
+      startDate : requestBody.startDate,
+      endDate : requestBody.endDate
+    }    
     return of((appointmentList as any).default);
+    // return this.appSvc.Get(url, param)
 
   }
 
 
   getListOfAppointmentsForSelectedDate(requestBody: any){
     console.log(requestBody);
+    const url = `${this.baseUrl}/byuseridanddate`;
+    const param = {
+      userId : requestBody.emailId,
+      date : requestBody.date
+    }
     return of((appointmentDetails as any).default);
+    // return this.appSvc.Get(url,param);
+
   }
+
+
   randomCall() {
     console.log("called");
     return this.appSvc.Get('http://localhost:3000/data');
@@ -84,14 +100,23 @@ export class SchedulerService {
     const respStatus = {
       status : 200
     }
-    return of(respStatus);
+    const url = `${this.baseUrl}`;
+    // return of(respStatus);
+    return this.appSvc.Post(url,reqObj);
   }
 
-  editAppointment(reqObj){
+  editAppointment(reqObj, appointmentId : string){
     console.log(JSON.stringify(reqObj));
     const respStatus = {
       status : 200
     }
+    const url = `${this.baseUrl}/${appointmentId}`
+    return this.appSvc.Post(url, reqObj);
     return of(respStatus);
+  }
+
+  deleteAppointment(appointmentId : string){
+    const url = `${this.baseUrl}/${appointmentId}/Cancelled`;
+    return this.appSvc.DeleteAppointment(url);
   }
 }

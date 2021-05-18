@@ -17,6 +17,20 @@ export class AuthService {
   private personalDetailsRequired: boolean = true;
   private passwordChangeRequired: boolean = true;
   private user: IUser;
+  userObj = {
+    "status": 200,
+    "token": "sdfasdfasdfasdfasjkjskfjsfkhhfaskfjashfafklf",
+    "user": {
+    "firstName" : "Onkar",
+    "lastName" : "Patil",
+    "emailId" : "patil",
+    "dateOfBirth" : "23/12/1997",
+    "role" : "Doctor",
+    "id" : "D123",
+    "personalDetailsRequired": true,
+    "passwordChangeRequired" : true
+    }
+  }
 
   constructor(private http : HttpClient,
               private modal : NgbModal) {
@@ -86,7 +100,9 @@ export class AuthService {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    return this.http.post('http://localhost:8000/auth/login', user);
+    // return this.http.post('http://localhost:8000/auth/login', user);
+    return of(this.userObj);
+
   }
 
   patientRegistration(patientDetails: IPatientRegistrationReq): Observable<IPatientRegistrationRes> {

@@ -86,7 +86,7 @@ export class CreateAppointmentComponent implements OnInit {
       });
     }
   } else {
-
+    console.log(this.schedulerSvc.selectedAppointment)
     this.listOfDoctors = [];
     this.listOfDoctors.push({
       userId : this.schedulerSvc.selectedAppointment.physcianId,
@@ -173,18 +173,20 @@ export class CreateAppointmentComponent implements OnInit {
     const time = this.timeOfAppointment.value;
     const endTime = time.minutes == 30 ? `${time.hours+1}:00` : `${time.hours}:30`
     const reqObj = {
-      physcianId : this.physcianName.value.userId,
+      physicianId : this.physcianName.value.userId,
       patientId : this.patientName.value.userId,
       patientName : this.patientName.value.name,
-      physcianName : this.physcianName.value.name,
+      physicianName : this.physcianName.value.name,
       date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
-      status : "BOOKED",
+      status : "PENDING",
       startTime : this.timeOfAppointment.value.fullTime,
       endTime : endTime,
-      description : this.description.value
+      description : this.description.value,
+      meetingTitle : this.title.value
     }
     this.schedulerSvc.createAppointment(reqObj).subscribe(response => {
-      if(response.status == 200){
+      console.log(response)
+      if(response.status == 201){
         this.toastMessageSvc.displayToastMessage(appointmentCreationSuccess);
       } else {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
@@ -199,18 +201,20 @@ export class CreateAppointmentComponent implements OnInit {
     const time = this.timeOfAppointment.value;
     const endTime = time.minutes == 30 ? `${time.hours+1}:00` : `${time.hours}:30`
     const reqObj = {
-      physcianId : this.physcianName.value.userId,
+      physicianId : this.physcianName.value.userId,
       patientId : this.patientName.value.userId,
       patientName : this.patientName.value.name,
-      physcianName : this.physcianName.value.name,
+      physicianName : this.physcianName.value.name,
       date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
       status : this.schedulerSvc.selectedAppointment.status,
       startTime : this.timeOfAppointment.value.fullTime,
       endTime : endTime,
       description : this.description.value,
-      reasonForChange : this.reason.value
+      reasonForChange : this.reason.value,
+      patientVisitDetailId : this.schedulerSvc.selectedAppointment.patientVisitDetailId,
+      meetingTitle : this.title.value
     }
-    this.schedulerSvc.editAppointment(reqObj).subscribe(response => {
+    this.schedulerSvc.editAppointment(reqObj, this.schedulerSvc.selectedAppointment.appointmentId).subscribe(response => {
       this.activeModal.close(response);
 
     })

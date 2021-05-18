@@ -51,8 +51,12 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
       endDate : this.schedulerSvc.FormatDate(this.endDate)
     }
     this.schedulerSvc.getListOfAppointments(requestBody).subscribe(appoinments => {
-      const appointmentsList = appoinments.filter(app => app.noOfAppointments > 0);
-      this.allAppointments = this.resturctureAppointmentData(appointmentsList);
+      if(Array.isArray(appoinments)){
+        const appointmentsList = appoinments.filter(app => app.noOfAppointments > 0);
+        this.allAppointments = this.resturctureAppointmentData(appointmentsList);
+      } else {
+        this.allAppointments = this.resturctureAppointmentData(appoinments);
+      }
 
       const defaultDate = this.schedulerSvc.FormatDate(this.currentDate);
       this.options = {

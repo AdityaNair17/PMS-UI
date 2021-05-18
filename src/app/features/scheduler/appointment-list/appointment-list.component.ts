@@ -19,7 +19,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class AppointmentListComponent implements OnInit {
   
   selectedDate: Date;
-  appointments : any[];
+  appointments : any;
   showDeleteConfirmationDialog : boolean = false;
   appointmentToBeDeleted : any;
   deletionReason : string = "";
@@ -53,7 +53,10 @@ export class AppointmentListComponent implements OnInit {
   }
 
   deleteAppointment(){
-    console.log(this.appointmentToBeDeleted);   
+    console.log(this.appointmentToBeDeleted);
+    this.schedulerSvc.deleteAppointment(this.appointmentToBeDeleted.appointmentId).subscribe(response =>{
+      console.log(response);
+    })   
   }
 
   showDeleteDialog(appointment, event){
@@ -109,7 +112,7 @@ export class AppointmentListComponent implements OnInit {
     const visitObj : VisitDetails = {
       patientId : appointment.patientId,
       patientName : appointment.patientName,
-      visitId : appointment.patientVisitDetailId,
+      visitId : "123",                                    //appointment.patientVisitDetailId,
       physcianName : appointment.physcianName,
       appointmentDate : appointment.date
     }
