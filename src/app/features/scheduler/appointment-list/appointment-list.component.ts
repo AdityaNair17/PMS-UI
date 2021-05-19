@@ -41,7 +41,7 @@ export class AppointmentListComponent implements OnInit {
 
   GetListOfAppointments() {
     const reqBody = {
-      emailId: this.authSvc.User.emailId,
+      emailId: this.authSvc.User.id,
       date: this.schedulerSvc.FormatDate(this.selectedDate)
     }
 
@@ -82,6 +82,7 @@ export class AppointmentListComponent implements OnInit {
           this.toastMessageSvc.displayToastMessage(toastErrMessage);
         }
         this.GetListOfAppointments();
+        this.activeModal.close();
       }
     })
   }
@@ -108,15 +109,44 @@ export class AppointmentListComponent implements OnInit {
     console.log(appointment);
     this.activeModal.close();
     this.appSvc.previousUrl = 'layout/home/scheduler';
-    // An API call will be made here to generate visitID
-    const visitObj : VisitDetails = {
-      patientId : appointment.patientId,
-      patientName : appointment.patientName,
-      visitId : "123",                                    //appointment.patientVisitDetailId,
-      physcianName : appointment.physcianName,
-      appointmentDate : appointment.date
+    // An API call will be made here to generate 
+    
+    const reqObj = {
+      pataintDetailIdfk : appointment.patientId,
+      appointmentIdfk : appointment.appointmentId,
+      appointmentStatus : true
     }
-    this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(visitObj), isEdit : JSON.stringify(false) }]);
+
+    this.schedulerSvc.createVisitId(reqObj).subscribe((resp) => {
+      if(resp.status == 201){
+        // const visitId = "123";
+        appointment.patientVisitDetailId = resp.id;
+    
+        this.schedulerSvc.editAppointment(appointment, appointment.appointmentId).subscribe((response) => {
+          const visitObj : VisitDetails = {
+            patientId : appointment.patientId,
+            patientName : appointment.patientName,
+            visitId : appointment.patientVisitDetailId,                                    //appointment.patientVisitDetailId,
+            physcianName : appointment.physicianName,
+            appointmentDate : appointment.date
+          }
+          this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(visitObj), isEdit : JSON.stringify(false) }]);
+          }, (err) => {
+            console.log("Error" + err);
+          })
+
+      }
+    })
+
+    // const visitObj : VisitDetails = {
+    //   patientId : appointment.patientId,
+    //   patientName : appointment.patientName,
+    //   visitId : "1234",                                    //appointment.patientVisitDetailId,
+    //   physcianName : appointment.physicianName,
+    //   appointmentDate : appointment.date
+    // }
+    // this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(visitObj), isEdit : JSON.stringify(false) }]);
+
 
   }
 

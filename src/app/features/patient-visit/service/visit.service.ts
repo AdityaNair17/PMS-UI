@@ -70,7 +70,7 @@ export class VisitService {
   }
 
   getProcedureList(){
-    const url = `${this.procedureUrl}getAllProcedure`;
+    const url = `${this.procedureUrl}getallProcedure`;
     return this.appSvc.Get(url);
     return of((procedureList as any).default);
   }
@@ -82,9 +82,10 @@ export class VisitService {
   }
 
   
-  postDiagnosis(reqObj : any){
+  postProcedure(reqObj : any){
+    console.log(reqObj);
     const url = `${this.procedureUrl}procedureDetailDesc`;
-    return this.appSvc.Post(url, reqObj);
+    return this.appSvc.PostWithoutResponseCode(url, reqObj);
   }
 
   getDiagnosisList(){
@@ -100,10 +101,10 @@ export class VisitService {
   }
 
   
-  postProcedure(reqObj : any){
+  postDiagnosis(reqObj : any){
     console.log(reqObj);
     const url = `${this.diagnosisUrl}diagnosisDetailDesc`;
-    return this.appSvc.Post(url,reqObj);
+    return this.appSvc.PostWithoutResponseCode(url,reqObj);
   }
 
   getVitalsById(){

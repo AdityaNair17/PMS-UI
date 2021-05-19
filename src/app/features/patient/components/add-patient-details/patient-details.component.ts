@@ -1,8 +1,9 @@
+import { AppService } from './../../../../app.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastMessageService } from 'src/app/shared/components/toast/service/toastMessage.service';
-import { accessList, genderList, toastErrMessage, toastSuccMessage } from 'src/app/shared/constants/constants';
+import { accessList, genderList, toastErrMessage, toastSuccMessage, addressType } from 'src/app/shared/constants/constants';
 import { IAllergies, ILanguageKnown, IPatient } from '../../models/patientDetails-model';
 import { PatientService } from '../../patient.service';
 
@@ -13,8 +14,10 @@ import { PatientService } from '../../patient.service';
 })
 export class PatientDetailsComponent implements OnInit {
   @Input() readonlyMode: boolean;
-  @Input() patient: IPatient;
+  @Input() patient: any;
+  @Input() editMode: boolean;
   genderList: string[] = genderList;
+  addressType: any[] = addressType;
   accessList: any[] = accessList;
   languages: ILanguageKnown[] = [];
   allergies: IAllergies[] = [];
@@ -24,7 +27,8 @@ export class PatientDetailsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastMessageSvc: ToastMessageService,
     private router: Router,
-    private ps: PatientService
+    private ps: PatientService,
+    private appSvc : AppService
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +51,7 @@ export class PatientDetailsComponent implements OnInit {
         ethnicity: [this.patient && this.patient.basicDetails ? this.patient.basicDetails.ethnicity : null],
       }),
       address: this.formBuilder.group({
+        addressLine : [this.patient && this.patient.address ? this.patient.address.addressLine : null, [Validators.required]],
         landmarkArea: [this.patient && this.patient.address ? this.patient.address.landmarkArea : null, [Validators.required,]],
         city: [this.patient && this.patient.address ? this.patient.address.city : null, [Validators.required,]],
         state: [this.patient && this.patient.address ? this.patient.address.state : null, [Validators.required,]],
@@ -54,7 +59,7 @@ export class PatientDetailsComponent implements OnInit {
         pin: [this.patient && this.patient.address ? this.patient.address.pin : null, [Validators.required,]],
         addressType: [this.patient && this.patient.address ? this.patient.address.addressType : null, [Validators.required]]
       }),
-      emergency_Details: this.formBuilder.group({
+      emergencyDetails: this.formBuilder.group({
         emergency_first_name: [this.patient && this.patient.emergencyDetails ? this.patient.emergencyDetails.emergency_first_name : null, [Validators.required,]],
         emergency_last_name: [this.patient && this.patient.emergencyDetails ? this.patient.emergencyDetails.emergency_last_name : null, [Validators.required,]],
         emergency_relation_ship: [this.patient && this.patient.emergencyDetails ? this.patient.emergencyDetails.emergency_relation_ship : null, [Validators.required,]],
@@ -63,8 +68,8 @@ export class PatientDetailsComponent implements OnInit {
         mailId: [this.patient && this.patient.emergencyDetails ? this.patient.emergencyDetails.mailId : null, [Validators.required]],
         _same_address: [true, [Validators.required]]
       }),
-      languageKnown: [this.patient ? this.patient.languageKnown.map(x => x.id) : [], [Validators.required]],
-      allergies: [this.patient ? this.patient.allergies.map(x => x.id) : [], [Validators.required]]
+      languageKnown: [this.patient ? this.patient.languageKnownObject.map(x => x.id) : [], [Validators.required]],
+      allergies: [this.patient ? this.patient.allergiesObject.map(x => x.id) : [], [Validators.required]]
     });
   }
 
@@ -72,9 +77,34 @@ export class PatientDetailsComponent implements OnInit {
     if (!this.addPatientDetailsForm.valid) {
       return;
     }
-    this.ps.addPatientDetils(this.addPatientDetailsForm.value)
-      .subscribe((patient) => {
-        if (patient.status === 200) {
+    if(this.editMode){
+          let reqObj = {
+      user_id_fk : "APT50e2a882-abc4-4df4-a1f1-480f3731a635",
+      basicDetails : this.addPatientDetailsForm.value.basicDetails,
+      address : this.addPatientDetailsForm.value.address,
+      emergencyDetails: this.addPatientDetailsForm.value.emergencyDetails,
+      languageKnown: this.addPatientDetailsForm.value.languageKnown,
+      allergies: this.addPatientDetailsForm.value.allergies,
+      id: this.patient.id
+    }
+    reqObj.basicDetails.dateOfBirth = this.appSvc.FormatDate(reqObj.basicDetails.dateOfBirth);
+      this.ps.updatePatientDetails(reqObj).subscribe((resp) => {
+        console.log(resp);
+      })
+    } else {
+      let reqObj = {
+        user_id_fk : "APT50e2a882-abc4-4df4-a1f1-480f3731a635",
+        basicDetails : this.addPatientDetailsForm.value.basicDetails,
+        address : this.addPatientDetailsForm.value.address,
+        emergencyDetails: this.addPatientDetailsForm.value.emergencyDetails,
+        languageKnown: this.addPatientDetailsForm.value.languageKnown,
+        allergies: this.addPatientDetailsForm.value.allergies
+      }
+      reqObj.basicDetails.dateOfBirth = this.appSvc.FormatDate(reqObj.basicDetails.dateOfBirth);
+    this.ps.addPatientDetils(reqObj)
+      .subscribe(patient => {
+        console.log(patient)
+        if (patient.status === 201) {
           toastSuccMessage.summary = patient.message;
           this.toastMessageSvc.displayToastMessage(toastSuccMessage);
           //re direct to view patient details page
@@ -83,6 +113,8 @@ export class PatientDetailsComponent implements OnInit {
       }, (err) => {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
       });
+    }
+
   }
 
   getLanguageKnownList() {

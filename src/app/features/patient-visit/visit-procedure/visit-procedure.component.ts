@@ -24,7 +24,7 @@ export class VisitProcedureComponent implements OnInit {
       this.visitSvc.getProcedureDetailsById().subscribe(response => {
         if(response.successFlag){
           this.procedures = [];
-          response.procedure_details.forEach(pd => {
+          response.procedureMain.forEach(pd => {
               const obj = {
                 procedureId : pd.id,
                 procedureName : pd.name
@@ -44,7 +44,7 @@ export class VisitProcedureComponent implements OnInit {
       })
     } else {
     this.visitSvc.getProcedureList().subscribe(procedure => {
-      this.procedures = procedure;
+      this.procedures = procedure.procedureMaster;
     })
   }
   }
@@ -89,6 +89,8 @@ export class VisitProcedureComponent implements OnInit {
     }
 
     console.log(reqBody);
-    this.visitSvc.postProcedure(reqBody);
+    this.visitSvc.postProcedure(reqBody).subscribe((response) => {
+      console.log(response);
+    });
   }
 }

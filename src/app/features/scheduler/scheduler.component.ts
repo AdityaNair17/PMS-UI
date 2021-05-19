@@ -2,7 +2,7 @@ import { CreateAppointmentComponent } from './create-appointment/create-appointm
 import { AppointmentListComponent } from './appointment-list/appointment-list.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SchedulerService } from './service/scheduler.service';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -23,14 +23,36 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
   private endDate : Date;
   @ViewChild('calendar') private calendar: FullCalendar;
   constructor(private schedulerSvc: SchedulerService,
-              private authSvc: AuthService) { }
+              private authSvc: AuthService,
+              private cdref : ChangeDetectorRef) { }
 
   ngOnInit(): void {
 
     this.currentDate = new Date();
 
-    this.getListOfAppointment();
+    const defaultDate = this.schedulerSvc.FormatDate(this.currentDate);
+    this.options = {
+      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+      defaultDate: defaultDate,
+      fixedWeekCount: false,
+      header: {
+        left: 'prev,next',
+        center: 'title',
+        // right: 'addAppointment,dayGridMonth,timeGridWeek,timeGridDay',
+        right: 'addAppointment'
+      },
+      editable: true,
+      dateClick: this.handleDateClick.bind(this),
+      eventClick: this.handleEventClick.bind(this),
+      customButtons : {
+        addAppointment : {
+          text : "Add Appointment",
+          click : this.addAppointment.bind(this)
+        }
+      }
+    };
 
+    this.getListOfAppointment();
   }
 
 
@@ -46,39 +68,40 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
     this.endDate = new Date(lastDayOfMonth.setDate(lastDayOfMonth.getDate() + (6 - lastDayOfMonth.getDay())));
 
     const requestBody = {
-      emailId : this.authSvc.User.emailId,
+      emailId : this.authSvc.User.id,
       startDate : this.schedulerSvc.FormatDate(this.startDate),
       endDate : this.schedulerSvc.FormatDate(this.endDate)
     }
     this.schedulerSvc.getListOfAppointments(requestBody).subscribe(appoinments => {
       if(Array.isArray(appoinments)){
-        const appointmentsList = appoinments.filter(app => app.noOfAppointments > 0);
+        const appointmentsList = appoinments.filter(app => app.count > 0);
         this.allAppointments = this.resturctureAppointmentData(appointmentsList);
       } else {
         this.allAppointments = this.resturctureAppointmentData(appoinments);
       }
 
-      const defaultDate = this.schedulerSvc.FormatDate(this.currentDate);
-      this.options = {
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        defaultDate: defaultDate,
-        fixedWeekCount: false,
-        header: {
-          left: 'prev,next',
-          center: 'title',
-          // right: 'addAppointment,dayGridMonth,timeGridWeek,timeGridDay',
-          right: 'addAppointment'
-        },
-        editable: true,
-        dateClick: this.handleDateClick.bind(this),
-        eventClick: this.handleEventClick.bind(this),
-        customButtons : {
-          addAppointment : {
-            text : "Add Appointment",
-            click : this.addAppointment.bind(this)
-          }
-        }
-      };
+      // const defaultDate = this.schedulerSvc.FormatDate(this.currentDate);
+      // this.options = {
+      //   plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+      //   defaultDate: defaultDate,
+      //   fixedWeekCount: false,
+      //   header: {
+      //     left: 'prev,next',
+      //     center: 'title',
+      //     // right: 'addAppointment,dayGridMonth,timeGridWeek,timeGridDay',
+      //     right: 'addAppointment'
+      //   },
+      //   editable: true,
+      //   dateClick: this.handleDateClick.bind(this),
+      //   eventClick: this.handleEventClick.bind(this),
+      //   customButtons : {
+      //     addAppointment : {
+      //       text : "Add Appointment",
+      //       click : this.addAppointment.bind(this)
+      //     }
+      //   }
+      // };
+      this.cdref.detectChanges();
     });
   }
 
@@ -88,7 +111,7 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
     const restrucredData: any[] = [];
     appointments.forEach(app => {
       const obj = {
-        "title": `${app.noOfAppointments} Appointments`,
+        "title": `${app.count} Appointments`,
         "start": app.date
       };
       restrucredData.push(obj);
@@ -122,6 +145,7 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.bindEvents();
+    
   }
 
   bindEvents() {

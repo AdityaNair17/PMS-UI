@@ -56,4 +56,5 @@ export interface IAddress {
     country?: string;
     pin?: string;
     addressType?: string;
+    addressLine? : string;
 }

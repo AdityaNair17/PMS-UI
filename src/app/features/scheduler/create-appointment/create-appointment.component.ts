@@ -17,7 +17,7 @@ export class CreateAppointmentComponent implements OnInit {
   public appointmentForm : FormGroup;
   public title : FormControl;
   public patientName : FormControl;
-  public physcianName : FormControl;
+  public physicianName : FormControl;
   public dateOfAppointment : FormControl;
   public timeOfAppointment : FormControl;
   public reason : FormControl;
@@ -67,7 +67,7 @@ export class CreateAppointmentComponent implements OnInit {
         userId : loggedInUser.id,
         name : `${loggedInUser.firstName} ${loggedInUser.lastName}`
       });
-      this.appointmentForm.get("physcianName").patchValue(this.listOfDoctors[0]);
+      this.appointmentForm.get("physicianName").patchValue(this.listOfDoctors[0]);
       this.disableDoctor = true;
     }
 
@@ -89,10 +89,10 @@ export class CreateAppointmentComponent implements OnInit {
     console.log(this.schedulerSvc.selectedAppointment)
     this.listOfDoctors = [];
     this.listOfDoctors.push({
-      userId : this.schedulerSvc.selectedAppointment.physcianId,
-      name : this.schedulerSvc.selectedAppointment.physcianName
+      userId : this.schedulerSvc.selectedAppointment.physicianId,
+      name : this.schedulerSvc.selectedAppointment.physicianName
     });
-    this.appointmentForm.get("physcianName").patchValue(this.listOfDoctors[0]);
+    this.appointmentForm.get("physicianName").patchValue(this.listOfDoctors[0]);
     this.disableDoctor = true;
 
 
@@ -116,7 +116,7 @@ export class CreateAppointmentComponent implements OnInit {
 
     this.appointmentForm.get("description").patchValue(this.schedulerSvc.selectedAppointment.description);
 
-    this.appointmentForm.get("title").patchValue(this.schedulerSvc.selectedAppointment.title);
+    this.appointmentForm.get("title").patchValue(this.schedulerSvc.selectedAppointment.meetingTitle);
 
   }
 
@@ -125,7 +125,7 @@ export class CreateAppointmentComponent implements OnInit {
   createControls(){
     this.title = new FormControl('', Validators.required);
     this.patientName = new FormControl('', Validators.required);
-    this.physcianName = new FormControl('', Validators.required);
+    this.physicianName = new FormControl('', Validators.required);
     this.dateOfAppointment = new FormControl('', Validators.required);
     this.timeOfAppointment = new FormControl('', Validators.required);
     this.description = new FormControl('', Validators.required);
@@ -138,7 +138,7 @@ export class CreateAppointmentComponent implements OnInit {
     this.appointmentForm = this.fb.group({
       title : this.title,
       patientName : this.patientName,
-      physcianName : this.physcianName,
+      physicianName : this.physicianName,
       dateOfAppointment : this.dateOfAppointment,
       timeOfAppointment : this.timeOfAppointment,
       description : this.description
@@ -147,7 +147,7 @@ export class CreateAppointmentComponent implements OnInit {
     this.appointmentForm = this.fb.group({
       title : this.title,
       patientName : this.patientName,
-      physcianName : this.physcianName,
+      physicianName : this.physicianName,
       dateOfAppointment : this.dateOfAppointment,
       timeOfAppointment : this.timeOfAppointment,
       description : this.description,
@@ -171,26 +171,30 @@ export class CreateAppointmentComponent implements OnInit {
 
   createAppointment(){
     const time = this.timeOfAppointment.value;
+    const startTime = time.hours < 10 ? `0${time.hours}:${time.minutes}` : `${time.hours}:${time.minutes}`
     const endTime = time.minutes == 30 ? `${time.hours+1}:00` : `${time.hours}:30`
     const reqObj = {
-      physicianId : this.physcianName.value.userId,
+      physicianId : this.physicianName.value.userId,
       patientId : this.patientName.value.userId,
       patientName : this.patientName.value.name,
-      physicianName : this.physcianName.value.name,
+      physicianName : this.physicianName.value.name,
       date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
       status : "PENDING",
-      startTime : this.timeOfAppointment.value.fullTime,
+      startTime : startTime,
       endTime : endTime,
       description : this.description.value,
       meetingTitle : this.title.value
     }
-    this.schedulerSvc.createAppointment(reqObj).subscribe(response => {
-      console.log(response)
+    this.schedulerSvc.createAppointment(reqObj).subscribe((response) => {
+      console.log("Create Appointment" + response)
       if(response.status == 201){
         this.toastMessageSvc.displayToastMessage(appointmentCreationSuccess);
       } else {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
       }
+      this.activeModal.close();
+    }, (error) => {
+      console.log("Error = " + JSON.stringify(error));
       this.activeModal.close();
 
     })
@@ -201,10 +205,10 @@ export class CreateAppointmentComponent implements OnInit {
     const time = this.timeOfAppointment.value;
     const endTime = time.minutes == 30 ? `${time.hours+1}:00` : `${time.hours}:30`
     const reqObj = {
-      physicianId : this.physcianName.value.userId,
+      physicianId : this.physicianName.value.userId,
       patientId : this.patientName.value.userId,
       patientName : this.patientName.value.name,
-      physicianName : this.physcianName.value.name,
+      physicianName : this.physicianName.value.name,
       date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
       status : this.schedulerSvc.selectedAppointment.status,
       startTime : this.timeOfAppointment.value.fullTime,

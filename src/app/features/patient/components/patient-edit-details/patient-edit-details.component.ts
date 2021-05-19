@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatientEditDetailsComponent implements OnInit {
   editMode: boolean = true;
-  constructor() { }
+  patientId : string = '';
+  constructor(private route : ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.patientId = params.get('id');
+    })
   }
 
 }

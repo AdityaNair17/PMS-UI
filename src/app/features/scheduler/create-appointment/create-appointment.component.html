@@ -28,8 +28,8 @@
       <div class="flex-block">
         <label class="pd-tp-5">Physican : </label>&nbsp;&nbsp;
         <div>
-        <p-dropdown [options]="listOfDoctors" optionLabel = "name" formControlName = "physcianName"  [filter]="true" [disabled]="disableDoctor" placeholder = "Select" ></p-dropdown>
-        <div *ngIf =  "isControlInvalid(physcianName) && physcianName.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
+        <p-dropdown [options]="listOfDoctors" optionLabel = "name" formControlName = "physicianName"  [filter]="true" [disabled]="disableDoctor" placeholder = "Select" ></p-dropdown>
+        <div *ngIf =  "isControlInvalid(physicianName) && physicianName.errors?.required" class = "errorMessage">{{CONSTANT.requiredFieldMessage}}</div>
       </div>
       </div>
       <br><br>

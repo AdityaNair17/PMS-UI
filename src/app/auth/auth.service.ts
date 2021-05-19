@@ -1,3 +1,4 @@
+import { AppService } from './../app.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IUser, IUserSessionData } from './models/user-model';
 import { Observable, of } from 'rxjs';
@@ -17,6 +18,7 @@ export class AuthService {
   private personalDetailsRequired: boolean = true;
   private passwordChangeRequired: boolean = true;
   private user: IUser;
+  private baseUrl : string = "http://13.92.244.117:8080/api/admin-service/";
   userObj = {
     "status": 200,
     "token": "sdfasdfasdfasdfasjkjskfjsfkhhfaskfjashfafklf",
@@ -33,7 +35,8 @@ export class AuthService {
   }
 
   constructor(private http : HttpClient,
-              private modal : NgbModal) {
+              private modal : NgbModal,
+              private appSvc : AppService) {
    }
 
   public get AuthenticationToken() {
@@ -100,13 +103,17 @@ export class AuthService {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
+    const url = `${this.baseUrl}oauth/token`;
+    // return this.appSvc.LoginCall(url, params, httpOptions);
     // return this.http.post('http://localhost:8000/auth/login', user);
     return of(this.userObj);
 
   }
 
-  patientRegistration(patientDetails: IPatientRegistrationReq): Observable<IPatientRegistrationRes> {
-    return of({ status: 200, message: 'Registered Successfully' })
+  patientRegistration(patientDetails): Observable<any> {
+    const url = `${this.baseUrl}registration/`;
+    return this.appSvc.PostWithoutResponseCode(url, patientDetails);
+    // return of({ status: 200, message: 'Registered Successfully' })
   }
 
   changePassword(changePasswordDetails: IChangePasswordReq): Observable<IChangePasswordRes> {

@@ -64,6 +64,10 @@
         <div formGroupName="address">
             <div class="formControl-group">
                 <mat-form-field appearance="outline">
+                        <mat-label>Address</mat-label>
+                        <input matInput [readonly]="readonlyMode" placeholder="AddressLine" formControlName="addressLine">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>LandmarkArea</mat-label>
                     <input matInput [readonly]="readonlyMode" placeholder="LandmarkArea" formControlName="landmarkArea">
                 </mat-form-field>
@@ -90,13 +94,13 @@
                 <mat-form-field appearance="outline">
                     <mat-label>AddressType</mat-label>
                     <mat-select formControlName="addressType" [disabled]="readonlyMode">
-                        <mat-option value="HOME_ADDRESS">Home address</mat-option>
+                        <mat-option  *ngFor="let address of addressType" [value]="address.value">{{address.label}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
         </div>
         <p>Emergency contact info</p>
-        <div formGroupName="emergency_Details">
+        <div formGroupName="emergencyDetails">
             <div class="formControl-group">
                 <mat-form-field appearance="outline">
                     <mat-label>First name</mat-label>

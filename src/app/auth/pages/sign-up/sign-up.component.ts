@@ -1,3 +1,4 @@
+import { AppService } from './../../../app.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastMessageService } from './../../../shared/components/toast/service/toastMessage.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,7 +21,8 @@ export class SignUpComponent implements OnInit {
     private toastMessageSvc: ToastMessageService,
     private authService: AuthService,
     private router: Router,
-    public activeModal : NgbActiveModal
+    public activeModal : NgbActiveModal,
+    private appSvc : AppService
   ) { }
 
   ngOnInit(): void {
@@ -46,9 +48,21 @@ export class SignUpComponent implements OnInit {
     }
     const patient = this.patientSignupForm.value as IPatientRegistrationReq;
     delete patient.confirmPassword;
-    this.authService.patientRegistration(patient)
+    const reqObj = {
+      title : patient.title,
+      firstName : patient.firstName,
+      lastName : patient.lastName,
+      dob : this.appSvc.FormatDate(this.patientSignupForm.value.dateOfBirth),
+      role : "Doctor",
+      userCredentials : {
+        email : patient.emailId,
+        password : patient.password
+      }
+      
+    }
+    this.authService.patientRegistration(reqObj)
       .subscribe((data) => {
-        if (data.status === 200) {
+        if (data.status === 201) {
           toastSuccMessage.summary = "Registered Successfully!"
           this.toastMessageSvc.displayToastMessage(toastSuccMessage);
           this.router.navigate(['/auth/sign-in']);
