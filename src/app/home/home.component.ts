@@ -8,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  public role : string = "Doctor";
   constructor(private svc : AuthService) { }
 
   ngOnInit(): void {
     console.log(this.svc.User);
+    this.role = this.svc.UserRole;
   }
 
 }

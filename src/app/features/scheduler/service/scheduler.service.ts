@@ -1,6 +1,6 @@
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { AppService } from './../../../app.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as appointmentList from '../../../../assets/json/calendarAppointmentList.json';
@@ -9,6 +9,7 @@ import * as appointmentDetails from '../../../../assets/json/listOfAppointmentDe
 import * as patientList from '../../../../assets/json/listOfPatients.json';
 import * as doctorList from '../../../../assets/json/listOfDoctors.json';
 import * as timeSlots from '../../../../assets/json/appointmentTimes.json';
+import { Config } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,8 @@ export class SchedulerService {
   public selectedDate: Date;
   public appointmentMode : string;
   public selectedAppointment : any;
+  private baseUrl : string = "http://13.90.38.170:8082/appointment"
+  private visitUrl : string = "http://13.90.38.170:8082/healthcare/";
 
   constructor(private http: HttpClient,
     private appSvc: AppService,
@@ -25,16 +28,31 @@ export class SchedulerService {
 
   getListOfAppointments(requestBody: any) {
     console.log(requestBody);
-
-    return of((appointmentList as any).default);
+    const url = `${this.baseUrl}/byuseridandwithindate`;
+    const param = {
+      userId : requestBody.emailId,
+      startDate : requestBody.startDate,
+      endDate : requestBody.endDate
+    }    
+    // return of((appointmentList as any).default);
+    return this.appSvc.Get(url, param)
 
   }
 
 
   getListOfAppointmentsForSelectedDate(requestBody: any){
     console.log(requestBody);
-    return of((appointmentDetails as any).default);
+    const url = `${this.baseUrl}/byuseridanddate`;
+    const param = {
+      userId : requestBody.emailId,
+      date : requestBody.date
+    }
+    // return of((appointmentDetails as any).default);
+    return this.appSvc.Get(url,param);
+
   }
+
+
   randomCall() {
     console.log("called");
     return this.appSvc.Get('http://localhost:3000/data');
@@ -79,19 +97,33 @@ export class SchedulerService {
     return of((timeSlots as any).default);
   }
 
-  createAppointment(reqObj){
+  createAppointment(reqObj) : Observable<HttpResponse<String>>{
     console.log(JSON.stringify(reqObj));
     const respStatus = {
       status : 200
     }
+    const url = `${this.baseUrl}`;
+    // return of(respStatus);
+    return this.appSvc.Post(url,reqObj);
+  }
+
+  editAppointment(reqObj, appointmentId : string){
+    console.log(JSON.stringify(reqObj));
+    const respStatus = {
+      status : 200
+    }
+    const url = `${this.baseUrl}/${appointmentId}`
+    return this.appSvc.Put(url, reqObj);
     return of(respStatus);
   }
 
-  editAppointment(reqObj){
-    console.log(JSON.stringify(reqObj));
-    const respStatus = {
-      status : 200
-    }
-    return of(respStatus);
+  deleteAppointment(appointmentId : string){
+    const url = `${this.baseUrl}/${appointmentId}/CANCELLED`;
+    return this.appSvc.DeleteAppointment(url);
+  }
+
+  createVisitId(reqObj) : Observable<any>{
+    const url = `${this.visitUrl}visit/createvisit/`;
+    return this.appSvc.PostWithoutResponseCode(url, reqObj);
   }
 }

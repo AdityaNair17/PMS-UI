@@ -2,34 +2,34 @@
 [
   {
     "date" : "2021-04-29",
-    "noOfAppointments" : 10
+    "count" : 10
   },
   {
     "date" : "2021-05-02",
-    "noOfAppointments" : 5
+    "count" : 5
   },
   {
     "date" : "2021-05-03",
-    "noOfAppointments" : 6
+    "count" : 6
   },
   {
     "date" : "2021-05-04",
-    "noOfAppointments" : 14
+    "count" : 14
   },
   {
     "date" : "2021-05-05",
-    "noOfAppointments" : 15
+    "count" : 15
   },
   {
     "date" : "2021-05-06",
-    "noOfAppointments" : 6
+    "count" : 6
   },
   {
     "date" : "2021-05-14",
-    "noOfAppointments" : 5
+    "count" : 5
   },
   {
     "date" : "2021-05-15",
-    "noOfAppointments" : 6
+    "count" : 6
   }
 ]

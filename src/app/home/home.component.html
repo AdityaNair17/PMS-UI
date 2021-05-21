@@ -2,6 +2,6 @@
     <a mat-tab-link routerLink="/layout/home/inbox" routerLinkActive="router-link-active" class="tab-label"> Inbox</a>
     <a mat-tab-link routerLink="/layout/home/scheduler" routerLinkActive="router-link-active" class="tab-label">Scheduler</a>
     <a mat-tab-link routerLink="/layout/home/history" routerLinkActive="router-link-active" class="tab-label"> History</a>
-    <a mat-tab-link routerLink="/layout/home/patient" routerLinkActive="router-link-active" class="tab-label">Patient details</a>
+    <a mat-tab-link routerLink="/layout/home/patient" *ngIf="role == 'Doctor'" routerLinkActive="router-link-active" class="tab-label">Patient details</a>
 </nav>
 <router-outlet></router-outlet>

@@ -49,19 +49,19 @@ export class SignInComponent implements OnInit {
       data => {
         console.log(data);
           this.invalidMessageFlag = false;
-          this.authSvc.AuthenticationToken = data.token;
-          this.authSvc.UserRole = data.user.role;
+          this.authSvc.AuthenticationToken = data.access_token;
+          this.authSvc.UserRole = data.user_role;
           // this.authSvc.PasswordChangeRequired = data.user.passwordChangeRequired;
           // this.authSvc.PersonalDetailsRequired = data.user.personalDetailsRequired;
           this.authSvc.PasswordChangeRequired = false;
           this.authSvc.PersonalDetailsRequired =false;
           this.authSvc.IsUserAuthenticated = true;
           let user = {
-            firstName: data.user.firstName,
-            lastName: data.user.lastName,
-            emailId: data.user.emailId,
-            dateOfBirth: data.user.dateOfBirth,
-            id: data.user.id
+            firstName: data.fullName.split(" ")[0],
+            lastName: data.fullName.split(" ")[1],
+            emailId: data.emailId,
+            // dateOfBirth: data.user.dateOfBirth,
+            id: data.userId
           }
           this.authSvc.User = user;
           this.authSvc.StoreSession();

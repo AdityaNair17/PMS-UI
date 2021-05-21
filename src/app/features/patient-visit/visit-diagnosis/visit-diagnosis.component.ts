@@ -89,10 +89,13 @@ export class VisitDiagnosisComponent implements OnInit {
     });
 
     const reqBody = {
-      patient_visit_id : "123",
+      patient_visit_id : this.visitSvc.VisitId,
       diagnosis_details : diagnosisDetails
     }
 
     console.log(reqBody);
+    this.visitSvc.postDiagnosis(reqBody).subscribe((resposne) => {
+      console.log(resposne);
+    });
   }
 }

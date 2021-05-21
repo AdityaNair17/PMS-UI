@@ -1,3 +1,5 @@
+import { HttpResponse } from '@angular/common/http';
+import { AppService } from './../../app.service';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IAllergies, ILanguageKnown, IPatient, IPatientDetailsRes } from './models/patientDetails-model';
@@ -7,27 +9,40 @@ import { IAllergies, ILanguageKnown, IPatient, IPatientDetailsRes } from './mode
 })
 export class PatientService {
 
-  constructor() { }
+  baseurl : string = "http://13.90.38.170:8082/healthcare/"
+  constructor(private appSvc : AppService) { }
 
-  addPatientDetils(patientDetails: any): Observable<IPatientDetailsRes> {
-    return of({ id: '456fdsdfhjjtrdsaw35789', status: 200, message: 'Patient details added Successfully' })
+  addPatientDetils(patientDetails: any) : Observable<any>{
+    console.log(patientDetails);
+    const url = `${this.baseurl}patient/`
+    return this.appSvc.Post(url, patientDetails);
+    // return of({ id: '456fdsdfhjjtrdsaw35789', status: 200, message: 'Patient details added Successfully' })
   }
 
-  getLanguageKnownList(): Observable<ILanguageKnown[]> {
+  updatePatientDetails(patientDetails: any) {
+    const url = `${this.baseurl}patient/`
+    return this.appSvc.Put(url, patientDetails);  
+  }
+
+  getLanguageKnownList(): Observable<any> {
     const languages: ILanguageKnown[] = [
       { id: 1, name: 'Hindi' },
       { id: 2, name: 'English' },
       { id: 3, name: 'Mandarin' }
     ];
-    return of(languages)
+    const url = `${this.baseurl}/languages`
+    return this.appSvc.Get(url);
+    // return of(languages)
   }
 
-  getAllergies(): Observable<IAllergies[]> {
+  getAllergies(): Observable<any> {
     const allergies: IAllergies[] = [{ id: 1, type: 'Drug', isFatal: true }];
-    return of(allergies);
+    const url = `${this.baseurl}/allergies/`;
+    return this.appSvc.Get(url);
+    // return of(allergies);
   }
 
-  getPatient(): Observable<IPatient> {
+  getPatient(patientId : string): Observable<any> {
     const patient = {
       "id": "CT62d98519-5e20-482d-817a-a6330aca531a",
       "basicDetails": {
@@ -79,10 +94,12 @@ export class PatientService {
         }
       ]
     }
+    const url = `${this.baseurl}patient/${patientId}`;
+    return this.appSvc.Get(url);
     return of(JSON.parse(JSON.stringify(patient)));
   }
 
-  getAllPatients(user?: string): Observable<IPatient[]> {
+  getAllPatients(user?: string): Observable<any> {
     const data = [
       {
         "id": "CT62d98519-5e20-482d-817a-a6330aca531a",
@@ -198,7 +215,9 @@ export class PatientService {
         ]
       }
     ];
-    const patients = JSON.parse(JSON.stringify(data)) as IPatient[];
-    return of(patients)
+    // const patients = JSON.parse(JSON.stringify(data)) as IPatient[];
+    const url = `${this.baseurl}patient/`
+    return this.appSvc.Get(url);
+    // return of(patients)
   }
 }

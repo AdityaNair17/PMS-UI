@@ -28,7 +28,12 @@ export const appointmentEditionSuccess = {
   detail: ""
 }
 
-export const genderList: string[] = ['Male', 'Female'];
+export const genderList: string[] = ['MALE', 'FEMALE', 'OTHER'];
+
+export const addressType : any[] = [
+  {value : 'HOME_ADDRESS', label : 'Home Address'},
+  {value : 'EMERGENCY_ADDRESS', label : 'Emergency Address'}
+]
 
 export const accessList = [
   { name: 'Yes', value: true },

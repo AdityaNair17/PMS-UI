@@ -10,6 +10,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(httpRequest : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>>{
 
+    if(this.authSvc.IsUserAuthenticated){
     let token = this.authSvc.AuthenticationToken;
     let clonedHttpReq = httpRequest.clone({
       setHeaders : {
@@ -19,5 +20,8 @@ export class TokenInterceptor implements HttpInterceptor {
 
     console.log(clonedHttpReq);
     return next.handle(clonedHttpReq);
+  } else{
+    return next.handle(httpRequest);
+  }
   }
 }

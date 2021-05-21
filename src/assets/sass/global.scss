@@ -118,6 +118,10 @@ margin-bottom: 3rem !important;
         border-radius: 10px;
         text-align: center;
     }
+
+    .fc-row.fc-week.fc-widget-content{
+        height: 100px !important;
+    }
 }
 
 .pd-tp-5{
@@ -131,4 +135,8 @@ margin-bottom: 3rem !important;
 
 .cdk-overlay-container{
   z-index:9999999;
+}
+
+.p-datepicker{
+    top: -10px !important;
 }
