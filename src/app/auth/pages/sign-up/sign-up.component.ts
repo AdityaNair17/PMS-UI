@@ -54,6 +54,7 @@ export class SignUpComponent implements OnInit {
       lastName : patient.lastName,
       dob : this.appSvc.FormatDate(this.patientSignupForm.value.dateOfBirth),
       role : "Doctor",
+      contactNumber : +patient.contactNumber,
       userCredentials : {
         email : patient.emailId,
         password : patient.password
@@ -74,6 +75,7 @@ export class SignUpComponent implements OnInit {
         }
 
       });
+      this.activeModal.close();
 
   }
 

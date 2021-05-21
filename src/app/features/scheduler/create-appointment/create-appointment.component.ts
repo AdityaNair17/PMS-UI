@@ -179,7 +179,7 @@ export class CreateAppointmentComponent implements OnInit {
       patientName : this.patientName.value.name,
       physicianName : this.physicianName.value.name,
       date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
-      status : "PENDING",
+      status : this.authSvc.UserRole == 'Doctor' ? "ACCEPTED" : "PENDING",
       startTime : startTime,
       endTime : endTime,
       description : this.description.value,
@@ -189,6 +189,21 @@ export class CreateAppointmentComponent implements OnInit {
       console.log("Create Appointment" + response)
       if(response.status == 201){
         this.toastMessageSvc.displayToastMessage(appointmentCreationSuccess);
+        const mailObj = {
+          key : {
+            to_id : this.physicianName.value.userId,
+            to_name : this.physicianName.value.name,
+            from_id : this.physicianName.value.userId,
+            from_name : this.patientName.value.name
+          },
+          value : {
+            message : "Appointment Request",
+            appointment : response.body,
+            isNurse : false
+          }
+        }
+
+        console.log(mailObj);
       } else {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
       }

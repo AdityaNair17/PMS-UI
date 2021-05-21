@@ -97,12 +97,12 @@ export class VisitMedicationComponent implements OnInit {
     });
     const reqObj = {
       medication : medication,
-      patientId : "1234",
-      visitId : "123"
+      patientId : this.visitSvc.PatientId,
+      visitId : this.visitSvc.VisitId
     }
-    // this.visitSvc.postMedication(reqObj).subscribe(data => {
-    //   console.log(data);
-    // })
+    this.visitSvc.postMedication(reqObj).subscribe(data => {
+      console.log(data);
+    })
     console.log(reqObj);
     this.submitClick.emit();
   }

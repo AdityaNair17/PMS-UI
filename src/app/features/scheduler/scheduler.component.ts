@@ -158,6 +158,9 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
 
   addAppointment(event){
 
-    this.schedulerSvc.createEditAppointment(CreateAppointmentComponent, "add");
+    const modal = this.schedulerSvc.createEditAppointment(CreateAppointmentComponent, "add");
+    modal.result.then((resp) => {
+      this.getListOfAppointment();
+    })
   }
 }

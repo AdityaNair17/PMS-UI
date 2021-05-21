@@ -9,7 +9,7 @@ import { IAllergies, ILanguageKnown, IPatient, IPatientDetailsRes } from './mode
 })
 export class PatientService {
 
-  baseurl : string = "http://13.92.244.117:8082/healthcare/"
+  baseurl : string = "http://13.90.38.170:8082/healthcare/"
   constructor(private appSvc : AppService) { }
 
   addPatientDetils(patientDetails: any) : Observable<any>{
@@ -37,7 +37,7 @@ export class PatientService {
 
   getAllergies(): Observable<any> {
     const allergies: IAllergies[] = [{ id: 1, type: 'Drug', isFatal: true }];
-    const url = `${this.baseurl}/allergies`;
+    const url = `${this.baseurl}/allergies/`;
     return this.appSvc.Get(url);
     // return of(allergies);
   }
@@ -216,7 +216,7 @@ export class PatientService {
       }
     ];
     // const patients = JSON.parse(JSON.stringify(data)) as IPatient[];
-    const url = `${this.baseurl}patient`
+    const url = `${this.baseurl}patient/`
     return this.appSvc.Get(url);
     // return of(patients)
   }

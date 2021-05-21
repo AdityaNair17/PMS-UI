@@ -78,19 +78,7 @@ export class PatientDetailsComponent implements OnInit {
       return;
     }
     if(this.editMode){
-          let reqObj = {
-      user_id_fk : "APT50e2a882-abc4-4df4-a1f1-480f3731a635",
-      basicDetails : this.addPatientDetailsForm.value.basicDetails,
-      address : this.addPatientDetailsForm.value.address,
-      emergencyDetails: this.addPatientDetailsForm.value.emergencyDetails,
-      languageKnown: this.addPatientDetailsForm.value.languageKnown,
-      allergies: this.addPatientDetailsForm.value.allergies,
-      id: this.patient.id
-    }
-    reqObj.basicDetails.dateOfBirth = this.appSvc.FormatDate(reqObj.basicDetails.dateOfBirth);
-      this.ps.updatePatientDetails(reqObj).subscribe((resp) => {
-        console.log(resp);
-      })
+      this.editUserDetails();
     } else {
       let reqObj = {
         user_id_fk : "APT50e2a882-abc4-4df4-a1f1-480f3731a635",
@@ -135,4 +123,21 @@ export class PatientDetailsComponent implements OnInit {
       });
   }
 
+
+  editUserDetails(){
+    console.log(this.patient);
+    let reqObj = {
+      user_id_fk : "APT50e2a882-abc4-4df4-a1f1-480f3731a635",
+      basicDetails : this.addPatientDetailsForm.value.basicDetails,
+      address : this.addPatientDetailsForm.value.address,
+      emergencyDetails: this.addPatientDetailsForm.value.emergencyDetails,
+      languageKnown: this.addPatientDetailsForm.value.languageKnown,
+      allergies: this.addPatientDetailsForm.value.allergies,
+      id: this.patient.id
+    }
+    reqObj.basicDetails.dateOfBirth = this.appSvc.FormatDate(reqObj.basicDetails.dateOfBirth);
+      this.ps.updatePatientDetails(reqObj).subscribe((resp) => {
+        console.log(resp);
+      })
+  }
 }

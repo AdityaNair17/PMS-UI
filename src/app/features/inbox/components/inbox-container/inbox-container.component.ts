@@ -34,10 +34,10 @@ export class InboxContainerComponent implements OnInit {
   }
 
   getMailId(id: string) {
-    this.vissible = true;
     this.inboxService.getMailById(id)
       .subscribe((mail) => {
         this.mailDetails = mail;
+        this.vissible = true;
       }, (err) => {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
       });

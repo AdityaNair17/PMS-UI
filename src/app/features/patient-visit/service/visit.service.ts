@@ -21,7 +21,7 @@ export class VisitService {
   private patientId : string = null;
   private appointmentDetails : VisitDetails;
   public isEdit : boolean = true;
-  medicationUrl : string = "/medication/";
+  medicationUrl : string = "http://40.76.198.123:8080/medication/";
   procedureUrl : string = 'http://13.90.116.138:8080/healthcare/procedure/';
   diagnosisUrl : string = 'http://13.90.116.138:8081/healthcare/diagnosis/';
 
@@ -55,17 +55,18 @@ export class VisitService {
   }
 
   getMedicationList(){
-    return of((medicationList as any).default);
-    // const url  = 'http://23.96.121.152:8080/medication/getList';
-    // return this.http.get(url);
+    // return of((medicationList as any).default);
+    const url  = `${this.medicationUrl}getList`
+    return this.http.get(url);
   }
 
 
   getMedicationDetailsById(){
     // const url  = `http://23.96.121.152:8080/medication/getList/${this.visitId}/${this.patientId}`;
-    // return this.http.get(url);
+    const url = `${this.medicationUrl}getList/${this.visitId}/${this.patientId}`;
+    return this.http.get(url);
 
-    return of((medicationById as any).default);
+    // return of((medicationById as any).default);
 
   }
 

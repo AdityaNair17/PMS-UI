@@ -3,8 +3,9 @@ export interface IUser {
     firstName: string;
     lastName: string;
     emailId: string;
-    dateOfBirth: string;
+    dateOfBirth?: string;
     id: string;
+    fullName?: string;
 }
 
 export interface IUserSessionData {

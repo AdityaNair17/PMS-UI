@@ -18,20 +18,19 @@ export class AuthService {
   private personalDetailsRequired: boolean = true;
   private passwordChangeRequired: boolean = true;
   private user: IUser;
-  private baseUrl : string = "http://13.92.244.117:8080/api/admin-service/";
+  private baseUrl : string = "http://13.90.38.170:8080/api/admin-service/";
   userObj = {
     "status": 200,
-    "token": "sdfasdfasdfasdfasjkjskfjsfkhhfaskfjashfafklf",
-    "user": {
+    "access_token": "sdfasdfasdfasdfasjkjskfjsfkhhfaskfjashfafklf",
     "firstName" : "Onkar",
     "lastName" : "Patil",
     "emailId" : "patil",
     "dateOfBirth" : "23/12/1997",
-    "role" : "Doctor",
-    "id" : "D123",
+    "user_role" : "Doctor",
+    "fullName" : "Onkar Patil",
+    "userId" : "D123",
     "personalDetailsRequired": true,
     "passwordChangeRequired" : true
-    }
   }
 
   constructor(private http : HttpClient,
@@ -103,8 +102,9 @@ export class AuthService {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    const url = `${this.baseUrl}oauth/token`;
+    const url = `http://13.90.38.170:8080/oauth/token`;
     // return this.appSvc.LoginCall(url, params, httpOptions);
+    
     // return this.http.post('http://localhost:8000/auth/login', user);
     return of(this.userObj);
 
@@ -112,7 +112,7 @@ export class AuthService {
 
   patientRegistration(patientDetails): Observable<any> {
     const url = `${this.baseUrl}registration/`;
-    return this.appSvc.PostWithoutResponseCode(url, patientDetails);
+    return this.appSvc.Post(url, patientDetails);
     // return of({ status: 200, message: 'Registered Successfully' })
   }
 

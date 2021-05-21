@@ -19,8 +19,8 @@ export class SchedulerService {
   public selectedDate: Date;
   public appointmentMode : string;
   public selectedAppointment : any;
-  private baseUrl : string = "http://13.92.244.117:8082/appointment"
-  private visitUrl : string = "http://13.92.244.117:8082/healthcare/";
+  private baseUrl : string = "http://13.90.38.170:8082/appointment"
+  private visitUrl : string = "http://13.90.38.170:8082/healthcare/";
 
   constructor(private http: HttpClient,
     private appSvc: AppService,
