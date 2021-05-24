@@ -1,3 +1,5 @@
+import { STATUS } from './../../models/inbox-models';
+import { AppointmentDetails } from './../../../scheduler/model/model';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ToastMessageService } from 'src/app/shared/components/toast/service/toastMessage.service';
@@ -21,11 +23,15 @@ export class InboxContainerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAllInbox(this.authService.User.emailId);
+    this.getAllInbox(this.authService.User.id);
   }
 
   getAllInbox(user: string) {
-    this.inboxService.getAllInboxByuser(user)
+    const reqBody = {
+      toId : this.authService.User.id,
+      role : this.authService.UserRole
+    }
+    this.inboxService.getAllInboxByuser(reqBody)
       .subscribe((inboxList) => {
         this.inboxList = inboxList;
       }, (err) => {
@@ -34,7 +40,7 @@ export class InboxContainerComponent implements OnInit {
   }
 
   getMailId(id: string) {
-    this.inboxService.getMailById(id)
+    this.inboxService.getAppointmentById(id)
       .subscribe((mail) => {
         this.mailDetails = mail;
         this.vissible = true;
@@ -43,13 +49,34 @@ export class InboxContainerComponent implements OnInit {
       });
   }
 
-  logAppointment(appointmentDetails: IAppointmentContextReq) {
-    this.inboxService.appointmentSubmission(appointmentDetails)
+  logAppointment(appointmentDetails: AppointmentDetails) {
+    this.inboxService.editAppointment(appointmentDetails).subscribe((resp) => {
+      console.log(resp);
+    });
+
+    const reqObj = {
+      key : {
+        toId : appointmentDetails.patientId,
+        toName : appointmentDetails.patientName,
+        fromId : this.authService.User.id,
+        fromName : this.authService.User.fullName
+      },
+      value : {
+        message : appointmentDetails.status == STATUS.ACCEPTED ? 'Appointment Accepted' : 'Appointment Rejected',
+        isNurse : appointmentDetails.status == STATUS.ACCEPTED ? true : false,
+        appointmentId : appointmentDetails.appointmentId
+      }
+    }
+
+
+
+    this.inboxService.appointmentSubmission(reqObj)
       .subscribe((appointment) => {
-        if (appointment.status === 200) {
-          toastSuccMessage.summary = appointment.message;
-          this.toastMessageSvc.displayToastMessage(toastSuccMessage);
-        }
+        console.log(appointment);
+        // if (appointment.status === 200) {
+        //   toastSuccMessage.summary = appointment.message;
+        //   this.toastMessageSvc.displayToastMessage(toastSuccMessage);
+        // }
       }, (err) => {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
       });
@@ -58,5 +85,6 @@ export class InboxContainerComponent implements OnInit {
   onDialogClose(dialogCloseFlag: boolean) {
     this.vissible = dialogCloseFlag;
   }
+
 
 }

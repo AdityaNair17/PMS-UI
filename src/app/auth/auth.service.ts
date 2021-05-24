@@ -1,3 +1,4 @@
+import { ApiConstants } from './../api.constants';
 import { AppService } from './../app.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IUser, IUserSessionData } from './models/user-model';
@@ -28,7 +29,7 @@ export class AuthService {
     "dateOfBirth" : "23/12/1997",
     "user_role" : "Doctor",
     "fullName" : "Onkar Patil",
-    "userId" : "D123",
+    "userId" : "11",
     "personalDetailsRequired": true,
     "passwordChangeRequired" : true
   }
@@ -102,16 +103,16 @@ export class AuthService {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    const url = `http://13.90.38.170:8080/oauth/token`;
+    // const url = `http://13.90.38.170:8080/oauth/token`;
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'login');
     // return this.appSvc.LoginCall(url, params, httpOptions);
-    
-    // return this.http.post('http://localhost:8000/auth/login', user);
     return of(this.userObj);
 
   }
 
   patientRegistration(patientDetails): Observable<any> {
-    const url = `${this.baseUrl}registration/`;
+    // const url = `${this.baseUrl}registration/`;
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'userRegistration');
     return this.appSvc.Post(url, patientDetails);
     // return of({ status: 200, message: 'Registered Successfully' })
   }

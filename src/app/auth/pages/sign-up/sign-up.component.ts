@@ -15,6 +15,8 @@ import { toastErrMessage, toastSuccMessage } from 'src/app/shared/constants/cons
 })
 export class SignUpComponent implements OnInit {
   patientSignupForm: FormGroup;
+  public titleOptions : string[] = ['Mr', 'Mrs', 'Ms'];
+  public roleOptions : string[] = ['Doctor', 'Patient', 'Nurse'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,7 +40,8 @@ export class SignUpComponent implements OnInit {
       dateOfBirth: [null, [Validators.required]],
       contactNumber: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      confirmPassword: [null, [Validators.required]]
+      confirmPassword: [null, [Validators.required]],
+      role : [null, [Validators.required]]
     });
   }
 
@@ -53,7 +56,7 @@ export class SignUpComponent implements OnInit {
       firstName : patient.firstName,
       lastName : patient.lastName,
       dob : this.appSvc.FormatDate(this.patientSignupForm.value.dateOfBirth),
-      role : "Doctor",
+      role : patient.role,
       contactNumber : +patient.contactNumber,
       userCredentials : {
         email : patient.emailId,

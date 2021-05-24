@@ -118,11 +118,10 @@ export class AppointmentListComponent implements OnInit {
       appointmentStatus : true
     }
 
-    // this.schedulerSvc.createVisitId(reqObj).subscribe((resp) => {
-      // if(resp.status == 201){
-        // const visitId = "123";
-        // appointment.patientVisitDetailId = resp.id;
-        appointment.patientVisitDetailId ="899";
+    this.schedulerSvc.createVisitId(reqObj).subscribe((resp) => {
+      if(resp.status == 201){
+        appointment.patientVisitDetailId = resp.id;
+        // appointment.patientVisitDetailId ="899";
         this.schedulerSvc.editAppointment(appointment, appointment.appointmentId).subscribe((response) => {
           const visitObj : VisitDetails = {
             patientId : appointment.patientId,
@@ -137,13 +136,13 @@ export class AppointmentListComponent implements OnInit {
             console.log("Error" + err);
           })
 
-      // }
-    // })
+      }
+    })
 
     // const visitObj : VisitDetails = {
     //   patientId : appointment.patientId,
     //   patientName : appointment.patientName,
-    //   visitId : "1234",                                    //appointment.patientVisitDetailId,
+    //   visitId : "899",                                    //appointment.patientVisitDetailId,
     //   physcianName : appointment.physicianName,
     //   appointmentDate : appointment.date
     // }

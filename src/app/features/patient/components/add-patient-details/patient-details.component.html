@@ -1,10 +1,10 @@
 <div class="p-my-4 p-mx-6">
     <div class="p-mb-4">
     <div *ngIf="!patient ; else readEditMode">
-        <h2 class="color">Add patient details</h2>
+        <h2 class="color">Add User details</h2>
     </div>
     <ng-template #readEditMode>
-        <h2 class="color">{{readonlyMode ? 'View patient details': 'Edit patient details'}}</h2>
+        <h2 class="color">{{readonlyMode ? 'View User details': 'Edit User details'}}</h2>
     </ng-template>
     </div>
     <form [formGroup]="addPatientDetailsForm" (ngSubmit)="onAddPatientDetails()">

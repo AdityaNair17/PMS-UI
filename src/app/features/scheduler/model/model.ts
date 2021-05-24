@@ -4,7 +4,7 @@ export interface AppointmentDetails {
   physcianId : string;
   patientVisitDetailId : string;
   patientName : string;
-  physcianName : string;
+  physicianName : string;
   date : string;
   description : string;
   startTime : string;

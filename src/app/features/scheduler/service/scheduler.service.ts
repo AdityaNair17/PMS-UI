@@ -1,3 +1,4 @@
+import { ApiConstants } from './../../../api.constants';
 import { of, Observable } from 'rxjs';
 import { AppService } from './../../../app.service';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
@@ -28,7 +29,8 @@ export class SchedulerService {
 
   getListOfAppointments(requestBody: any) {
     console.log(requestBody);
-    const url = `${this.baseUrl}/byuseridandwithindate`;
+    // const url = `${this.baseUrl}/byuseridandwithindate`;
+    const url = ApiConstants.generateDynamicEndpoint('appointmentEndpoint','appointmentList');
     const param = {
       userId : requestBody.emailId,
       startDate : requestBody.startDate,
@@ -42,7 +44,8 @@ export class SchedulerService {
 
   getListOfAppointmentsForSelectedDate(requestBody: any){
     console.log(requestBody);
-    const url = `${this.baseUrl}/byuseridanddate`;
+    // const url = `${this.baseUrl}/byuseridanddate`;
+    const url = ApiConstants.generateDynamicEndpoint('appointmentEndpoint', 'appointmentListByDate');
     const param = {
       userId : requestBody.emailId,
       date : requestBody.date
@@ -86,10 +89,14 @@ export class SchedulerService {
 
 
   getListOfPatients(){
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'getUserByRole', 'Patient');
+    // return this.appSvc.Get(url, 'Patient');
     return of((patientList as any).default);
   }
 
   getListOfDoctors(){
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'getUserByRole', 'Doctor');
+    return this.appSvc.Get(url);
     return of((doctorList as any).default);
   }
 
@@ -102,7 +109,8 @@ export class SchedulerService {
     const respStatus = {
       status : 200
     }
-    const url = `${this.baseUrl}`;
+    // const url = `${this.baseUrl}`;
+    const url = ApiConstants.generateDynamicEndpoint('appointmentEndpoint', 'createAppointment');
     // return of(respStatus);
     return this.appSvc.Post(url,reqObj);
   }
@@ -112,18 +120,26 @@ export class SchedulerService {
     const respStatus = {
       status : 200
     }
-    const url = `${this.baseUrl}/${appointmentId}`
+    // const url = `${this.baseUrl}/${appointmentId}`
+    const url = ApiConstants.generateDynamicEndpoint('appointmentEndpoint', 'editAppointment', appointmentId);
     return this.appSvc.Put(url, reqObj);
     return of(respStatus);
   }
 
   deleteAppointment(appointmentId : string){
-    const url = `${this.baseUrl}/${appointmentId}/CANCELLED`;
+    // const url = `${this.baseUrl}/${appointmentId}/CANCELLED`;
+    const url = ApiConstants.generateDynamicEndpoint('appointmentEndpoint', 'deleteAppointment', appointmentId)
     return this.appSvc.DeleteAppointment(url);
   }
 
   createVisitId(reqObj) : Observable<any>{
-    const url = `${this.visitUrl}visit/createvisit/`;
+    // const url = `${this.visitUrl}visit/createvisit/`;
+    const url = ApiConstants.generateDynamicEndpoint('visitAndPatientEndpoint','createVisit');
     return this.appSvc.PostWithoutResponseCode(url, reqObj);
+  }
+
+  sendMail(reqObj) {
+    const url = ApiConstants.generateDynamicEndpoint('inboxEndpoint', 'sendMail');
+    return this.appSvc.Post(url, reqObj);
   }
 }

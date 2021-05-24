@@ -1,3 +1,4 @@
+import { AppointmentDetails } from './../../../scheduler/model/model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IAppointmentContextReq, IInbox, STATUS } from '../../models/inbox-models';
 
@@ -9,22 +10,24 @@ import { IAppointmentContextReq, IInbox, STATUS } from '../../models/inbox-model
 export class InboxDetailsComponent implements OnInit {
   @Input() vissible: boolean;
   @Output() displayChange: EventEmitter<boolean> = new EventEmitter();
-  @Output() logAppointment: EventEmitter<IAppointmentContextReq> = new EventEmitter();
-  @Input() mailDetails: IInbox;
+  @Output() logAppointment: EventEmitter<AppointmentDetails> = new EventEmitter();
+  @Input() mailDetails: AppointmentDetails;
   constructor() { }
 
   ngOnInit(): void {
   }
 
 
-  onAccept(id: string) {
+  onAccept() {
+    this.mailDetails.status = STATUS.ACCEPTED;
     this.displayChange.emit(false);
-    this.logAppointment.emit({status: STATUS.ACCEPTED, id: id})
+    this.logAppointment.emit(this.mailDetails)
   }
 
-  onReject(id: string) {
+  onReject() {
+    this.mailDetails.status = STATUS.REJECTED;
     this.displayChange.emit(false);
-    this.logAppointment.emit({status: STATUS.REJECTED, id: id})
+    this.logAppointment.emit(this.mailDetails)
   }
 
   onClose() {

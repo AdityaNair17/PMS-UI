@@ -26,6 +26,11 @@ const routes: Routes = [
       {
         path: 'change-password',
         component: ChangePasswordComponent
+      },
+      {
+        path: 'patient',
+        loadChildren: ()=>import('../features/patient/patient.module').then(m=>m.PatientModule)
+
       }
     ]
   }
