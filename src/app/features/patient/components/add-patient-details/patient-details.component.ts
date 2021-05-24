@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/auth/auth.service';
 import { AppService } from './../../../../app.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,23 +16,32 @@ import { PatientService } from '../../patient.service';
 export class PatientDetailsComponent implements OnInit {
   @Input() readonlyMode: boolean;
   @Input() patient: any;
-  @Input() editMode: boolean;
+  @Input() editMode: boolean = false;
   genderList: string[] = genderList;
   addressType: any[] = addressType;
   accessList: any[] = accessList;
   languages: ILanguageKnown[] = [];
   allergies: IAllergies[] = [];
   addPatientDetailsForm: FormGroup;
+  private firstName : string;
+  private lastName : string;
+  private emailId : string;
 
   constructor(
     private formBuilder: FormBuilder,
     private toastMessageSvc: ToastMessageService,
     private router: Router,
     private ps: PatientService,
-    private appSvc : AppService
+    private appSvc : AppService,
+    private authSvc : AuthService
   ) { }
 
   ngOnInit(): void {
+    if(!this.editMode){
+      this.firstName = this.authSvc.User.firstName;
+      this.lastName = this.authSvc.User.lastName;
+      this.emailId = this.authSvc.User.emailId;
+    }
     this.buildForm();
     this.getLanguageKnownList();
     this.getAllergies();
@@ -40,9 +50,9 @@ export class PatientDetailsComponent implements OnInit {
   buildForm() {
     this.addPatientDetailsForm = this.formBuilder.group({
       basicDetails: this.formBuilder.group({
-        firstName: [this.patient && this.patient.basicDetails ? this.patient.basicDetails.firstName : null, [Validators.required,]],
-        lastName: [this.patient && this.patient.basicDetails ? this.patient.basicDetails.lastName : null, [Validators.required,]],
-        emailId: [this.patient && this.patient.basicDetails ? this.patient.basicDetails.emailId : null, [Validators.required,]],
+        firstName: [this.patient && this.patient.basicDetails ? this.patient.basicDetails.firstName : !this.editMode ? this.firstName : null, [Validators.required,]],
+        lastName: [this.patient && this.patient.basicDetails ? this.patient.basicDetails.lastName : !this.editMode ? this.lastName : null, [Validators.required,]],
+        emailId: [this.patient && this.patient.basicDetails ? this.patient.basicDetails.emailId : !this.editMode ? this.emailId : null, [Validators.required,]],
         dateOfBirth: [this.patient && this.patient.basicDetails ? new Date(this.patient.basicDetails.dateOfBirth) : null, [Validators.required,]],
         contactNo: [this.patient && this.patient.basicDetails ? this.patient.basicDetails.contactNo : null, [Validators.required,]],
         age: [this.patient && this.patient.basicDetails ? this.patient.basicDetails.age : null, [Validators.required,]],
@@ -96,7 +106,7 @@ export class PatientDetailsComponent implements OnInit {
           toastSuccMessage.summary = patient.message;
           this.toastMessageSvc.displayToastMessage(toastSuccMessage);
           //re direct to view patient details page
-          // this.router.navigate(['\'])
+          this.router.navigate(['/layout/home']);
         }
       }, (err) => {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
@@ -126,6 +136,7 @@ export class PatientDetailsComponent implements OnInit {
 
   editUserDetails(){
     console.log(this.patient);
+    this.addPatientDetailsForm.value.basciDetails.id = this.patient.basicDetails.id;
     let reqObj = {
       user_id_fk : "APT50e2a882-abc4-4df4-a1f1-480f3731a635",
       basicDetails : this.addPatientDetailsForm.value.basicDetails,

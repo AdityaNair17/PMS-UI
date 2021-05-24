@@ -67,12 +67,16 @@ export class InboxContainerComponent implements OnInit {
         appointmentId : appointmentDetails.appointmentId
       }
     }
-    this.inboxService.appointmentSubmission(appointmentDetails)
+
+
+
+    this.inboxService.appointmentSubmission(reqObj)
       .subscribe((appointment) => {
-        if (appointment.status === 200) {
-          toastSuccMessage.summary = appointment.message;
-          this.toastMessageSvc.displayToastMessage(toastSuccMessage);
-        }
+        console.log(appointment);
+        // if (appointment.status === 200) {
+        //   toastSuccMessage.summary = appointment.message;
+        //   this.toastMessageSvc.displayToastMessage(toastSuccMessage);
+        // }
       }, (err) => {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
       });

@@ -73,11 +73,14 @@ export class InboxService {
       "patientVisitDetailId": null
     }
     const url = ApiConstants.generateDynamicEndpoint('appointmentEndpoint', 'appointmentById', appointmentId);
-    return of(dummy);
+    return this.appSvc.Get(url);
+    // return of(dummy);
   }
 
-  appointmentSubmission(appointment: any): Observable<any> {
-    return of({ status: 200, message: 'Appointment accepted' })
+  appointmentSubmission(reqObj: any): Observable<any> {
+    // return of({ status: 200, message: 'Appointment accepted' })
+    const url = ApiConstants.generateDynamicEndpoint('inboxEndpoint', 'sendMail');
+    return this.appSvc.Post(url, reqObj);
   }
 
   editAppointment(appointment : AppointmentDetails){

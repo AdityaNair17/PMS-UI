@@ -89,10 +89,14 @@ export class SchedulerService {
 
 
   getListOfPatients(){
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'getUserByRole', 'Patient');
+    // return this.appSvc.Get(url, 'Patient');
     return of((patientList as any).default);
   }
 
   getListOfDoctors(){
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'getUserByRole', 'Doctor');
+    return this.appSvc.Get(url);
     return of((doctorList as any).default);
   }
 

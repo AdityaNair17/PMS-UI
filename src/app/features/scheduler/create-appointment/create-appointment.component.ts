@@ -180,6 +180,7 @@ export class CreateAppointmentComponent implements OnInit {
       physicianName : this.physicianName.value.name,
       date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
       status : this.authSvc.UserRole == 'Doctor' ? "ACCEPTED" : "PENDING",
+      // status : "PENDING",
       startTime : startTime,
       endTime : endTime,
       description : this.description.value,
@@ -198,7 +199,7 @@ export class CreateAppointmentComponent implements OnInit {
           },
           value : {
             message : "Appointment Request",
-            appointment : response.body,
+            appointmentId : response.body,
             isNurse : false
           }
         }

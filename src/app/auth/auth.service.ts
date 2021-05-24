@@ -29,7 +29,7 @@ export class AuthService {
     "dateOfBirth" : "23/12/1997",
     "user_role" : "Doctor",
     "fullName" : "Onkar Patil",
-    "userId" : "D123",
+    "userId" : "11",
     "personalDetailsRequired": true,
     "passwordChangeRequired" : true
   }
@@ -106,8 +106,6 @@ export class AuthService {
     // const url = `http://13.90.38.170:8080/oauth/token`;
     const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'login');
     // return this.appSvc.LoginCall(url, params, httpOptions);
-    
-    // return this.http.post('http://localhost:8000/auth/login', user);
     return of(this.userObj);
 
   }

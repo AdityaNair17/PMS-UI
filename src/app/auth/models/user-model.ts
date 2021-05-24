@@ -6,6 +6,7 @@ export interface IUser {
     dateOfBirth?: string;
     id: string;
     fullName?: string;
+    role? : string;
 }
 
 export interface IUserSessionData {

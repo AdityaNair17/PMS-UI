@@ -1,12 +1,12 @@
 export const apiConstant = {
   /** Endpoints */
-  appointmentEndpoint: 'http://13.90.38.170:8082/',
-  authenticationEndpoint: 'http://13.90.38.170:8080/',
-  visitAndPatientEndpoint: 'http://13.90.38.170:8082/',
+  appointmentEndpoint: 'http://52.224.123.133:8082/',
+  authenticationEndpoint: 'http://52.224.123.133:8080/',
+  visitAndPatientEndpoint: 'http://52.224.123.133:8082/',
   diagnosisEndpoint: 'http://13.90.116.138:8081/',
   procedureEndpoint: 'http://13.90.116.138:8080/',
   medicationEndpoint: 'http://40.76.198.123:8080/',
-  inboxEndpoint: 'http://40.76.198.123:8080/',
+  inboxEndpoint: 'http://40.76.198.123:',
   vitalEndpoint : 'http://52.188.201.41:8080/',
   /**Appointment Calls */
   appointmentList : 'appointment/byuseridandwithindate',
@@ -40,9 +40,10 @@ export const apiConstant = {
   /** Registration Calls */
   userRegistration : 'api/admin-service/registration/',
   login : 'oauth/token',
+  getUserByRole : '/api/admin-service/registration/role/{$0}',
   /** Inbox Calls */
-  sendMail : 'inboxProducer/sendRequest',
-  getMail : 'records/get',
+  sendMail : '8081/inboxProducer/sendRequest',
+  getMail : '8082/records/get',
   /** Vital Calls */
   addVitals : 'healthcare/vitalDetails/addVitalDetails',
   getVitalsById : 'healthcare/vitalDetails/getVitalDetailById/{$0}'

@@ -20,16 +20,19 @@ export class VisitVitalsComponent implements OnInit {
   
     this.createFormGroup();
     if(this.visitSvc.isEdit){
-      this.visitSvc.getVitalsById().subscribe((vitals) => {
+      this.visitSvc.getVitalsById().subscribe((response) => {
+        if(response.successflag){
+          const vitals = response.vitalDetails;
         this.vitalsForm.setValue({
           height : vitals.height,
           weight : vitals.weight,
           systolic : vitals.systolic,
           diastolic : vitals.diastolic,
-          temperature : vitals.temperature,
+          temperature : vitals.bodyTemperature,
           respirationRate : vitals.respirationRate
         })
         this.disableFields = true;
+      }
       })
       
     }
@@ -50,6 +53,7 @@ export class VisitVitalsComponent implements OnInit {
   submitVitals(){
     const reqBody = {
       visitId : this.visitSvc.VisitId,
+      patientId : this.visitSvc.PatientId,
       height : this.vitalsForm.get("height").value,
       weight : this.vitalsForm.get("weight").value,
       systolic : this.vitalsForm.get("systolic").value,
@@ -58,6 +62,8 @@ export class VisitVitalsComponent implements OnInit {
       respirationRate : this.vitalsForm.get("respirationRate").value
     }
     console.log(reqBody);
-    this.visitSvc.addVitals(reqBody);
+    this.visitSvc.addVitals(reqBody).subscribe((resp) => {
+      console.log(resp)
+    });
   }
 }

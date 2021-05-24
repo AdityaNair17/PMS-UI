@@ -51,8 +51,8 @@ export class SignInComponent implements OnInit {
           this.invalidMessageFlag = false;
           this.authSvc.AuthenticationToken = data.access_token;
           this.authSvc.UserRole = data.user_role;
-          // this.authSvc.PasswordChangeRequired = data.user.passwordChangeRequired;
-          // this.authSvc.PersonalDetailsRequired = data.user.personalDetailsRequired;
+          // this.authSvc.PasswordChangeRequired = data.passwordChangeRequired;
+          // this.authSvc.PersonalDetailsRequired = data.personalDetailsRequired;
           this.authSvc.PasswordChangeRequired = false;
           this.authSvc.PersonalDetailsRequired =false;
           this.authSvc.IsUserAuthenticated = true;
@@ -60,6 +60,7 @@ export class SignInComponent implements OnInit {
             firstName: data.fullName.split(" ")[0],
             lastName: data.fullName.split(" ")[1],
             emailId: data.emailId,
+            fullName : data.fullName,
             // dateOfBirth: data.user.dateOfBirth,
             id: data.userId
           }
@@ -74,7 +75,7 @@ export class SignInComponent implements OnInit {
             this.router.navigate(['/layout/change-password']);
           } else if ( this.authSvc.PersonalDetailsRequired) {
             //re direct to patient details page
-            // this.router.navigate(['\'])
+            this.router.navigate(['/layout/patient/add-patient-details'])
           } else {
             this.router.navigate(['/layout/home'])
           }
