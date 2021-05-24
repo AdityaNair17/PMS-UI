@@ -12,15 +12,16 @@ export interface IInbox{
 }
 
 export interface IAppointmentContextReq{
-    id: string;
+    appointmentId: string;
     status: STATUS;
 }
 
 export enum STATUS{
-    UPCOMING = 'Upcoming',
-    ACCEPTED = 'Accepted',
-    REJECTED = 'Rejected',
-    PENDING = 'Approval Pending'
+    UPCOMING = 'UPCOMING',
+    ACCEPTED = 'ACCEPTED',
+    REJECTED = 'REJECTED',
+    PENDING = 'PENDING',
+    CANCELLED = 'CANCELLED'
 }
 
 export interface IAppointmentContextRes extends IResponse{}

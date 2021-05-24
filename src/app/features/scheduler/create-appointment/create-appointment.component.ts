@@ -191,10 +191,10 @@ export class CreateAppointmentComponent implements OnInit {
         this.toastMessageSvc.displayToastMessage(appointmentCreationSuccess);
         const mailObj = {
           key : {
-            to_id : this.physicianName.value.userId,
-            to_name : this.physicianName.value.name,
-            from_id : this.physicianName.value.userId,
-            from_name : this.patientName.value.name
+            toId : this.physicianName.value.userId,
+            toName : this.physicianName.value.name,
+            fromId : this.physicianName.value.userId,
+            fromName : this.patientName.value.name
           },
           value : {
             message : "Appointment Request",
@@ -204,6 +204,9 @@ export class CreateAppointmentComponent implements OnInit {
         }
 
         console.log(mailObj);
+        this.schedulerSvc.sendMail(mailObj).subscribe((response) => {
+          console.log("Mail Response = " + response);
+        });
       } else {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
       }

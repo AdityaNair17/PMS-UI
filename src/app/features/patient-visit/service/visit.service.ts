@@ -2,7 +2,7 @@ import { ApiConstants } from './../../../api.constants';
 import { AppService } from './../../../app.service';
 import { VisitDetails } from './../model/model';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import * as medicationList from '../../../../assets/json/medicationList.json';
@@ -73,6 +73,13 @@ export class VisitService {
 
   }
 
+  postMedication(reqBody : any){
+    // const url = 'http://23.96.121.152:8080/medication/saveList';
+    // const url = this.medicationUrl + 'saveList'
+    const url = ApiConstants.generateDynamicEndpoint('medicationEndpoint', 'createMedication');
+    return this.http.post(url, reqBody);
+  }
+
   getProcedureList(){
     // const url = `${this.procedureUrl}getallProcedure`;
     const url = ApiConstants.generateDynamicEndpoint('procedureEndpoint', 'listOfProcedures');
@@ -117,15 +124,15 @@ export class VisitService {
     return this.appSvc.PostWithoutResponseCode(url,reqObj);
   }
 
-  getVitalsById(){
-    return of((vitalsById as any).default);
+  getVitalsById() : Observable<any>{
+    const url = ApiConstants.generateDynamicEndpoint('vitalEndpoint', 'getVitalsById', this.visitId);
+    return this.appSvc.Get(url)
+    // return of((vitalsById as any).default);
   }
 
-  postMedication(reqBody : any){
-    // const url = 'http://23.96.121.152:8080/medication/saveList';
-    // const url = this.medicationUrl + 'saveList'
-    const url = ApiConstants.generateDynamicEndpoint('medicationEndpoint', 'createMedication');
-    return this.http.post(url, reqBody);
+  addVitals(reqObj){
+    const url = ApiConstants.generateDynamicEndpoint('vitalEndpoint', 'addVitals');
+    return this.appSvc.PostWithoutResponseCode(url, reqObj);
   }
 
 

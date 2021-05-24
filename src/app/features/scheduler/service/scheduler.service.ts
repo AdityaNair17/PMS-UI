@@ -133,4 +133,9 @@ export class SchedulerService {
     const url = ApiConstants.generateDynamicEndpoint('visitAndPatientEndpoint','createVisit');
     return this.appSvc.PostWithoutResponseCode(url, reqObj);
   }
+
+  sendMail(reqObj) {
+    const url = ApiConstants.generateDynamicEndpoint('inboxEndpoint', 'sendMail');
+    return this.appSvc.Post(url, reqObj);
+  }
 }

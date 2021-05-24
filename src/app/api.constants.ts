@@ -6,6 +6,8 @@ export const apiConstant = {
   diagnosisEndpoint: 'http://13.90.116.138:8081/',
   procedureEndpoint: 'http://13.90.116.138:8080/',
   medicationEndpoint: 'http://40.76.198.123:8080/',
+  inboxEndpoint: 'http://40.76.198.123:8080/',
+  vitalEndpoint : 'http://52.188.201.41:8080/',
   /**Appointment Calls */
   appointmentList : 'appointment/byuseridandwithindate',
   appointmentListByDate : 'appointment/byuseridanddate',
@@ -33,11 +35,17 @@ export const apiConstant = {
   patientById : 'healthcare/patient/{$0}',
   getAllPatients : 'healthcare/patient/',
   updatePatient : 'healthcare/patient/',
-  listOfAllergies : '/healthcare/allergies/',
+  listOfAllergies : 'healthcare/allergies/',
   listOfLanguages : 'healthcare/languages',
   /** Registration Calls */
   userRegistration : 'api/admin-service/registration/',
-  login : 'oauth/token'
+  login : 'oauth/token',
+  /** Inbox Calls */
+  sendMail : 'inboxProducer/sendRequest',
+  getMail : 'records/get',
+  /** Vital Calls */
+  addVitals : 'healthcare/vitalDetails/addVitalDetails',
+  getVitalsById : 'healthcare/vitalDetails/getVitalDetailById/{$0}'
 }
 
 export class ApiConstants{

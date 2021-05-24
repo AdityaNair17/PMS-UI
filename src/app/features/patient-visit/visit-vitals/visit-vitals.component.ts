@@ -49,13 +49,15 @@ export class VisitVitalsComponent implements OnInit {
 
   submitVitals(){
     const reqBody = {
+      visitId : this.visitSvc.VisitId,
       height : this.vitalsForm.get("height").value,
       weight : this.vitalsForm.get("weight").value,
       systolic : this.vitalsForm.get("systolic").value,
       diastolic : this.vitalsForm.get("diastolic").value,
-      temperature : this.vitalsForm.get("temperature").value,
+      bodyTemperature : this.vitalsForm.get("temperature").value,
       respirationRate : this.vitalsForm.get("respirationRate").value
     }
     console.log(reqBody);
+    this.visitSvc.addVitals(reqBody);
   }
 }

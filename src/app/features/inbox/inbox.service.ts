@@ -1,3 +1,6 @@
+import { AppointmentDetails } from './../scheduler/model/model';
+import { AppService } from './../../app.service';
+import { ApiConstants } from './../../api.constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -8,67 +11,83 @@ import { IAppointmentContextReq, IAppointmentContextRes, IInbox, STATUS } from '
 })
 export class InboxService {
 
-  inboxList: IInbox[] = [
+  inboxList: any[] = [
     {
-      id: 'qqahshjjk55612bdbfstjbsvfaayajbx0',
-      name: 'Ankit sawant',
-      type: 'appointment/others',
-      subject: 'Appointment Request',
-      status: STATUS.UPCOMING,
-      time: '20:15',
-      date: '13 Apr'
+      fromName : "Ankit Sawant",
+      message : "Appointment Request",
+      time : "12:12",
+      date : "12-05-2021",
+      appointmentId : "A12345"
     },
     {
-      id: 'qqahshjjk55612bdbfstjbsvfaayajbx1',
-      name: 'Onkar Patil',
-      type: 'appointment/others',
-      subject: 'Appointment Request',
-      status: STATUS.REJECTED,
-      time: '20:17',
-      date: '14 Apr'
+      fromName : "Kamlesh Badgujar",
+      message : "Appointment Request",
+      time : "12:00",
+      date : "12-05-2021",
+      appointmentId : "A12346"
     },
     {
-      id: 'qqahshjjk55612bdbfstjbsvfaayajbx2',
-      name: 'Dr. Sanket Chaudhari',
-      type: 'appointment/others',
-      subject: 'Appointment Request',
-      status: STATUS.ACCEPTED,
-      time: '20:18',
-      date: '15 Apr'
+      fromName : "Pranav Ekapure",
+      message : "Appointment Request",
+      time : "11:30",
+      date : "12-05-2021",
+      appointmentId : "A12347"
     },
     {
-      id: 'qqahshjjk55612bdbfstjbsvfaayajbx3',
-      name: 'Kamlesh Badgujar',
-      type: 'appointment/others',
-      subject: 'Appointment Request For 13/03/2021 21:00',
-      status: STATUS.UPCOMING,
-      time: '20:25',
-      date: '21 Apr'
+      fromName : "Sanket Chanudhari",
+      message : "Appointment Request",
+      time : "11:20",
+      date : "12-05-2021",
+      appointmentId : "A12348"
     },
     {
-      id: 'qqahshjjk55612bdbfstjbsvfaayajbx4',
-      name: 'Pranav Ekapure',
-      type: 'appointment/others',
-      subject: 'Reports of Patient XYZ',
-      status: STATUS.ACCEPTED,
-      time: '20:30',
-      date: '20 Apr'
+      fromName : "Shriya Khatri",
+      message : "Appointment Request",
+      time : "10:00",
+      date : "12-05-2021",
+      appointmentId : "A12349"
     }
   ];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private appSvc : AppService) { }
 
-  getAllInboxByuser(user: string): Observable<IInbox[]> {
+  getAllInboxByuser(reqObj: any): Observable<any> {
+    const url = ApiConstants.generateDynamicEndpoint('inboxEndpoint', 'getMail');
+    return this.appSvc.PostWithoutResponseCode(url, reqObj)
     return of(this.inboxList);
   }
 
-  getMailById(id: string): Observable<IInbox> {
-    const mailDetails = this.inboxList.find(mail => mail.id === id);
-    return of(mailDetails);
+  getAppointmentById(appointmentId: string): Observable<any> {
+    // const mailDetails = this.inboxList.find(mail => mail.appointmentId === appointmentId);
+    const dummy = {
+      "appointmentId": "A12345",
+      "physicianId": "10",
+      "patientId": "140",
+      "date": "2021-12-15",
+      "startTime": "17:42:12",
+      "endTime": "00:00:00",
+      "status": "PENDING",
+      "description": "New appointment",
+      "reasonForChange": null,
+      "patientVisitDetailId": null
+    }
+    const url = ApiConstants.generateDynamicEndpoint('appointmentEndpoint', 'appointmentById', appointmentId);
+    return of(dummy);
   }
 
-  appointmentSubmission(appointment: IAppointmentContextReq): Observable<IAppointmentContextRes> {
+  appointmentSubmission(appointment: any): Observable<any> {
     return of({ status: 200, message: 'Appointment accepted' })
   }
 
+  editAppointment(appointment : AppointmentDetails){
+    const appointmentId = appointment.appointmentId
+    const url = ApiConstants.generateDynamicEndpoint('appointmentEndpoint', 'editAppointment', appointmentId);
+    return this.appSvc.Put(url, appointment);
+  }
+
+  sendMail(reqObj) {
+    const url = ApiConstants.generateDynamicEndpoint('inboxEndpoint', 'sendMail');
+    return this.appSvc.Post(url, reqObj);
+  }
 }
