@@ -40,7 +40,7 @@ export class InboxContainerComponent implements OnInit {
         // })
         this.inboxList = inboxList;
       }, (err) => {
-        this.toastMessageSvc.displayToastMessage(toastErrMessage);
+        console.log(err);
       });
   }
 
