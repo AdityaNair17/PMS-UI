@@ -1,52 +1,57 @@
 export const apiConstant = {
   /** Endpoints */
-  appointmentEndpoint: 'http://52.224.123.133:8082/',
-  authenticationEndpoint: 'http://52.224.123.133:8080/',
-  visitAndPatientEndpoint: 'http://52.224.123.133:8082/',
+  appointmentEndpoint: 'http://40.114.53.239:8080/',
+  authenticationEndpoint: 'http://40.114.53.239:8080/',
+  visitAndPatientEndpoint: 'http://40.114.53.239:8080/',
   diagnosisEndpoint: 'http://13.90.116.138:8081/',
   procedureEndpoint: 'http://13.90.116.138:8080/',
   medicationEndpoint: 'http://40.76.198.123:8080/',
   inboxEndpoint: 'http://40.76.198.123:',
   vitalEndpoint : 'http://52.188.201.41:8080/',
+  globalEndpoint : 'http://davita.eastus.cloudapp.azure.com:8080/',
   /**Appointment Calls */
-  appointmentList : 'appointment/byuseridandwithindate',
-  appointmentListByDate : 'appointment/byuseridanddate',
-  createAppointment : 'appointment',
-  editAppointment : 'appointment/{$0}',
-  deleteAppointment : 'appointment/{$0}/CANCELLED',
-  appointmentById : 'appointment/{$0}',
+  appointmentList : 'api/patient-service/appointment/byuseridandwithindate',
+  appointmentListByDate : 'api/patient-service/appointment/byuseridanddate',
+  createAppointment : 'api/patient-service/appointment',
+  editAppointment : 'api/patient-service/appointment/{$0}',
+  deleteAppointment : 'api/patient-service/appointment/{$0}/CANCELLED',
+  appointmentById : 'api/patient-service/appointment/{$0}',
   /** Visit Calls */
-  createVisit : 'healthcare/visit/createvisit/',
-  getVisitById : 'healthcare/visit/myvisit/{$0}',
+  createVisit : 'api/patient-service/healthcare/visit/createvisit/',
+  getVisitById : 'api/patient-service/healthcare/visit/myvisit/{$0}',
   /** Diagnosis Calls */
-  listOfDiagnosis : 'healthcare/diagnosis/getalldiagnosis',
-  diagnosisById : 'healthcare/diagnosis/{$0}',
-  createDiagnosis : 'healthcare/diagnosis/diagnosisDetailDesc',
+  listOfDiagnosis : 'api/diagnosis-service/healthcare/diagnosis/getalldiagnosis',
+  diagnosisById : 'api/diagnosis-service/healthcare/diagnosis/{$0}',
+  createDiagnosis : 'api/diagnosis-service/healthcare/diagnosis/diagnosisDetailDesc',
   /** Procedure Calls */
-  listOfProcedures : 'healthcare/procedure/getallProcedure',
-  procedureById : 'healthcare/procedure/{$0}',
-  createProcedure : 'healthcare/procedure/procedureDetailDesc',
+  listOfProcedures : 'api/procedure-service/healthcare/procedure/getallProcedure',
+  procedureById : 'api/procedure-service/healthcare/procedure/{$0}',
+  createProcedure : 'api/procedure-service/healthcare/procedure/procedureDetailDesc',
   /** Medication Calls */
-  listOfMedications : 'medication/getList',
-  medicationById : 'medication/getList/{$0}/{$1}',
-  createMedication : 'medication/saveList',
+  listOfMedications : 'api/medication-service/medication/getList',
+  medicationById : 'api/medication-service/medication/getList/{$0}/{$1}',
+  createMedication : 'api/medication-service/medication/saveList',
   /** Patient Calls */
-  addPatient : 'healthcare/patient/',
-  patientById : 'healthcare/patient/{$0}',
-  getAllPatients : 'healthcare/patient/',
-  updatePatient : 'healthcare/patient/',
-  listOfAllergies : 'healthcare/allergies/',
-  listOfLanguages : 'healthcare/languages',
+  addPatient : 'api/patient-service/healthcare/patient/',
+  patientById : 'api/patient-service/healthcare/patient/{$0}',
+  getAllPatients : 'api/patient-service/healthcare/patient/',
+  updatePatient : 'api/patient-service/healthcare/patient/',
+  listOfAllergies : 'api/patient-service/healthcare/allergies/',
+  listOfLanguages : 'api/patient-service/healthcare/languages',
   /** Registration Calls */
   userRegistration : 'api/admin-service/registration/',
   login : 'oauth/token',
-  getUserByRole : '/api/admin-service/registration/role/{$0}',
+  getUserById : 'api/admin-service/registration/{$0}',
+  getUserByRole : 'api/admin-service/registration/role/{$0}',
+  forgotPassword: 'api/admin-service/authentication/forgotpassword?email={$0}',
+  updatePatientDetailCall: 'api/admin-service/registration/afterfirstauth?isPasswordChangeReq={$0}&isPersonalDeatilRequired={$1}&userId={$2}',
+  changePassword : 'api/admin-service/authentication/updatepassword',
   /** Inbox Calls */
-  sendMail : '8081/inboxProducer/sendRequest',
-  getMail : '8082/records/get',
+  sendMail : 'api/producer-service/inboxProducer/sendRequest',
+  getMail : 'api/consumer-service/records/get',
   /** Vital Calls */
-  addVitals : 'healthcare/vitalDetails/addVitalDetails',
-  getVitalsById : 'healthcare/vitalDetails/getVitalDetailById/{$0}'
+  addVitals : 'api/vitals-service/healthcare/vitalDetails/addVitalDetails',
+  getVitalsById : 'api/vitals-service/healthcare/vitalDetails/getVitalDetailById/{$0}'
 }
 
 export class ApiConstants{
@@ -54,8 +59,9 @@ export class ApiConstants{
   public static generateDynamicEndpoint(url : string, apiEndpointName : string, ...args){
     const endPoint = apiConstant[apiEndpointName]
     .replace('{$0}', args[0])
-    .replace('{$1}',args[1]);
+    .replace('{$1}',args[1])
+    .replace('{$2}',args[2]);
 
-    return apiConstant[url] + endPoint;
+    return apiConstant['globalEndpoint'] + endPoint;
   }
 }

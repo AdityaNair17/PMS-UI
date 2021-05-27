@@ -23,6 +23,8 @@ export class AppointmentListComponent implements OnInit {
   showDeleteConfirmationDialog : boolean = false;
   appointmentToBeDeleted : any;
   deletionReason : string = "";
+  userRole : string = 'Patient';
+  noAppointmentMessage : string = "No Appointments to View";
 
   constructor(public activeModal: NgbActiveModal,
               private schedulerSvc : SchedulerService,
@@ -34,7 +36,7 @@ export class AppointmentListComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedDate = this.schedulerSvc.selectedDate
-
+    this.userRole = this.authSvc.UserRole;
     this.GetListOfAppointments();
   }
 
@@ -48,14 +50,15 @@ export class AppointmentListComponent implements OnInit {
     this.schedulerSvc.getListOfAppointmentsForSelectedDate(reqBody).subscribe(appointments => {
 
       this.appointments = appointments;
-      console.log(this.appointments);
     })
   }
 
   deleteAppointment(){
-    console.log(this.appointmentToBeDeleted);
     this.schedulerSvc.deleteAppointment(this.appointmentToBeDeleted.appointmentId).subscribe(response =>{
-      console.log(response);
+      this.showDeleteConfirmationDialog = false;
+      this.appointmentToBeDeleted = null;
+      this.appointments = [];
+      this.GetListOfAppointments();
     })   
   }
 
@@ -90,7 +93,6 @@ export class AppointmentListComponent implements OnInit {
 
   viewVisit(appointment, event){
     event.stopPropagation();
-    console.log(appointment)
     this.activeModal.close();
     this.appSvc.previousUrl = 'layout/home/scheduler';
     
@@ -101,13 +103,11 @@ export class AppointmentListComponent implements OnInit {
       physcianName : appointment.physicianName,
       appointmentDate : appointment.date
     }
-    console.log("edit" + JSON.stringify(visitObj));
     this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(visitObj), isEdit : JSON.stringify(true) }]);
   }
 
   createVisit(appointment, event){
     event.stopPropagation();
-    console.log(appointment);
     this.activeModal.close();
     this.appSvc.previousUrl = 'layout/home/scheduler';
     // An API call will be made here to generate 
@@ -130,7 +130,6 @@ export class AppointmentListComponent implements OnInit {
             physcianName : appointment.physicianName,
             appointmentDate : appointment.date
           }
-          console.log("create" + JSON.stringify(visitObj));
           this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(visitObj), isEdit : JSON.stringify(false) }]);
           }, (err) => {
             console.log("Error" + err);
@@ -138,17 +137,6 @@ export class AppointmentListComponent implements OnInit {
 
       }
     })
-
-    // const visitObj : VisitDetails = {
-    //   patientId : appointment.patientId,
-    //   patientName : appointment.patientName,
-    //   visitId : "899",                                    //appointment.patientVisitDetailId,
-    //   physcianName : appointment.physicianName,
-    //   appointmentDate : appointment.date
-    // }
-    // this.router.navigate(['layout/visit', {appointmentDetails : JSON.stringify(visitObj), isEdit : JSON.stringify(false) }]);
-
-
   }
 
   dateChange(date){

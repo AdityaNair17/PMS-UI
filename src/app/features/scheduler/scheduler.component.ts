@@ -79,28 +79,6 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
       } else {
         this.allAppointments = this.resturctureAppointmentData(appoinments);
       }
-
-      // const defaultDate = this.schedulerSvc.FormatDate(this.currentDate);
-      // this.options = {
-      //   plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-      //   defaultDate: defaultDate,
-      //   fixedWeekCount: false,
-      //   header: {
-      //     left: 'prev,next',
-      //     center: 'title',
-      //     // right: 'addAppointment,dayGridMonth,timeGridWeek,timeGridDay',
-      //     right: 'addAppointment'
-      //   },
-      //   editable: true,
-      //   dateClick: this.handleDateClick.bind(this),
-      //   eventClick: this.handleEventClick.bind(this),
-      //   customButtons : {
-      //     addAppointment : {
-      //       text : "Add Appointment",
-      //       click : this.addAppointment.bind(this)
-      //     }
-      //   }
-      // };
       this.cdref.detectChanges();
     });
   }
@@ -119,26 +97,21 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
     return restrucredData;
   }
   handleDateClick(event) {
-    console.log(event);
     this.schedulerSvc.selectedDate = event.date;
     this.schedulerSvc.openAppointmentList(AppointmentListComponent);
   }
 
   handleEventClick(event) {
-    console.log(event);
     this.schedulerSvc.selectedDate = event.event.start;
-    console.log(this.schedulerSvc.selectedDate);
     this.schedulerSvc.openAppointmentList(AppointmentListComponent);
   }
   previousClick(event) {
     this.currentDate.setMonth(this.currentDate.getMonth() - 1);
-    console.log(this.currentDate);
     this.getListOfAppointment();
   }
 
   nextClick(event) {
     this.currentDate.setMonth(this.currentDate.getMonth() + 1);
-    console.log(this.currentDate);
     this.getListOfAppointment();
 
   }

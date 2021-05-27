@@ -91,7 +91,7 @@ export class PatientDetailsComponent implements OnInit {
       this.editUserDetails();
     } else {
       let reqObj = {
-        user_id_fk : "APT50e2a882-abc4-4df4-a1f1-480f3731a635",
+        user_id_fk : this.authSvc.User.id,
         basicDetails : this.addPatientDetailsForm.value.basicDetails,
         address : this.addPatientDetailsForm.value.address,
         emergencyDetails: this.addPatientDetailsForm.value.emergencyDetails,
@@ -101,10 +101,14 @@ export class PatientDetailsComponent implements OnInit {
       reqObj.basicDetails.dateOfBirth = this.appSvc.FormatDate(reqObj.basicDetails.dateOfBirth);
     this.ps.addPatientDetils(reqObj)
       .subscribe(patient => {
-        console.log(patient)
         if (patient.status === 201) {
           toastSuccMessage.summary = patient.message;
           this.toastMessageSvc.displayToastMessage(toastSuccMessage);
+          this.authSvc.PersonalDetailsRequired = false;
+          this.authSvc.StoreSession();
+          this.ps.upatedPatientDetailsRequirement(false, false, this.authSvc.User.id).subscribe((resp) => {
+            console.log(resp);
+          })
           //re direct to view patient details page
           this.router.navigate(['/layout/home']);
         }
@@ -135,8 +139,6 @@ export class PatientDetailsComponent implements OnInit {
 
 
   editUserDetails(){
-    console.log(this.patient);
-    this.addPatientDetailsForm.value.basciDetails.id = this.patient.basicDetails.id;
     let reqObj = {
       user_id_fk : "APT50e2a882-abc4-4df4-a1f1-480f3731a635",
       basicDetails : this.addPatientDetailsForm.value.basicDetails,
@@ -146,9 +148,12 @@ export class PatientDetailsComponent implements OnInit {
       allergies: this.addPatientDetailsForm.value.allergies,
       id: this.patient.id
     }
+    Object.assign(reqObj.basicDetails, {id : this.patient.basicDetails.id});
+    Object.assign(reqObj.address, {id : this.patient.address.id});
+    Object.assign(reqObj.emergencyDetails, {id : this.patient.emergencyDetails.id});
     reqObj.basicDetails.dateOfBirth = this.appSvc.FormatDate(reqObj.basicDetails.dateOfBirth);
       this.ps.updatePatientDetails(reqObj).subscribe((resp) => {
-        console.log(resp);
+        this.router.navigate(['/layout/home/patient/list']);
       })
   }
 }

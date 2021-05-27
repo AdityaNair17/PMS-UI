@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
   constructor(private svc : AuthService) { }
 
   ngOnInit(): void {
-    console.log(this.svc.User);
     this.role = this.svc.UserRole;
   }
 

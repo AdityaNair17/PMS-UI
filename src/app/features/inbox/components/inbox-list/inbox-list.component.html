@@ -21,7 +21,9 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         <tr (click)="getMailRowDetails(inbox.appointmentId)">
             <td>{{inbox.fromName}}</td>
             <td>{{inbox.message}}</td>
-            <td>{{inbox.time}}</td>
+            <!-- <td style="text-align: right;">{{inbox.time}}</td> -->
+            <td style="text-align: right;">{{inbox.date | date : 'medium'}}</td>
+
         </tr>
     </ng-template>
 </p-table>

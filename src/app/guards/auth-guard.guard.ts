@@ -1,4 +1,4 @@
-import { AuthService } from './../../auth/auth.service';
+import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,16 +16,14 @@ export class AuthGuardGuard implements CanActivate {
 
     if (localStorage.getItem('loggedInUser')) {
       const user = JSON.parse(localStorage.getItem('loggedInUser'));
-      console.log(user);
       if(!this.authSvc.IsUserAuthenticated){
       this.authSvc.storeUserData();
       }
-      if (user.passwordChangeRequired) {
+      if (this.authSvc.PasswordChangeRequired) {
         this.router.navigate(['/layout/change-password']);
         return false;
-      } else if (user.personalDetailsRequired) {
-        // this.router.navigate(['/'])
-        //redirect to personal details screen
+      } else if (this.authSvc.PersonalDetailsRequired) {
+        this.router.navigate(['/layout/patient/add-patient-details']);
         return false;
       } else {
         return true;

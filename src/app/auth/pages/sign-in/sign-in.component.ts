@@ -47,38 +47,43 @@ export class SignInComponent implements OnInit {
   verifyLogin() {
     this.authSvc.Login(this.loginDetails).subscribe(
       data => {
-        console.log(data);
           this.invalidMessageFlag = false;
           this.authSvc.AuthenticationToken = data.access_token;
           this.authSvc.UserRole = data.user_role;
-          // this.authSvc.PasswordChangeRequired = data.passwordChangeRequired;
-          // this.authSvc.PersonalDetailsRequired = data.personalDetailsRequired;
-          this.authSvc.PasswordChangeRequired = false;
-          this.authSvc.PersonalDetailsRequired =false;
+          // this.authSvc.PasswordChangeRequired = data.isPasswordChangeRequired;
+          // this.authSvc.PersonalDetailsRequired = data.isPersonalDetailsRequired;
+          // this.authSvc.PasswordChangeRequired = false;
+          // this.authSvc.PersonalDetailsRequired =false;
           this.authSvc.IsUserAuthenticated = true;
           let user = {
             firstName: data.fullName.split(" ")[0],
             lastName: data.fullName.split(" ")[1],
-            emailId: data.emailId,
+            emailId: data.email,
             fullName : data.fullName,
             // dateOfBirth: data.user.dateOfBirth,
             id: data.userId
           }
           this.authSvc.User = user;
+          this.authSvc.getUserById(data.userId).subscribe(resp => {
+            this.authSvc.PasswordChangeRequired = resp.isPasswordChangeRequired;
+            this.authSvc.PersonalDetailsRequired = resp.isPersonalDetailsRequired;
+            this.authSvc.StoreSession();
+            if ( this.authSvc.PasswordChangeRequired) {
+              this.router.navigate(['/layout/change-password']);
+            } else if ( this.authSvc.PersonalDetailsRequired) {
+              //re direct to patient details page
+              this.router.navigate(['/layout/patient/add-patient-details'])
+            } else {
+              this.router.navigate(['/layout/home'])
+            }
+          })
+
           this.authSvc.StoreSession();
           const toastMessage = {
             severity : "success",
             summary : "Logged in Successfully"
           }
           this.toastMessageSvc.displayToastMessage(toastMessage);
-          if ( this.authSvc.PasswordChangeRequired) {
-            this.router.navigate(['/layout/change-password']);
-          } else if ( this.authSvc.PersonalDetailsRequired) {
-            //re direct to patient details page
-            this.router.navigate(['/layout/patient/add-patient-details'])
-          } else {
-            this.router.navigate(['/layout/home'])
-          }
         } , (error) => {
           this.invalidMessageFlag = true;
           const toastMessage = {
@@ -93,7 +98,6 @@ export class SignInComponent implements OnInit {
   }
 
   isControlInvalid(control : FormControl){
-    // console.log(control);
     return control.invalid && (control.dirty || control.touched);
   }
 

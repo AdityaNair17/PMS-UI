@@ -1,8 +1,8 @@
+import { AuthGuardGuard } from './../guards/auth-guard.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
-import { AuthGuardGuard } from '../shared/guards/auth-guard.guard';
 
 const routes: Routes = [
   {

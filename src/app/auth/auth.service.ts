@@ -19,7 +19,6 @@ export class AuthService {
   private personalDetailsRequired: boolean = true;
   private passwordChangeRequired: boolean = true;
   private user: IUser;
-  private baseUrl : string = "http://13.90.38.170:8080/api/admin-service/";
   userObj = {
     "status": 200,
     "access_token": "sdfasdfasdfasdfasjkjskfjsfkhhfaskfjashfafklf",
@@ -103,23 +102,19 @@ export class AuthService {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    // const url = `http://13.90.38.170:8080/oauth/token`;
     const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'login');
-    // return this.appSvc.LoginCall(url, params, httpOptions);
-    return of(this.userObj);
+    return this.appSvc.LoginCall(url, params, httpOptions);
 
   }
 
   patientRegistration(patientDetails): Observable<any> {
-    // const url = `${this.baseUrl}registration/`;
     const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'userRegistration');
     return this.appSvc.Post(url, patientDetails);
-    // return of({ status: 200, message: 'Registered Successfully' })
   }
 
-  changePassword(changePasswordDetails: IChangePasswordReq): Observable<IChangePasswordRes> {
-    console.log(changePasswordDetails)
-    return of({ status: 200, message: 'password changed Successfully' })
+  changePassword(changePasswordDetails: IChangePasswordReq): Observable<any> {
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'changePassword');
+    return this.appSvc.Put(url, changePasswordDetails);
   }
   
   public StoreSession() {
@@ -150,5 +145,20 @@ export class AuthService {
 
   public openModal(component : any){
     this.modal.open(component, {backdrop: 'static'});
+  }
+
+  public forgotPassword(email : string){
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'forgotPassword', email);
+    return this.appSvc.Post(url, {});
+  }
+
+  upatedPatientDetailsRequirement(isPasswordChangeRequired : boolean, isPersonalDetailsRequired : boolean, userId : string){
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'updatePatientDetailCall', isPasswordChangeRequired, isPersonalDetailsRequired, userId);
+    return this.appSvc.Put(url, {});
+  }
+
+  getUserById(id : string) : Observable<any>{
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'getUserById', id);
+    return this.appSvc.Get(url);
   }
 }

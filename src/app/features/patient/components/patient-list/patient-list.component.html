@@ -26,7 +26,7 @@
     <ng-template pTemplate="body" let-patient>
         <tr>
             <td>{{patient.basicDetails.firstName}} {{patient.basicDetails.lastName}}</td>
-            <td>{{patient.basicDetails.dateOfBirth}}</td>
+            <td>{{patient.basicDetails.dateOfBirth  | date: 'dd/MM/yyyy'}}</td>
             <td>{{patient.basicDetails.emailId}}</td>
             <td>{{patient.basicDetails.contactNo}}</td>
             <td>

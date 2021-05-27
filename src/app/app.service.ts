@@ -30,7 +30,7 @@ constructor(private http : HttpClient) { }
   }
 
   public DeleteAppointment(url : string){
-    return this.http.put(url, {});
+    return this.http.put(url, {}, {observe : 'response', responseType: 'text'});
   }
 
   public Put(url : string, reqObj : any){

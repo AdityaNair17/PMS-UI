@@ -86,7 +86,6 @@ export class CreateAppointmentComponent implements OnInit {
       });
     }
   } else {
-    console.log(this.schedulerSvc.selectedAppointment)
     this.listOfDoctors = [];
     this.listOfDoctors.push({
       userId : this.schedulerSvc.selectedAppointment.physicianId,
@@ -109,7 +108,6 @@ export class CreateAppointmentComponent implements OnInit {
     const month = dateArray[1];
     const date = dateArray[2];
     this.appointmentForm.get("dateOfAppointment").patchValue(new Date(year, month - 1, date));
-    console.log(year + " " + month + " " + date);
 
 
     this.appointmentForm.get("timeOfAppointment").patchValue(this.availableTimeslots.find(t => t.fullTime == this.schedulerSvc.selectedAppointment.startTime));
@@ -180,33 +178,47 @@ export class CreateAppointmentComponent implements OnInit {
       physicianName : this.physicianName.value.name,
       date : this.schedulerSvc.FormatDate(this.dateOfAppointment.value),
       status : this.authSvc.UserRole == 'Doctor' ? "ACCEPTED" : "PENDING",
-      // status : "PENDING",
       startTime : startTime,
       endTime : endTime,
       description : this.description.value,
       meetingTitle : this.title.value
     }
     this.schedulerSvc.createAppointment(reqObj).subscribe((response) => {
-      console.log("Create Appointment" + response)
       if(response.status == 201){
         this.toastMessageSvc.displayToastMessage(appointmentCreationSuccess);
-        const mailObj = {
-          key : {
-            toId : this.physicianName.value.userId,
-            toName : this.physicianName.value.name,
-            fromId : this.physicianName.value.userId,
-            fromName : this.patientName.value.name
-          },
-          value : {
-            message : "Appointment Request",
-            appointmentId : response.body,
-            isNurse : false
+        let mailObj;
+        if(this.authSvc.UserRole == 'Doctor'){
+          mailObj = {
+            key : {
+              toId : this.patientName.value.userId,
+              toName : this.patientName.value.name,
+              fromId : this.physicianName.value.userId,
+              fromName : this.physicianName.value.name
+            },
+            value : {
+              message : "Appointment Accepted",
+              appointmentId : response.body,
+              isNurse : true
+            }
+          }
+        } else {
+          mailObj = {
+            key : {
+              toId : this.physicianName.value.userId,
+              toName : this.physicianName.value.name,
+              fromId : this.patientName.value.userId,
+              fromName : this.patientName.value.name
+            },
+            value : {
+              message : "Appointment Request",
+              appointmentId : response.body,
+              isNurse : false
+            }
           }
         }
 
-        console.log(mailObj);
+
         this.schedulerSvc.sendMail(mailObj).subscribe((response) => {
-          console.log("Mail Response = " + response);
         });
       } else {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);

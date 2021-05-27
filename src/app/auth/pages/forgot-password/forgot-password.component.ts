@@ -1,3 +1,4 @@
+import { AuthService } from './../../auth.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  constructor(public activeModal : NgbActiveModal) { }
+  constructor(public activeModal : NgbActiveModal,
+              private authSvc : AuthService) { }
 
   email : string;
   ngOnInit(): void {
   }
 
   forgotPassword(){
-
+    this.authSvc.forgotPassword(this.email).subscribe(resp => {
+      console.log(resp);
+    })
   }
 }

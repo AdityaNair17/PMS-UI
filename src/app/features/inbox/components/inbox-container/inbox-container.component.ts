@@ -33,6 +33,11 @@ export class InboxContainerComponent implements OnInit {
     }
     this.inboxService.getAllInboxByuser(reqBody)
       .subscribe((inboxList) => {
+        // inboxList.forEach(ib => {
+        //   const date = new Date(ib.date);
+        //   ib.date = date.getDate();
+        //   ib.time = date.getHours() + ':' + date.getMinutes();
+        // })
         this.inboxList = inboxList;
       }, (err) => {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
@@ -51,7 +56,13 @@ export class InboxContainerComponent implements OnInit {
 
   logAppointment(appointmentDetails: AppointmentDetails) {
     this.inboxService.editAppointment(appointmentDetails).subscribe((resp) => {
-      console.log(resp);
+      if(resp.status == 200){
+        const message = {
+          severity : "success",
+          summary : appointmentDetails.status == STATUS.ACCEPTED ? 'Appointment Accepted' : 'Appointment Rejected'
+        }
+        this.toastMessageSvc.displayToastMessage(message);
+      }
     });
 
     const reqObj = {
@@ -73,10 +84,6 @@ export class InboxContainerComponent implements OnInit {
     this.inboxService.appointmentSubmission(reqObj)
       .subscribe((appointment) => {
         console.log(appointment);
-        // if (appointment.status === 200) {
-        //   toastSuccMessage.summary = appointment.message;
-        //   this.toastMessageSvc.displayToastMessage(toastSuccMessage);
-        // }
       }, (err) => {
         this.toastMessageSvc.displayToastMessage(toastErrMessage);
       });

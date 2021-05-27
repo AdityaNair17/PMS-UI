@@ -6,17 +6,18 @@
   <div class="modal-body">
     <p-calendar [(ngModel)]="selectedDate" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy" (onSelect) = "dateChange($event)"></p-calendar>
     <br><br>
+    <!-- <div *ngIf = "appointments.length > 0"; else noAppointmentTemplate> -->
     <p-accordion class="accordian" *ngFor="let app of appointments" (onClose)="cancelDeleteDialog(app.appointmentId)">
       <div >
         <p-accordionTab >
           <p-header>
             <div class="row">
               <div class="col-md-8">
-                <span>{{app.patientName}} </span>
+                <span>{{app.patientName}}</span>
               </div>
               <div class="align-right col-md-4">
                   <i class="fa fa-eye" *ngIf="app.patientVisitDetailId != null" title="View Visit" (click) = "viewVisit(app,$event)"></i>
-                  <i class="fa fa-plus-circle"  *ngIf="app.patientVisitDetailId == null" title="Create Visit" (click)="createVisit(app, $event)"></i>&nbsp;
+                  <i class="fa fa-plus-circle"  *ngIf="app.patientVisitDetailId == null && userRole != 'Patient'" title="Create Visit" (click)="createVisit(app, $event)"></i>&nbsp;
                   <i class="fa fa-edit"  *ngIf="app.patientVisitDetailId == null" (click)="editAppointment(app, $event)" title="Reschedule Appointment"></i>&nbsp;
                   <i class="fa fa-trash"  *ngIf="app.patientVisitDetailId == null" (click)="showDeleteDialog(app, $event)" title="Delete Appointment"></i>
               </div>
@@ -41,6 +42,8 @@
         
       </div>
     </p-accordion>
+  <!-- </div> -->
+
 
   </div>
   <div class="modal-footer">
@@ -48,3 +51,7 @@
       (click)="activeModal.close()">Close</button>
   </div>
 </div>
+
+<ng-template #noAppointmentTemplate>
+  <span>{{noAppointmentMessage}}</span>
+</ng-template>

@@ -15,8 +15,8 @@ import { toastErrMessage, toastSuccMessage } from 'src/app/shared/constants/cons
 })
 export class SignUpComponent implements OnInit {
   patientSignupForm: FormGroup;
-  public titleOptions : string[] = ['Mr', 'Mrs', 'Ms'];
-  public roleOptions : string[] = ['Doctor', 'Patient', 'Nurse'];
+  public titleOptions : string[] = ['Dr', 'Mr', 'Mrs', 'Ms', 'Miss', 'Sir', 'Lord'];
+  public roleOptions : string[] = ['Doctor', 'Patient', 'Nurse', 'Admin'];
 
   constructor(
     private formBuilder: FormBuilder,

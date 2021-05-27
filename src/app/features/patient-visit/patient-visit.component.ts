@@ -48,9 +48,6 @@ export class PatientVisitComponent implements OnInit {
     this.visitSvc.VisitId = this.visitSvc.AppointmentDetails.visitId;
     this.visitSvc.PatientId = this.visitSvc.AppointmentDetails.patientId;
     this.visitSvc.isEdit = JSON.parse(this.route.snapshot.paramMap.get('isEdit'));
-    console.log(this.visitSvc.VisitId);
-    console.log(this.visitSvc.AppointmentDetails);
-    console.log(this.visitSvc.PatientId);
     this.cdr.detectChanges();
   }
 
@@ -99,6 +96,7 @@ export class PatientVisitComponent implements OnInit {
     if(prevUrl != undefined || prevUrl != ''){
       this.router.navigate([prevUrl]);
     }
+    
   }
 
   cancel(){

@@ -93,9 +93,8 @@ export class VisitDiagnosisComponent implements OnInit {
       diagnosis_details : diagnosisDetails
     }
 
-    console.log(reqBody);
-    this.visitSvc.postDiagnosis(reqBody).subscribe((resposne) => {
-      console.log(resposne);
+    this.visitSvc.postDiagnosis(reqBody).subscribe((response) => {
+      console.log(response);
     });
   }
 }

@@ -88,7 +88,6 @@ export class VisitProcedureComponent implements OnInit {
       procedure_details : procedureDetails,
     }
 
-    console.log(reqBody);
     this.visitSvc.postProcedure(reqBody).subscribe((response) => {
       console.log(response);
     });

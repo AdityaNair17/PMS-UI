@@ -10,19 +10,15 @@ import { IAllergies, ILanguageKnown, IPatient, IPatientDetailsRes } from './mode
 })
 export class PatientService {
 
-  baseurl : string = "http://13.90.38.170:8082/healthcare/"
   constructor(private appSvc : AppService) { }
 
   addPatientDetils(patientDetails: any) : Observable<any>{
-    console.log(patientDetails);
-    // const url = `${this.baseurl}patient/`
     const url = ApiConstants.generateDynamicEndpoint('visitAndPatientEndpoint', 'addPatient');
     return this.appSvc.Post(url, patientDetails);
     // return of({ id: '456fdsdfhjjtrdsaw35789', status: 200, message: 'Patient details added Successfully' })
   }
 
   updatePatientDetails(patientDetails: any) {
-    // const url = `${this.baseurl}patient/`
     const url = ApiConstants.generateDynamicEndpoint('visitAndPatientEndpoint', 'updatePatient');
     return this.appSvc.Put(url, patientDetails);  
   }
@@ -33,7 +29,6 @@ export class PatientService {
       { id: 2, name: 'English' },
       { id: 3, name: 'Mandarin' }
     ];
-    // const url = `${this.baseurl}/languages`
     const url = ApiConstants.generateDynamicEndpoint('visitAndPatientEndpoint', 'listOfLanguages');
     return this.appSvc.Get(url);
     // return of(languages)
@@ -41,7 +36,6 @@ export class PatientService {
 
   getAllergies(): Observable<any> {
     const allergies: IAllergies[] = [{ id: 1, type: 'Drug', isFatal: true }];
-    // const url = `${this.baseurl}/allergies/`;
     const url = ApiConstants.generateDynamicEndpoint('visitAndPatientEndpoint','listOfAllergies');
     return this.appSvc.Get(url);
     // return of(allergies);
@@ -99,7 +93,6 @@ export class PatientService {
         }
       ]
     }
-    // const url = `${this.baseurl}patient/${patientId}`;
     const url = ApiConstants.generateDynamicEndpoint('visitAndPatientEndpoint', 'patientById', patientId);
     return this.appSvc.Get(url);
     return of(JSON.parse(JSON.stringify(patient)));
@@ -222,9 +215,13 @@ export class PatientService {
       }
     ];
     // const patients = JSON.parse(JSON.stringify(data)) as IPatient[];
-    // const url = `${this.baseurl}patient/`
     const url = ApiConstants.generateDynamicEndpoint('visitAndPatientEndpoint', 'getAllPatients')
     return this.appSvc.Get(url);
     // return of(patients)
+  }
+
+  upatedPatientDetailsRequirement(isPasswordChangeRequired : boolean, isPersonalDetailsRequired : boolean, userId : string){
+    const url = ApiConstants.generateDynamicEndpoint('authenticationEndpoint', 'updatePatientDetailCall', isPasswordChangeRequired, isPersonalDetailsRequired, userId);
+    return this.appSvc.Put(url, {});
   }
 }

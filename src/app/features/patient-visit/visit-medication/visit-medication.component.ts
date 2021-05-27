@@ -103,7 +103,6 @@ export class VisitMedicationComponent implements OnInit {
     this.visitSvc.postMedication(reqObj).subscribe(data => {
       console.log(data);
     })
-    console.log(reqObj);
     this.submitClick.emit();
   }
 }
