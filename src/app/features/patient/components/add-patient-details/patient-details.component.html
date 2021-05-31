@@ -1,11 +1,11 @@
 <div class="p-my-4 p-mx-6">
     <div class="p-mb-4">
-    <div *ngIf="!patient ; else readEditMode">
-        <h2 class="color">Add User details</h2>
-    </div>
-    <ng-template #readEditMode>
-        <h2 class="color">{{readonlyMode ? 'View User details': 'Edit User details'}}</h2>
-    </ng-template>
+        <div *ngIf="!patient ; else readEditMode">
+            <h2 class="color">Add User details</h2>
+        </div>
+        <ng-template #readEditMode>
+            <h2 class="color">{{readonlyMode ? 'View User details': 'Edit User details'}}</h2>
+        </ng-template>
     </div>
     <form [formGroup]="addPatientDetailsForm" (ngSubmit)="onAddPatientDetails()">
         <div formGroupName="basicDetails">
@@ -18,20 +18,20 @@
                     <mat-label>Last name</mat-label>
                     <input matInput [readonly]="readonlyMode" placeholder="Last name" formControlName="lastName">
                 </mat-form-field>
-            </div>
-            <div class="formControl-group">
+
                 <mat-form-field appearance="outline">
                     <mat-label>Email id</mat-label>
                     <input matInput [readonly]="readonlyMode" placeholder="Email id" formControlName="emailId">
                 </mat-form-field>
+            </div>
+            <div class="formControl-group">
                 <mat-form-field appearance="outline">
                     <mat-label>Date of birth</mat-label>
                     <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dateOfBirth">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
-            </div>
-            <div class="formControl-group">
+
                 <mat-form-field appearance="outline">
                     <mat-label>Age</mat-label>
                     <input matInput [readonly]="readonlyMode" placeholder="Age" formControlName="age">
@@ -52,20 +52,34 @@
                     <mat-label>Race</mat-label>
                     <input matInput [readonly]="readonlyMode" placeholder="Race" formControlName="race">
                 </mat-form-field>
-            </div>
-            <div class="formControl-group">
                 <mat-form-field appearance="outline">
                     <mat-label>Ethnicity</mat-label>
                     <input matInput [readonly]="readonlyMode" placeholder="Ethnicity" formControlName="ethnicity">
                 </mat-form-field>
             </div>
         </div>
+        <div class="formControl-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Languages Known</mat-label>
+                <mat-select formControlName="languageKnown" multiple [disabled]="readonlyMode">
+                    <mat-option *ngFor="let language of languages" [value]="language.id">{{language.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Allergies</mat-label>
+                <mat-select formControlName="allergies" multiple [disabled]="readonlyMode">
+                    <mat-option *ngFor="let allergie of allergies" [value]="allergie.id">{{allergie.type}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <br>
         <p>Address</p>
+        <br>
         <div formGroupName="address">
             <div class="formControl-group">
                 <mat-form-field appearance="outline">
-                        <mat-label>Address</mat-label>
-                        <input matInput [readonly]="readonlyMode" placeholder="AddressLine" formControlName="addressLine">
+                    <mat-label>Address</mat-label>
+                    <input matInput [readonly]="readonlyMode" placeholder="AddressLine" formControlName="addressLine">
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>LandmarkArea</mat-label>
@@ -94,12 +108,15 @@
                 <mat-form-field appearance="outline">
                     <mat-label>AddressType</mat-label>
                     <mat-select formControlName="addressType" [disabled]="readonlyMode">
-                        <mat-option  *ngFor="let address of addressType" [value]="address.value">{{address.label}}</mat-option>
+                        <mat-option *ngFor="let address of addressType" [value]="address.value">{{address.label}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
         </div>
+        <br>
         <p>Emergency contact info</p>
+        <br>
         <div formGroupName="emergencyDetails">
             <div class="formControl-group">
                 <mat-form-field appearance="outline">
@@ -112,24 +129,26 @@
                     <input matInput [readonly]="readonlyMode" placeholder="Last name"
                         formControlName="emergency_last_name">
                 </mat-form-field>
-            </div>
-            <div class="formControl-group">
                 <mat-form-field appearance="outline">
                     <mat-label>Email id</mat-label>
                     <input matInput [readonly]="readonlyMode" placeholder="Email id" formControlName="mailId">
                 </mat-form-field>
+            </div>
+            <div class="formControl-group">
+
                 <mat-form-field appearance="outline">
                     <mat-label>Contact number</mat-label>
                     <input matInput [readonly]="readonlyMode" placeholder="Contact number"
                         formControlName="emergency_contact_number">
                 </mat-form-field>
-            </div>
-            <div class="formControl-group">
                 <mat-form-field appearance="outline">
                     <mat-label>Relationship</mat-label>
                     <input matInput [readonly]="readonlyMode" placeholder="Relationship"
                         formControlName="emergency_relation_ship">
                 </mat-form-field>
+            </div>
+            <div class="formControl-group">
+
                 <mat-form-field appearance="outline">
                     <mat-label>Do you need access to patient portal?</mat-label>
                     <mat-select formControlName="_access_approved" [disabled]="readonlyMode">
@@ -137,8 +156,7 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>
-            <div class="formControl-group">
+
                 <mat-form-field appearance="outline">
                     <mat-label>Address</mat-label>
                     <mat-select formControlName="_same_address" [disabled]="readonlyMode">
@@ -146,21 +164,9 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+
         </div>
-        <div class="formControl-group">
-            <mat-form-field appearance="outline">
-                <mat-label>Languages Known</mat-label>
-                <mat-select formControlName="languageKnown" multiple [disabled]="readonlyMode">
-                    <mat-option *ngFor="let language of languages" [value]="language.id">{{language.name}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Allergies</mat-label>
-                <mat-select formControlName="allergies" multiple [disabled]="readonlyMode">
-                    <mat-option *ngFor="let allergie of allergies" [value]="allergie.id">{{allergie.type}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+
         <button mat-stroked-button class="bg-color white-color mb-30" *ngIf="!readonlyMode">{{!!patient ? 'Update
             patient
             details': 'Add patient details'}}</button>

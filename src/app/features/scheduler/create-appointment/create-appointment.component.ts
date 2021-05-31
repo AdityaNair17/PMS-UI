@@ -111,7 +111,7 @@ export class CreateAppointmentComponent implements OnInit {
 
 
     this.appointmentForm.get("timeOfAppointment").patchValue(this.availableTimeslots.find(t => t.fullTime == this.schedulerSvc.selectedAppointment.startTime));
-
+    
     this.appointmentForm.get("description").patchValue(this.schedulerSvc.selectedAppointment.description);
 
     this.appointmentForm.get("title").patchValue(this.schedulerSvc.selectedAppointment.meetingTitle);

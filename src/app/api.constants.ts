@@ -8,7 +8,7 @@ export const apiConstant = {
   medicationEndpoint: 'http://40.76.198.123:8080/',
   inboxEndpoint: 'http://40.76.198.123:',
   vitalEndpoint : 'http://52.188.201.41:8080/',
-  globalEndpoint : 'http://davita.eastus.cloudapp.azure.com:8080/',
+  globalEndpoint : 'http://davita-impact.eastus.cloudapp.azure.com:8080/',
   /**Appointment Calls */
   appointmentList : 'api/patient-service/appointment/byuseridandwithindate',
   appointmentListByDate : 'api/patient-service/appointment/byuseridanddate',

@@ -111,7 +111,16 @@ export class SchedulerComponent implements OnInit, AfterViewInit {
   }
 
   nextClick(event) {
-    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+    // this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+    const month = this.currentDate.getMonth();
+    const year = this.currentDate.getFullYear();
+    let numberOfDaysInNextMonth = new Date(year, month + 2, 0).getDate();
+    if(this.currentDate.getDate() > numberOfDaysInNextMonth){
+      this.currentDate = new Date(year, month + 1, numberOfDaysInNextMonth);
+    } else {
+      this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+    }
+    console.log(this.currentDate);
     this.getListOfAppointment();
 
   }
